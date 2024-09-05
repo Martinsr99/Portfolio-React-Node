@@ -6,6 +6,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import Footer from './components/Footer';
 import './App.css';
 
 function ScrollToTop() {
@@ -21,7 +22,7 @@ function ScrollToTop() {
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
         <ScrollToTop />
         <AnimatePresence mode='wait'>
@@ -72,6 +73,7 @@ function App() {
             } />
           </Routes>
         </AnimatePresence>
+        <Footer />
       </div>
     </Router>
   );
