@@ -4,20 +4,52 @@ import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaReact, FaNodeJs, FaPython, FaJava, FaDatabase } from 'react-icons/fa';
-import { SiJavascript, SiTypescript, SiCss3, SiHtml5 } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaDocker, FaAws } from 'react-icons/fa';
+import { SiJavascript, SiTypescript, SiCss3, SiHtml5, SiMongodb } from 'react-icons/si';
 import profileImage from '../images/profile-image.jpg';
 
+// Mapa de iconos actualizado
 const iconMap = {
   React: FaReact,
   Node: FaNodeJs,
+  'Node.js': FaNodeJs, // Normalizando Node.js a Node en el mapa
   Python: FaPython,
   Java: FaJava,
   JavaScript: SiJavascript,
   TypeScript: SiTypescript,
   CSS: SiCss3,
   HTML: SiHtml5,
-  SQL: FaDatabase
+  SQL: FaDatabase,
+  MongoDB: SiMongodb, // Icono para MongoDB
+  Docker: FaDocker,   // Icono para Docker
+  AWS: FaAws          // Icono para AWS
+};
+
+// Función para normalizar los nombres de habilidades
+const normalizeSkillName = (skill) => {
+  const normalizedSkill = skill.toLowerCase();
+  switch (normalizedSkill) {
+    case 'javascript':
+      return 'JavaScript';
+    case 'typescript':
+      return 'TypeScript';
+    case 'css':
+      return 'CSS';
+    case 'html':
+      return 'HTML';
+    case 'node.js':
+      return 'Node.js';
+    case 'sql':
+      return 'SQL';
+    case 'mongodb':
+      return 'MongoDB';
+    case 'docker':
+      return 'Docker';
+    case 'aws':
+      return 'AWS';
+    default:
+      return skill.charAt(0).toUpperCase() + skill.slice(1);
+  }
 };
 
 const Home = () => {
@@ -119,7 +151,8 @@ const Home = () => {
             <h3 className="skills-title">My Skills</h3>
             <Slider {...settings}>
               {info.skills.map((skill, index) => {
-                const Icon = iconMap[skill] || FaDatabase;
+                const normalizedSkill = normalizeSkillName(skill);
+                const Icon = iconMap[normalizedSkill] || FaDatabase; // Icono predeterminado en caso de no encontrar coincidencia
                 return (
                   <motion.div
                     key={index}
@@ -129,7 +162,7 @@ const Home = () => {
                     transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
                   >
                     <Icon className="skill-icon" />
-                    <p className="skill-name">{skill}</p>
+                    <p className="skill-name">{normalizedSkill}</p>
                   </motion.div>
                 );
               })}
