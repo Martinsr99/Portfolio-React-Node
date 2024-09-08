@@ -15,7 +15,23 @@ app.get('/api/info', (req, res) => {
     name: 'Martin Siles',
     title: 'Desarrollador Full Stack',
     bio: 'Soy un apasionado desarrollador full stack con experiencia en crear soluciones web innovadoras y eficientes. Me especializo en JavaScript y sus frameworks modernos, siempre buscando aprender y aplicar las últimas tecnologías en mis proyectos.',
-    skills: ['JavaScript', 'React', 'Node.js', 'Python', 'MongoDB', 'Docker', 'AWS']
+    skills: [
+      'JavaScript', 
+      'React', 
+      'Node.js', 
+      'Python', 
+      'MongoDB', 
+      'Docker', 
+      'AWS',
+      'PostgreSQL',  // Nueva habilidad
+      'Angular',      // Nueva habilidad
+      'Vue',          // Nueva habilidad
+      'Kubernetes',   // Nueva habilidad
+      'Golang',       // Nueva habilidad
+      'Next',         // Nueva habilidad
+      'Nest',         // Nueva habilidad
+      'Express'       // Nueva habilidad
+    ]
   });
 });
 

@@ -4,15 +4,19 @@ import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaDocker, FaAws } from 'react-icons/fa';
-import { SiJavascript, SiTypescript, SiCss3, SiHtml5, SiMongodb } from 'react-icons/si';
+import { 
+  FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs 
+} from 'react-icons/fa';
+import { 
+  SiJavascript, SiTypescript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiNextdotjs, SiNestjs, SiExpress 
+} from 'react-icons/si';
+import { DiGo, DiDocker } from 'react-icons/di';  // Importa los iconos desde Devicons
 import profileImage from '../images/profile-image.jpg';
 
-// Mapa de iconos actualizado
 const iconMap = {
   React: FaReact,
   Node: FaNodeJs,
-  'Node.js': FaNodeJs, // Normalizando Node.js a Node en el mapa
+  'Node.js': FaNodeJs,
   Python: FaPython,
   Java: FaJava,
   JavaScript: SiJavascript,
@@ -20,12 +24,19 @@ const iconMap = {
   CSS: SiCss3,
   HTML: SiHtml5,
   SQL: FaDatabase,
-  MongoDB: SiMongodb, // Icono para MongoDB
-  Docker: FaDocker,   // Icono para Docker
-  AWS: FaAws          // Icono para AWS
+  MongoDB: SiMongodb,
+  Docker: DiDocker,     // Icono de Docker
+  AWS: FaAws,
+  PostgreSQL: SiPostgresql,
+  Angular: FaAngular,
+  Vue: FaVuejs,
+  Kubernetes: DiDocker,  // Usamos el icono de Docker para Kubernetes
+  Golang: DiGo,          // Icono de Golang
+  Next: SiNextdotjs,
+  Nest: SiNestjs,
+  Express: SiExpress
 };
 
-// Función para normalizar los nombres de habilidades
 const normalizeSkillName = (skill) => {
   const normalizedSkill = skill.toLowerCase();
   switch (normalizedSkill) {
@@ -47,10 +58,28 @@ const normalizeSkillName = (skill) => {
       return 'Docker';
     case 'aws':
       return 'AWS';
+    case 'postgresql':
+      return 'PostgreSQL';
+    case 'angular':
+      return 'Angular';
+    case 'vue':
+      return 'Vue';
+    case 'kubernetes':
+      return 'Kubernetes';
+    case 'golang':
+      return 'Golang';
+    case 'next':
+    case 'next.js':
+      return 'Next';
+    case 'nestjs':
+      return 'Nest';
+    case 'express':
+      return 'Express';
     default:
       return skill.charAt(0).toUpperCase() + skill.slice(1);
   }
 };
+
 
 const Home = () => {
   const [info, setInfo] = useState(null);
@@ -152,7 +181,7 @@ const Home = () => {
             <Slider {...settings}>
               {info.skills.map((skill, index) => {
                 const normalizedSkill = normalizeSkillName(skill);
-                const Icon = iconMap[normalizedSkill] || FaDatabase; // Icono predeterminado en caso de no encontrar coincidencia
+                const Icon = iconMap[normalizedSkill] || FaDatabase; 
                 return (
                   <motion.div
                     key={index}
