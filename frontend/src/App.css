@@ -141,13 +141,10 @@ footer {
   color: #2c3e50;
 }
 
-.skills-section {
-  background-color: #f8f9fa;
-}
 
 .skills-title {
-  font-size: 2rem;
-  margin-bottom: 30px;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
   color: #2c3e50;
   transition: color 0.3s ease;
 }
@@ -156,28 +153,68 @@ footer {
   color: #3498db;
 }
 
-/* Slick carousel styles */
-.slick-slider {
+/* Updated styles for skills grid */
+.skills-grid {
+  position: relative; /* Importante para que el overlay se posicione relativo a la cuadrícula */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
+.skill-overlay {
+  position: absolute; /* Absoluto dentro de skills-grid */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajuste para centrar exactamente */
+  background-color: rgba(0, 0, 0, 0.85); /* Fondo semitransparente */
+  display: flex; /* Flexbox para centrar el contenido */
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  z-index: 100;
+  padding: 20px;
+  text-align: center;
+  width: 80%; /* Ajuste para cubrir toda la cuadrícula */
+  height: 50%; /* Ajuste para cubrir toda la cuadrícula */
+  color: #fff;
+}
+
+.skill-overlay-content {
+  text-align: center;
+  max-width: 50%; /* Limitar el ancho del contenido dentro del overlay */
+}
+
+.skill-overlay-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+
+
 .skill-item {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1 / 1;
 }
 
 .skill-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .skill-icon {
-  font-size: 3rem;
-  margin-bottom: 10px;
+  font-size: 4rem;
+  margin-bottom: 15px;
   color: #3498db;
   transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -187,58 +224,43 @@ footer {
   color: #2980b9;
 }
 
-.skill-name {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #34495e;
-  transition: color 0.3s ease;
-}
-
-.skill-item:hover .skill-name {
-  color: #2c3e50;
-}
-
-/* Slick carousel custom styles */
-.slick-prev,
-.slick-next {
-  font-size: 0;
-  line-height: 0;
+.skill-tooltip {
   position: absolute;
-  top: 50%;
-  display: block;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  transform: translate(0, -50%);
-  cursor: pointer;
-  color: transparent;
-  border: none;
-  outline: none;
-  background: transparent;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
-.slick-prev:before,
-.slick-next:before {
-  font-size: 20px;
-  line-height: 1;
-  opacity: .75;
-  color: #2c3e50;
+.skill-item:hover .skill-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
 }
-
-.slick-dots li button:before {
-  font-size: 12px;
-  color: #2c3e50;
-}
-
-.slick-dots li.slick-active button:before {
-  color: #3498db;
+/* Estilos para el overlay de habilidades */
+.skills-section {
+  position: relative; /* Posiciona la sección para contener el overlay */
+  background-color: #f8f9fa;
+  padding: 4rem 2rem;
+  overflow: hidden; /* Asegura que el overlay no se salga de la sección */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centrar contenido verticalmente */
 }
 
 /* Projects component styles */
 .projects-container {
-  padding: 40px 0;
+  padding: 40px 40px;
   width: 100%;
-  max-width: 100vw;
+  height: 100%;
   background-color: #fff;
 }
 
@@ -511,7 +533,7 @@ footer {
 @media screen and (max-width: 768px) {
   .intro-section,
   .skills-section {
-    padding: 1rem;
+    padding: 2rem 1rem;
   }
 
   .name {
@@ -527,24 +549,18 @@ footer {
   }
 
   .skills-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
   }
 
   .skill-icon {
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 
-  .skill-name {
-    font-size: 0.9rem;
-  }
-
-  .slick-slider {
-    max-width: 100%;
-  }
-}
-
-/* Responsive styles */
-@media screen and (max-width: 768px) {
   .projects-container,
   .about-container,
   .contact-container {
@@ -552,30 +568,6 @@ footer {
     margin-left: 0;
     margin-right: 0;
     width: 100%;
-  }
-
-  .name {
-    font-size: 2rem;
-  }
-
-  .title {
-    font-size: 1.2rem;
-  }
-
-  .bio {
-    font-size: 1rem;
-  }
-
-  .skills-title {
-    font-size: 1.5rem;
-  }
-
-  .skill-icon {
-    font-size: 2.5rem;
-  }
-
-  .skill-name {
-    font-size: 0.9rem;
   }
 
   .projects-grid {
@@ -636,5 +628,16 @@ footer {
 
   .projects-grid {
     max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+  }
+
+  .skill-icon {
+    font-size: 2.5rem;
   }
 }

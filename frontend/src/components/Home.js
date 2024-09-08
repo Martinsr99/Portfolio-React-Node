@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import Slider from 'react-slick';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { 
   FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs 
 } from 'react-icons/fa';
 import { 
   SiJavascript, SiTypescript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiNextdotjs, SiNestjs, SiExpress 
 } from 'react-icons/si';
-import { DiGo, DiDocker } from 'react-icons/di';  // Importa los iconos desde Devicons
+import { DiGo, DiDocker } from 'react-icons/di';
 import profileImage from '../images/profile-image.jpg';
 
 const iconMap = {
@@ -25,64 +22,20 @@ const iconMap = {
   HTML: SiHtml5,
   SQL: FaDatabase,
   MongoDB: SiMongodb,
-  Docker: DiDocker,     // Icono de Docker
+  Docker: DiDocker,
   AWS: FaAws,
   PostgreSQL: SiPostgresql,
   Angular: FaAngular,
   Vue: FaVuejs,
-  Kubernetes: DiDocker,  // Usamos el icono de Docker para Kubernetes
-  Golang: DiGo,          // Icono de Golang
+  Golang: DiGo,
   Next: SiNextdotjs,
   Nest: SiNestjs,
   Express: SiExpress
 };
 
-const normalizeSkillName = (skill) => {
-  const normalizedSkill = skill.toLowerCase();
-  switch (normalizedSkill) {
-    case 'javascript':
-      return 'JavaScript';
-    case 'typescript':
-      return 'TypeScript';
-    case 'css':
-      return 'CSS';
-    case 'html':
-      return 'HTML';
-    case 'node.js':
-      return 'Node.js';
-    case 'sql':
-      return 'SQL';
-    case 'mongodb':
-      return 'MongoDB';
-    case 'docker':
-      return 'Docker';
-    case 'aws':
-      return 'AWS';
-    case 'postgresql':
-      return 'PostgreSQL';
-    case 'angular':
-      return 'Angular';
-    case 'vue':
-      return 'Vue';
-    case 'kubernetes':
-      return 'Kubernetes';
-    case 'golang':
-      return 'Golang';
-    case 'next':
-    case 'next.js':
-      return 'Next';
-    case 'nestjs':
-      return 'Nest';
-    case 'express':
-      return 'Express';
-    default:
-      return skill.charAt(0).toUpperCase() + skill.slice(1);
-  }
-};
-
-
 const Home = () => {
   const [info, setInfo] = useState(null);
+  const [hoveredSkill, setHoveredSkill] = useState(null);
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -95,32 +48,6 @@ const Home = () => {
     };
     fetchInfo();
   }, []);
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1
-        }
-      }
-    ]
-  };
 
   return (
     <motion.div
@@ -176,12 +103,12 @@ const Home = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.5 }}
+            onMouseLeave={() => setHoveredSkill(null)}  // Ocultar cuando el ratón sale de la sección
           >
             <h3 className="skills-title">My Skills</h3>
-            <Slider {...settings}>
+            <div className="skills-grid">
               {info.skills.map((skill, index) => {
-                const normalizedSkill = normalizeSkillName(skill);
-                const Icon = iconMap[normalizedSkill] || FaDatabase; 
+                const Icon = iconMap[skill.name] || FaDatabase; 
                 return (
                   <motion.div
                     key={index}
@@ -189,13 +116,24 @@ const Home = () => {
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
+                    onMouseEnter={() => setHoveredSkill(skill)} // Mostrar cuando el ratón está sobre una habilidad
                   >
                     <Icon className="skill-icon" />
-                    <p className="skill-name">{normalizedSkill}</p>
+                    <p className="skill-name">{skill.name}</p>
                   </motion.div>
                 );
               })}
-            </Slider>
+            </div>
+            {hoveredSkill && (
+              <div className="skill-overlay">
+                <div className="skill-overlay-content">
+                  {React.createElement(iconMap[hoveredSkill.name] || FaDatabase, { className: "skill-overlay-icon" })}
+                  <h4>{hoveredSkill.name}</h4>
+                  <p>Version: {hoveredSkill.version}</p>
+                  <p>{hoveredSkill.details}</p>
+                </div>
+              </div>
+            )}
           </motion.div>
         </>
       )}
