@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const nodemailer = require('nodemailer');
 
 dotenv.config();
 
@@ -10,6 +11,12 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Log email configuration (without full password)
+console.log('Email configuration:');
+console.log('EMAIL_USER:', process.env.EMAIL_USER);
+console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '********' : 'Not set');
+
+// Existing route
 app.get('/api/info', (req, res) => {
   res.json({
     name: 'Martin Siles',
@@ -33,6 +40,51 @@ app.get('/api/info', (req, res) => {
       { name: 'CSS', version: 'CSS3', details: 'Diseño responsivo y animaciones avanzadas' }
     ]
   });
+});
+
+// New route for sending emails
+app.post('/api/send-email', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  console.log('Attempting to send email...');
+  console.log('From:', email);
+  console.log('To: silesreche.martin@gmail.com');
+
+  // Create a transporter
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+  });
+
+  // Email options
+  let mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: 'silesreche.martin@gmail.com',
+    subject: 'New Contact Form Submission',
+    text: `
+      Name: ${name}
+      Email: ${email}
+      Message: ${message}
+    `
+  };
+
+  try {
+    console.log('Sending email...');
+    // Send email
+    let info = await transporter.sendMail(mailOptions);
+    console.log('Message sent: %s', info.messageId);
+    res.status(200).send('Email sent successfully');
+  } catch (error) {
+    console.error('Error sending email:', error);
+    if (error.code === 'EAUTH') {
+      console.error('Authentication error. Please check your email credentials.');
+      console.error('Make sure you\'re using an "app password" if you have 2-factor authentication enabled.');
+    }
+    res.status(500).send(`Error sending email: ${error.message}`);
+  }
 });
 
 app.listen(port, () => {
