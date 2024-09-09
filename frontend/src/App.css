@@ -155,68 +155,77 @@ footer {
 
 /* Updated styles for skills grid */
 .skills-grid {
-  position: relative; /* Importante para que el overlay se posicione relativo a la cuadrícula */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Aumenta el tamaño mínimo de las celdas */
+  gap: 40px; /* Aumenta la separación entre las celdas */
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px; /* Incrementa el ancho máximo de la cuadrícula */
   margin: 0 auto;
 }
-
-.skill-overlay {
-  position: absolute; /* Absoluto dentro de skills-grid */
-  top: 50%; /* Centra verticalmente */
-  left: 50%; /* Centra horizontalmente */
-  transform: translate(-50%, -50%); /* Ajuste para centrar exactamente */
-  background-color: rgba(0, 0, 0, 0.85); /* Fondo semitransparente */
-  display: flex; /* Flexbox para centrar el contenido */
-  align-items: center; /* Centrado vertical */
-  justify-content: center; /* Centrado horizontal */
-  z-index: 100;
-  padding: 20px;
-  text-align: center;
-  width: 80%; /* Ajuste para cubrir toda la cuadrícula */
-  height: 50%; /* Ajuste para cubrir toda la cuadrícula */
-  color: #fff;
-}
-
-.skill-overlay-content {
-  text-align: center;
-  max-width: 50%; /* Limitar el ancho del contenido dentro del overlay */
-}
-
-.skill-overlay-icon {
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
-
 
 .skill-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 30px; /* Aumenta el padding para que el contenido tenga más espacio */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /* Mantiene una proporción cuadrada */
 }
+
+.skill-icon {
+  font-size: 5rem; /* Aumenta el tamaño del ícono */
+  margin-bottom: 20px; /* Aumenta el espacio debajo del ícono */
+  color: #3498db;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.skill-name {
+  font-size: 1.2rem; /* Aumenta el tamaño de la fuente del nombre de la habilidad */
+  text-align: center;
+  margin-top: 10px; /* Añade un poco de margen superior */
+}
+
+
+.skill-item:hover .skill-overlay {
+  opacity: 1; /* Muestra el overlay al pasar el ratón sobre el item */
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.skill-overlay {
+  position: absolute; /* Posiciona dentro de skill-item */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0); /* Comienza oculto */
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 10px;
+  text-align: center;
+  width: 80%; /* Ajusta al 80% del contenedor de cada habilidad */
+  height: auto; /* Ajusta al contenido */
+  color: #fff;
+  border-radius: 10px;
+  opacity: 0; /* Overlay oculto inicialmente */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.skill-overlay-icon {
+  font-size: 30px; /* Ajusta tamaño del icono en el overlay */
+  margin-bottom: 5px;
+}
+
+
 
 .skill-item:hover {
   transform: translateY(-10px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.skill-icon {
-  font-size: 4rem;
-  margin-bottom: 15px;
-  color: #3498db;
-  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .skill-item:hover .skill-icon {

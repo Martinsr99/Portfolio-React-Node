@@ -107,22 +107,34 @@ const Home = () => {
           >
             <h3 className="skills-title">My Skills</h3>
             <div className="skills-grid">
-              {info.skills.map((skill, index) => {
-                const Icon = iconMap[skill.name] || FaDatabase; 
-                return (
-                  <motion.div
-                    key={index}
-                    className="skill-item"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
-                    onMouseEnter={() => setHoveredSkill(skill)} // Mostrar cuando el ratón está sobre una habilidad
-                  >
-                    <Icon className="skill-icon" />
-                    <p className="skill-name">{skill.name}</p>
-                  </motion.div>
-                );
-              })}
+            {info.skills.map((skill, index) => {
+  const Icon = iconMap[skill.name] || FaDatabase;
+  return (
+    <motion.div
+      key={index}
+      className="skill-item"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.4 + index * 0.1, duration: 0.5 }}
+      onMouseEnter={() => setHoveredSkill(skill)} 
+      onMouseLeave={() => setHoveredSkill(null)} // Ocultar cuando el ratón sale del item
+    >
+      <Icon className="skill-icon" />
+      <p className="skill-name">{skill.name}</p>
+      {hoveredSkill && hoveredSkill.name === skill.name && (
+        <div className="skill-overlay">
+          <div className="skill-overlay-content">
+            {React.createElement(iconMap[hoveredSkill.name] || FaDatabase, { className: "skill-overlay-icon" })}
+            <h4>{hoveredSkill.name}</h4>
+            <p>Version: {hoveredSkill.version}</p>
+            <p>{hoveredSkill.details}</p>
+          </div>
+        </div>
+      )}
+    </motion.div>
+  );
+})}
+
             </div>
             {hoveredSkill && (
               <div className="skill-overlay">
