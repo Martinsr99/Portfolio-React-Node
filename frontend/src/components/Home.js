@@ -38,10 +38,16 @@ const translations = {
   es: {
     title: "Mis Habilidades",
     version: "Versión",
+    details: "Detalles",
+    fullStackDeveloper: "Desarrollador Full Stack",
+    bio: "Soy un apasionado desarrollador full stack con experiencia en crear soluciones web innovadoras y eficientes. Me especializo en JavaScript y sus frameworks modernos, siempre buscando aprender y aplicar las últimas tecnologías en mis proyectos."
   },
   en: {
     title: "My Skills",
     version: "Version",
+    details: "Details",
+    fullStackDeveloper: "Full Stack Developer",
+    bio: "I'm a passionate full stack developer with experience in creating innovative and efficient web solutions. I specialize in JavaScript and its modern frameworks, always looking to learn and apply the latest technologies in my projects."
   }
 };
 
@@ -94,7 +100,7 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.05 }}
               >
-                {info.name}
+                Martin Siles
               </motion.h1>
               <motion.h2 
                 className="title"
@@ -102,7 +108,7 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.05 }}
               >
-                {info.title}
+                {translations[language].fullStackDeveloper}
               </motion.h2>
               <motion.p 
                 className="bio"
@@ -110,7 +116,7 @@ const Home = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.05 }}
               >
-                {info.bio}
+                {translations[language].bio}
               </motion.p>
             </motion.div>
 
@@ -143,7 +149,7 @@ const Home = () => {
                             {React.createElement(iconMap[hoveredSkill.name] || FaDatabase, { className: "skill-overlay-icon" })}
                             <h4>{hoveredSkill.name}</h4>
                             <p>{translations[language].version}: {hoveredSkill.version}</p>
-                            <p>{hoveredSkill.details}</p>
+                            <p>{translations[language].details}: {hoveredSkill.details}</p>
                           </div>
                         </div>
                       )}
