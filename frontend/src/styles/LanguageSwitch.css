@@ -1,0 +1,29 @@
+.language-switch {
+  position: fixed;
+  top: 80px; /* Aumentamos este valor para mover el botón más abajo */
+  right: 20px;
+  display: flex;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.language-option {
+  padding: 8px 12px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.language-option.active {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.language-option:not(.active):hover {
+  background-color: #e0e0e0;
+}
