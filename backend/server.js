@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const nodemailer = require('nodemailer');
+const rateLimit = require('express-rate-limit');
 
 dotenv.config();
 
@@ -15,6 +16,18 @@ app.use(express.json());
 console.log('Email configuration:');
 console.log('EMAIL_USER:', process.env.EMAIL_USER);
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '********' : 'Not set');
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 3 // limit each IP to 5 requests per windowMs
+});
+
+// Apply rate limiting to all routes
+app.use(limiter);
+
+// Store session tokens (in-memory storage, consider using a database for production)
+const sessionTokens = new Set();
 
 // Existing route
 app.get('/api/info', (req, res) => {
@@ -44,7 +57,22 @@ app.get('/api/info', (req, res) => {
 
 // New route for sending emails
 app.post('/api/send-email', async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, message, captcha } = req.body;
+  const sessionToken = req.headers['x-session-token'];
+
+  console.log('Received request:', { name, email, message, captcha, sessionToken });
+
+  // Verify session token
+  if (!sessionTokens.has(sessionToken)) {
+    console.log('Invalid session token:', sessionToken);
+    return res.status(403).send('Invalid session token');
+  }
+
+  // Verify captcha (simple implementation, consider using a more robust solution for production)
+  if (!captcha) {
+    console.log('Captcha is missing');
+    return res.status(400).send('Captcha is required');
+  }
 
   console.log('Attempting to send email...');
   console.log('From:', email);
@@ -77,6 +105,9 @@ app.post('/api/send-email', async (req, res) => {
     let info = await transporter.sendMail(mailOptions);
     console.log('Message sent: %s', info.messageId);
     res.status(200).send('Email sent successfully');
+
+    // Remove the used session token
+    sessionTokens.delete(sessionToken);
   } catch (error) {
     console.error('Error sending email:', error);
     if (error.code === 'EAUTH') {
@@ -85,6 +116,13 @@ app.post('/api/send-email', async (req, res) => {
     }
     res.status(500).send(`Error sending email: ${error.message}`);
   }
+});
+
+// New route to generate and store a session token
+app.get('/api/generate-token', (req, res) => {
+  const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  sessionTokens.add(token);
+  res.json({ token });
 });
 
 app.listen(port, () => {

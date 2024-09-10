@@ -1,0 +1,46 @@
+/* Custom styles for toast notifications */
+.custom-toast {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 12px 20px;
+    color: #ffffff;
+}
+
+.custom-toast-info {
+    background-color: #3498db;
+}
+
+.custom-toast-success {
+    background-color: #ffffff;
+    color: black;
+}
+
+/* Cambia el color del botón de cierre a negro cuando la notificación es de éxito */
+.custom-toast-success .Toastify__close-button {
+    color: black;
+}
+
+.custom-toast-error {
+    background-color: #e74c3c;
+}
+
+/* Customize the close button */
+.Toastify__close-button {
+    color: #ffffff;
+    opacity: 0.7;
+}
+
+.Toastify__close-button:hover {
+    opacity: 1;
+}
+
+/* Add a subtle shadow for depth */
+.Toastify__toast {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transition for appearing/disappearing */
+.Toastify__toast-container {
+    transition: all 0.3s ease;
+}
