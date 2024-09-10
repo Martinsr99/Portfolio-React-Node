@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { LanguageContext } from '../LanguageContext';
 import bannerGmail from '../images/bannerGmail.png';
+import bannerLinkedin from '../images/bannerLinkedin.png';
 
 const translations = {
   es: {
@@ -51,11 +52,12 @@ const About = () => {
       transition={{ duration: 0.5 }}
       style={{
         height: '50vh',
+        minHeight: '300px',
         padding: '2rem',
         backgroundColor: bgColor,
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none',
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center center',
         width: '100%',
         textAlign: 'center',
         position: 'relative',
@@ -64,6 +66,10 @@ const About = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        '@media (max-width: 768px)': {
+          height: 'auto',
+          minHeight: '50vh',
+        },
       }}
     >
       <div style={{
@@ -74,7 +80,7 @@ const About = () => {
         bottom: 0,
         backgroundColor: backgroundImage ? 'rgba(0, 0, 0, 0.7)' : 'transparent',
       }}></div>
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px' }}>
+      <div style={{ position: 'relative', zIndex: 1, maxWidth: '800px', padding: '1rem' }}>
         <h3 style={{ color: textColor, marginBottom: '1rem', fontSize: '2rem', fontWeight: 'bold' }}>{title}</h3>
         <p style={{ fontSize: '1.1rem', lineHeight: '1.4', marginBottom: '1.5rem', color: textColor }}>
           {description}
@@ -125,7 +131,7 @@ const About = () => {
         <motion.li initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>{t.devOps}</motion.li>
       </ul>
       
-      <div style={{ height: '100vh', marginTop: '3rem' }}>
+      <div style={{ marginTop: '3rem' }}>
         <SocialSection
           title={t.youtubeTitle}
           description={t.youtubeDescription}
@@ -142,8 +148,10 @@ const About = () => {
           description={t.linkedinDescription}
           linkText={t.linkedinButton}
           linkUrl="https://www.linkedin.com/in/martinsilesreche/"
-          bgColor="#00436a"
+          bgColor="transparent"
           textColor="#ffffff"
+          backgroundImage={bannerLinkedin}
+          buttonTextColor="#0077B5"
         />
       </div>
     </motion.div>
