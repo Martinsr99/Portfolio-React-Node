@@ -17,19 +17,16 @@ console.log('Email configuration:');
 console.log('EMAIL_USER:', process.env.EMAIL_USER);
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '********' : 'Not set');
 
-// Rate limiting
-const limiter = rateLimit({
+// Rate limiting for email sending
+const emailLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 3 // limit each IP to 5 requests per windowMs
+  max: 3 // limit each IP to 3 requests per windowMs
 });
-
-// Apply rate limiting to all routes
-app.use(limiter);
 
 // Store session tokens (in-memory storage, consider using a database for production)
 const sessionTokens = new Set();
 
-// Existing route
+// Existing route for info (no rate limiting)
 app.get('/api/info', (req, res) => {
   res.json({
     name: 'Martin Siles',
@@ -55,8 +52,8 @@ app.get('/api/info', (req, res) => {
   });
 });
 
-// New route for sending emails
-app.post('/api/send-email', async (req, res) => {
+// Route for sending emails (with rate limiting)
+app.post('/api/send-email', emailLimiter, async (req, res) => {
   const { name, email, message, captcha } = req.body;
   const sessionToken = req.headers['x-session-token'];
 
