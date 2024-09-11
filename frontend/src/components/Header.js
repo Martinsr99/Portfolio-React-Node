@@ -18,6 +18,7 @@ const Header = () => {
             <motion.li whileHover={{ scale: 1.1 }}><Link to="/">{language === 'es' ? 'Inicio' : 'Home'}</Link></motion.li>
             <motion.li whileHover={{ scale: 1.1 }}><Link to="/about">{language === 'es' ? 'Sobre Mí' : 'About'}</Link></motion.li>
             <motion.li whileHover={{ scale: 1.1 }}><Link to="/projects">{language === 'es' ? 'Proyectos' : 'Projects'}</Link></motion.li>
+            <motion.li whileHover={{ scale: 1.1 }}><Link to="/education">{language === 'es' ? 'Educación' : 'Education'}</Link></motion.li>
             <motion.li whileHover={{ scale: 1.1 }}><Link to="/contact">{language === 'es' ? 'Contacto' : 'Contact'}</Link></motion.li>
           </motion.ul>
         </nav>

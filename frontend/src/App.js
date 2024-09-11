@@ -7,6 +7,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
+import Education from './components/Education';
 import Footer from './components/Footer';
 import LanguageSwitch from './components/LanguageSwitch';
 import './App.css';
@@ -44,6 +45,7 @@ function AppContent() {
               <Route path="/about" element={<About />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/education" element={<Education />} />
             </Routes>
           </motion.div>
         </AnimatePresence>
