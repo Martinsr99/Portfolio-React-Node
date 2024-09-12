@@ -10,7 +10,8 @@ const translations = {
     institution: "Institución",
     degree: "Título",
     year: "Año",
-    viewCertificate: "Ver Certificado"
+    viewCertificate: "Ver Certificado",
+    courseContents: "Contenidos del curso:"
   },
   en: {
     title: "Education and Certifications",
@@ -19,7 +20,8 @@ const translations = {
     institution: "Institution",
     degree: "Degree",
     year: "Year",
-    viewCertificate: "View Certificate"
+    viewCertificate: "View Certificate",
+    courseContents: "Course contents:"
   }
 };
 
@@ -33,7 +35,15 @@ const Education = () => {
       institution: "Universidad Tecnológica",
       degree: "Ingeniería en Informática",
       year: "2015 - 2019",
-      description: "Especialización en Desarrollo de Software y Sistemas Distribuidos"
+      description: "Especialización en Desarrollo de Software y Sistemas Distribuidos",
+      theme: "university"
+    },
+    {
+      institution: "Cambridge English",
+      degree: "B2 First Certificate in English",
+      year: "2016",
+      description: "Certificado de nivel B2 en inglés según el Marco Común Europeo de Referencia para las lenguas (MCER)",
+      theme: "language"
     }
   ];
 
@@ -42,31 +52,71 @@ const Education = () => {
       name: "React - The Complete Guide",
       platform: "Udemy",
       year: "2022",
-      pdfUrl: "/certificates/react-udemy.pdf"
+      pdfUrl: "/certificates/react-udemy.pdf",
+      contents: [
+        "JSX and React Components",
+        "State and Props",
+        "Hooks (useState, useEffect, useContext, etc.)",
+        "Redux for State Management",
+        "React Router for Navigation",
+        "Advanced Concepts: Context API, Higher-Order Components"
+      ]
     },
     {
       name: "Node.js Developer Course",
       platform: "Udemy",
       year: "2021",
-      pdfUrl: "/certificates/node-udemy.pdf"
+      pdfUrl: "/certificates/node-udemy.pdf",
+      contents: [
+        "Asynchronous Programming in Node.js",
+        "Express.js Framework",
+        "RESTful API Development",
+        "MongoDB and Mongoose",
+        "Authentication and Security",
+        "Deployment and CI/CD"
+      ]
     },
     {
       name: "Python Pro Bootcamp",
       platform: "Udemy",
       year: "2020",
-      pdfUrl: "/certificates/python-udemy.pdf"
+      pdfUrl: "/certificates/python-udemy.pdf",
+      contents: [
+        "Python Fundamentals and OOP",
+        "Web Scraping with Beautiful Soup",
+        "Data Analysis with Pandas",
+        "Web Development with Flask",
+        "GUI Development with Tkinter",
+        "Automation and Scripting"
+      ]
     },
     {
       name: "Angular - The Complete Guide",
       platform: "Udemy",
       year: "2022",
-      pdfUrl: "/certificates/angular-udemy.pdf"
+      pdfUrl: "/certificates/angular-udemy.pdf",
+      contents: [
+        "Angular Components and Databinding",
+        "Directives and Pipes",
+        "Services and Dependency Injection",
+        "Routing and Navigation",
+        "Observables and RxJS",
+        "NgRx for State Management"
+      ]
     },
     {
       name: "NestJS - The Complete Developer's Guide",
       platform: "Udemy",
       year: "2023",
-      pdfUrl: "/certificates/nest-udemy.pdf"
+      pdfUrl: "/certificates/nest-udemy.pdf",
+      contents: [
+        "NestJS Architecture and Modules",
+        "Dependency Injection and Providers",
+        "Controllers and Routing",
+        "Database Integration with TypeORM",
+        "Authentication and Authorization",
+        "Microservices Architecture"
+      ]
     }
   ];
 
@@ -77,7 +127,7 @@ const Education = () => {
       <section className="education-section">
         <h3>{t.education}</h3>
         {educationData.map((edu, index) => (
-          <div key={index} className="education-item">
+          <div key={index} className={`education-item ${edu.theme}`}>
             <h4>{edu.institution}</h4>
             <p><strong>{t.degree}:</strong> {edu.degree}</p>
             <p><strong>{t.year}:</strong> {edu.year}</p>
@@ -111,9 +161,12 @@ const Education = () => {
         <div className="certificate-preview">
           <h4>{selectedCert.name}</h4>
           <p>{selectedCert.platform} - {selectedCert.year}</p>
-          <a href={selectedCert.pdfUrl} target="_blank" rel="noopener noreferrer" className="view-certificate">
-            {t.viewCertificate}
-          </a>
+          <p><strong>{t.courseContents}</strong></p>
+          <ul>
+            {selectedCert.contents.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
