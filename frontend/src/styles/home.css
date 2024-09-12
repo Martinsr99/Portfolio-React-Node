@@ -1,0 +1,334 @@
+/* Home component styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 60px - 52px);
+  width: 100%;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: #ffffff;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.home-container::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, #2a5298 0deg, #1e3c72 180deg, #2a5298 360deg);
+  animation: rotate 20s linear infinite;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.intro-section,
+.skills-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.intro-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 4px solid #3498db;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
+}
+
+.name {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: color 0.3s ease;
+}
+
+.name:hover {
+  color: #3498db;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #ecf0f1;
+  transition: color 0.3s ease;
+}
+
+.title:hover {
+  color: #3498db;
+}
+
+.bio {
+  font-size: 1.1rem;
+  color: #ecf0f1;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+.bio:hover {
+  color: #ffffff;
+}
+
+.skills-section {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.skills-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: color 0.3s ease;
+}
+
+.skills-title:hover {
+  color: #3498db;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1 / 1;
+  backdrop-filter: blur(5px);
+}
+
+.skill-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.skill-icon {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  color: #3498db;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.skill-item:hover .skill-icon {
+  transform: scale(1.1);
+  color: #2980b9;
+}
+
+.skill-name {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+.skill-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 10px;
+  text-align: center;
+  width: 80%;
+  height: auto;
+  color: #fff;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.skill-item:hover .skill-overlay {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.skill-overlay-icon {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+/* Theme toggle styles */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  color: #3498db;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Dark mode styles */
+.dark-mode {
+  background: linear-gradient(135deg, #0a192f 0%, #0c2447 100%);
+}
+
+.dark-mode .home-container::before {
+  background: conic-gradient(from 0deg at 50% 50%, #0c2447 0deg, #0a192f 180deg, #0c2447 360deg);
+}
+
+.dark-mode .intro-section {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .skills-section {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .skill-item {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .skill-item:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .name,
+.dark-mode .title,
+.dark-mode .bio,
+.dark-mode .skills-title {
+  color: #e0e0e0;
+}
+
+.dark-mode .name:hover,
+.dark-mode .title:hover,
+.dark-mode .skills-title:hover {
+  color: #64b5f6;
+}
+
+.dark-mode .skill-icon {
+  color: #64b5f6;
+}
+
+.dark-mode .skill-item:hover .skill-icon {
+  color: #2196f3;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .intro-section,
+  .skills-section {
+    padding: 3rem 1rem;
+  }
+
+  .name {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .bio {
+    font-size: 1rem;
+  }
+
+  .skills-title {
+    font-size: 2rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+  }
+
+  .skill-icon {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+  }
+
+  .skill-icon {
+    font-size: 2.5rem;
+  }
+}
