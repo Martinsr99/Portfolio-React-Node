@@ -10,12 +10,14 @@ const LanguageSwitch = () => {
       <button
         className={`language-option ${language === 'es' ? 'active' : ''}`}
         onClick={() => language !== 'es' && toggleLanguage()}
+        aria-label="Cambiar a español"
       >
         ES
       </button>
       <button
         className={`language-option ${language === 'en' ? 'active' : ''}`}
         onClick={() => language !== 'en' && toggleLanguage()}
+        aria-label="Switch to English"
       >
         EN
       </button>

@@ -9,7 +9,6 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Education from './components/Education';
 import Footer from './components/Footer';
-import LanguageSwitch from './components/LanguageSwitch';
 import './App.css';
 
 function ScrollToTop() {
@@ -27,12 +26,11 @@ function AppContent() {
 
   return (
     <Router>
-      <div className="App" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div className="App app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
-        <LanguageSwitch />
         <ScrollToTop />
         <AnimatePresence mode='wait'>
-          <motion.div
+          <motion.main
             key={language}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -47,7 +45,7 @@ function AppContent() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/education" element={<Education />} />
             </Routes>
-          </motion.div>
+          </motion.main>
         </AnimatePresence>
         <Footer />
       </div>

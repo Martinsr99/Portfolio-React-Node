@@ -9,6 +9,7 @@ import {
 } from 'react-icons/si';
 import { DiGo, DiDocker } from 'react-icons/di';
 import { LanguageContext } from '../LanguageContext';
+import LanguageSwitch from './LanguageSwitch';
 import profileImage from '../images/profile-image.jpg';
 import '../styles/home.css';
 
@@ -66,7 +67,7 @@ const Home = () => {
     const fetchInfo = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/info?lang=${language}`);
-        console.log('API response:', response.data); // Log the API response
+        console.log('API response:', response.data);
         setInfo(response.data);
       } catch (error) {
         console.error('Error fetching info:', error);
@@ -83,97 +84,116 @@ const Home = () => {
     setDarkMode(!darkMode);
   };
 
-  console.log('Rendering Home component, info:', info); // Log the info state
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        duration: 0.5,
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1 }
+  };
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={language}
-        className={`home-container ${darkMode ? 'dark-mode' : ''}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+    <motion.div
+      key={language}
+      className={`home-container ${darkMode ? 'dark-mode' : ''}`}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div 
+        className="controls-container"
+        variants={itemVariants}
       >
-        <button onClick={toggleTheme} className="theme-toggle">
+        <LanguageSwitch />
+        <motion.button 
+          onClick={toggleTheme} 
+          className="theme-toggle" 
+          aria-label={translations[language].toggleTheme}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
           {darkMode ? <FaSun /> : <FaMoon />}
-          <span className="sr-only">{translations[language].toggleTheme}</span>
-        </button>
+        </motion.button>
+      </motion.div>
 
-        {info && (
-          <>
-            <motion.div 
-              className="intro-section"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+      {info && (
+        <>
+          <motion.div 
+            className="intro-section"
+            variants={containerVariants}
+          >
+            <motion.img 
+              src={profileImage}
+              alt={info.name} 
+              className="profile-image"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+            />
+            <motion.h1 
+              className="name"
+              variants={itemVariants}
             >
-              <motion.img 
-                src={profileImage}
-                alt={info.name} 
-                className="profile-image"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              />
-              <motion.h1 
-                className="name"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                Martin Siles
-              </motion.h1>
-              <motion.h2 
-                className="title"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                {translations[language].fullStackDeveloper}
-              </motion.h2>
-              <motion.p 
-                className="bio"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1 }}
-              >
-                {translations[language].bio}
-              </motion.p>
-            </motion.div>
+              Martin Siles
+            </motion.h1>
+            <motion.h2 
+              className="title"
+              variants={itemVariants}
+            >
+              {translations[language].fullStackDeveloper}
+            </motion.h2>
+            <motion.p 
+              className="bio"
+              variants={itemVariants}
+            >
+              {translations[language].bio}
+            </motion.p>
+          </motion.div>
 
-            <motion.div 
-              ref={skillsRef}
-              className="skills-section"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 1.2 }}
-              onMouseLeave={() => setHoveredSkill(null)}
+          <motion.div 
+            ref={skillsRef}
+            className="skills-section"
+            variants={containerVariants}
+          >
+            <motion.h3 
+              className="skills-title"
+              variants={itemVariants}
             >
-              <h3 className="skills-title">{translations[language].title}</h3>
-              <div className="skills-grid">
-                {info.skills && info.skills.map((skill, index) => {
-                  console.log('Rendering skill:', skill); // Log each skill being rendered
-                  const Icon = iconMap[skill.name] || FaDatabase;
-                  return (
-                    <motion.div
-                      key={`${skill.name}-${language}`}
-                      className="skill-item"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.1 * index }}
-                      onMouseEnter={() => setHoveredSkill(skill)} 
-                      onMouseLeave={() => setHoveredSkill(null)}
-                    >
-                      <Icon className="skill-icon" />
-                      <p className="skill-name">{skill.name}</p>
+              {translations[language].title}
+            </motion.h3>
+            <motion.div 
+              className="skills-grid"
+              variants={containerVariants}
+            >
+              {info.skills && info.skills.map((skill, index) => {
+                const Icon = iconMap[skill.name] || FaDatabase;
+                return (
+                  <motion.div
+                    key={`${skill.name}-${language}`}
+                    className="skill-item"
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    onMouseEnter={() => setHoveredSkill(skill)} 
+                    onMouseLeave={() => setHoveredSkill(null)}
+                  >
+                    <Icon className="skill-icon" />
+                    <p className="skill-name">{skill.name}</p>
+                    <AnimatePresence>
                       {hoveredSkill && hoveredSkill.name === skill.name && (
                         <motion.div 
                           className="skill-overlay"
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.9 }}
-                          transition={{ duration: 0.3 }}
+                          transition={{ duration: 0.2 }}
                         >
                           <div className="skill-overlay-content">
                             {React.createElement(iconMap[hoveredSkill.name] || FaDatabase, { className: "skill-overlay-icon" })}
@@ -183,15 +203,15 @@ const Home = () => {
                           </div>
                         </motion.div>
                       )}
-                    </motion.div>
-                  );
-                })}
-              </div>
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
             </motion.div>
-          </>
-        )}
-      </motion.div>
-    </AnimatePresence>
+          </motion.div>
+        </>
+      )}
+    </motion.div>
   );
 };
 
