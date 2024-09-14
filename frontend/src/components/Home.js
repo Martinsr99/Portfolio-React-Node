@@ -8,6 +8,7 @@ import {
   SiJavascript, SiTypescript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiNextdotjs, SiNestjs, SiExpress 
 } from 'react-icons/si';
 import { DiGo, DiDocker } from 'react-icons/di';
+import { TbBrandNextjs } from 'react-icons/tb';
 import { LanguageContext } from '../LanguageContext';
 import LanguageSwitch from './LanguageSwitch';
 import profileImage from '../images/profile-image.jpg';
@@ -31,8 +32,8 @@ const iconMap = {
   Angular: FaAngular,
   Vue: FaVuejs,
   Golang: DiGo,
-  Next: SiNextdotjs,
-  Nest: SiNestjs,
+  Next: TbBrandNextjs,
+  NestJS: SiNestjs,
   Express: SiExpress
 };
 

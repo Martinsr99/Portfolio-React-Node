@@ -34,6 +34,7 @@ app.get('/api/info', (req, res) => {
     bio: 'Soy un apasionado desarrollador full stack con experiencia en crear soluciones web innovadoras y eficientes. Me especializo en JavaScript y sus frameworks modernos, siempre buscando aprender y aplicar las últimas tecnologías en mis proyectos.',
     skills: [
       { name: 'JavaScript', version: 'ES2021', details: 'Amplia experiencia en desarrollo frontend y backend' },
+      { name: 'TypeScript', version: '4.x', details: 'Desarrollo de aplicaciones con tipado estático' },
       { name: 'React', version: '18.x', details: 'Desarrollo de aplicaciones SPA y componentes reutilizables' },
       { name: 'Node.js', version: '16.x', details: 'Creación de APIs RESTful y microservicios' },
       { name: 'Python', version: '3.9', details: 'Análisis de datos y automatización de tareas' },
@@ -43,7 +44,7 @@ app.get('/api/info', (req, res) => {
       { name: 'AWS', version: 'Múltiples servicios', details: 'Despliegue y gestión de aplicaciones en la nube' },
       { name: 'MongoDB', version: '5.0', details: 'Diseño e implementación de bases de datos NoSQL' },
       { name: 'PostgreSQL', version: '14.x', details: 'Gestión de bases de datos relacionales' },
-      { name: 'Next.js', version: '12.x', details: 'Desarrollo de aplicaciones React con renderizado del lado del servidor' },
+      { name: 'Next', version: '12.x', details: 'Desarrollo de aplicaciones React con renderizado del lado del servidor' },
       { name: 'Express', version: '4.x', details: 'Creación de servidores web y APIs' },
       { name: 'NestJS', version: '8.x', details: 'Desarrollo de aplicaciones backend escalables' },
       { name: 'Golang', version: '1.18', details: 'Desarrollo de microservicios de alto rendimiento' },
