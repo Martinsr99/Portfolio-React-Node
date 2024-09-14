@@ -190,17 +190,12 @@ const Home = () => {
                       {hoveredSkill && hoveredSkill.name === skill.name && (
                         <motion.div 
                           className="skill-overlay"
-                          initial={{ opacity: 0, scale: 0.9 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.9 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <div className="skill-overlay-content">
-                            {React.createElement(iconMap[hoveredSkill.name] || FaDatabase, { className: "skill-overlay-icon" })}
-                            <h4>{hoveredSkill.name}</h4>
-                            <p>{translations[language].version}: {hoveredSkill.version}</p>
-                            <p>{translations[language].details}: {hoveredSkill.details}</p>
-                          </div>
+                          <p>{skill.details}</p>
                         </motion.div>
                       )}
                     </AnimatePresence>

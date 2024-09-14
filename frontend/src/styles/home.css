@@ -25,7 +25,7 @@
 
 .controls-container {
   position: fixed;
-  top: 80px; /* Adjusted to move below the header */
+  top: 80px;
   right: 20px;
   display: flex;
   align-items: center;
@@ -138,6 +138,8 @@
   border-radius: 15px;
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .skill-item:hover {
@@ -150,12 +152,11 @@
   font-size: 4rem;
   margin-bottom: 20px;
   color: #3498db;
-  transition: transform 0.3s ease, color 0.5s ease-in-out;
+  transition: transform 0.3s ease, color 0.5s ease-in-out, opacity 0.3s ease;
 }
 
 .skill-item:hover .skill-icon {
-  transform: scale(1.1);
-  color: #2980b9;
+  opacity: 0;
 }
 
 .skill-name {
@@ -164,7 +165,11 @@
   margin-top: 10px;
   color: #2c3e50;
   font-weight: 600;
-  transition: color 0.5s ease-in-out;
+  transition: color 0.5s ease-in-out, opacity 0.3s ease;
+}
+
+.skill-item:hover .skill-name {
+  opacity: 0;
 }
 
 .skill-overlay {
@@ -175,7 +180,6 @@
   bottom: 0;
   background-color: rgba(52, 152, 219, 0.9);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
@@ -186,18 +190,6 @@
 
 .skill-item:hover .skill-overlay {
   opacity: 1;
-}
-
-.skill-overlay-icon {
-  font-size: 3rem;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.skill-overlay h4 {
-  color: #fff;
-  font-size: 1.2rem;
-  margin-bottom: 5px;
 }
 
 .skill-overlay p {
@@ -235,10 +227,6 @@
 
 .dark-mode .skill-icon {
   color: #64b5f6;
-}
-
-.dark-mode .skill-item:hover .skill-icon {
-  color: #2196f3;
 }
 
 .dark-mode .skill-name {
