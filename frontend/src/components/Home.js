@@ -60,7 +60,10 @@ const Home = () => {
   const [info, setInfo] = useState(null);
   const [hoveredSkill, setHoveredSkill] = useState(null);
   const { language } = useContext(LanguageContext);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    return savedMode ? JSON.parse(savedMode) : false;
+  });
   const skillsRef = useRef(null);
   const isInView = useInView(skillsRef, { once: false, amount: 0.2 });
 
@@ -79,21 +82,18 @@ const Home = () => {
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', darkMode);
+    localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }, [darkMode]);
 
   const toggleTheme = () => {
-    setDarkMode(!darkMode);
+    setDarkMode(prevMode => !prevMode);
   };
 
-  const containerVariants = {
+  const themeVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1,
-      transition: { 
-        duration: 0.5,
-        when: "beforeChildren",
-        staggerChildren: 0.1
-      }
+      transition: { duration: 0.5 }
     }
   };
 
@@ -103,15 +103,13 @@ const Home = () => {
   };
 
   return (
-    <motion.div
-      key={language}
-      className={`home-container ${darkMode ? 'dark-mode' : ''}`}
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-    >
+    <div className={`home-container ${darkMode ? 'dark-mode' : ''}`}>
+      <div className="background-animation"></div>
+
       <motion.div 
         className="controls-container"
+        initial="hidden"
+        animate="visible"
         variants={itemVariants}
       >
         <LanguageSwitch />
@@ -127,61 +125,42 @@ const Home = () => {
       </motion.div>
 
       {info && (
-        <>
-          <motion.div 
-            className="intro-section"
-            variants={containerVariants}
-          >
-            <motion.img 
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={themeVariants}
+        >
+          <div className="intro-section">
+            <img 
               src={profileImage}
               alt={info.name} 
               className="profile-image"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
             />
-            <motion.h1 
-              className="name"
-              variants={itemVariants}
-            >
+            <h1 className="name">
               Martin Siles
-            </motion.h1>
-            <motion.h2 
-              className="title"
-              variants={itemVariants}
-            >
+            </h1>
+            <h2 className="title">
               {translations[language].fullStackDeveloper}
-            </motion.h2>
-            <motion.p 
-              className="bio"
-              variants={itemVariants}
-            >
+            </h2>
+            <p className="bio">
               {translations[language].bio}
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
-          <motion.div 
+          <div 
             ref={skillsRef}
             className="skills-section"
-            variants={containerVariants}
           >
-            <motion.h3 
-              className="skills-title"
-              variants={itemVariants}
-            >
+            <h3 className="skills-title">
               {translations[language].title}
-            </motion.h3>
-            <motion.div 
-              className="skills-grid"
-              variants={containerVariants}
-            >
+            </h3>
+            <div className="skills-grid">
               {info.skills && info.skills.map((skill, index) => {
                 const Icon = iconMap[skill.name] || FaDatabase;
                 return (
-                  <motion.div
+                  <div
                     key={`${skill.name}-${language}`}
                     className="skill-item"
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05 }}
                     onMouseEnter={() => setHoveredSkill(skill)} 
                     onMouseLeave={() => setHoveredSkill(null)}
                   >
@@ -200,14 +179,14 @@ const Home = () => {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </div>
                 );
               })}
-            </motion.div>
-          </motion.div>
-        </>
+            </div>
+          </div>
+        </motion.div>
       )}
-    </motion.div>
+    </div>
   );
 };
 
