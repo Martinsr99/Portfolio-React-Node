@@ -2,15 +2,14 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { 
-  FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs, FaSun, FaMoon, FaFileDownload
+  FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs, FaFileDownload
 } from 'react-icons/fa';
 import { 
   SiJavascript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiNextdotjs, SiNestjs, SiExpress 
 } from 'react-icons/si';
 import { DiGo, DiDocker } from 'react-icons/di';
 import { TbBrandNextjs } from 'react-icons/tb';
-import { LanguageContext } from '../LanguageContext';
-import LanguageSwitch from './LanguageSwitch';
+import { AppContext } from '../AppContext';
 import profileImage from '../images/profile-image.jpg';
 import '../styles/home.css';
 
@@ -43,7 +42,6 @@ const translations = {
     details: "Detalles",
     fullStackDeveloper: "Desarrollador Full Stack",
     bio: "Soy un apasionado desarrollador full stack con experiencia en crear soluciones web innovadoras y eficientes. Me especializo en JavaScript y sus frameworks modernos, siempre buscando aprender y aplicar las últimas tecnologías en mis proyectos.",
-    toggleTheme: "Cambiar tema",
     downloadCV: "Descargar CV",
     viewCV: "Ver CV"
   },
@@ -53,7 +51,6 @@ const translations = {
     details: "Details",
     fullStackDeveloper: "Full Stack Developer",
     bio: "I'm a passionate full stack developer with experience in creating innovative and efficient web solutions. I specialize in JavaScript and its modern frameworks, always looking to learn and apply the latest technologies in my projects.",
-    toggleTheme: "Toggle theme",
     downloadCV: "Download CV",
     viewCV: "View CV"
   }
@@ -62,11 +59,7 @@ const translations = {
 const Home = () => {
   const [info, setInfo] = useState(null);
   const [hoveredSkill, setHoveredSkill] = useState(null);
-  const { language } = useContext(LanguageContext);
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem('darkMode');
-    return savedMode ? JSON.parse(savedMode) : false;
-  });
+  const { language, darkMode } = useContext(AppContext);
   const skillsRef = useRef(null);
   const isInView = useInView(skillsRef, { once: false, amount: 0.2 });
 
@@ -82,15 +75,6 @@ const Home = () => {
     };
     fetchInfo();
   }, [language]);
-
-  useEffect(() => {
-    document.body.classList.toggle('dark-mode', darkMode);
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-  }, [darkMode]);
-
-  const toggleTheme = () => {
-    setDarkMode(prevMode => !prevMode);
-  };
 
   const themeVariants = {
     hidden: { opacity: 0 },
@@ -108,24 +92,6 @@ const Home = () => {
   return (
     <div className={`home-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className="background-animation"></div>
-
-      <motion.div 
-        className="controls-container"
-        initial="hidden"
-        animate="visible"
-        variants={itemVariants}
-      >
-        <LanguageSwitch />
-        <motion.button 
-          onClick={toggleTheme} 
-          className="theme-toggle" 
-          aria-label={translations[language].toggleTheme}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </motion.button>
-      </motion.div>
 
       {info && (
         <motion.div

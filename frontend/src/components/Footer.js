@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { LanguageContext } from '../LanguageContext';
+import { AppContext } from '../AppContext';
 
 const translations = {
   es: {
@@ -11,15 +11,16 @@ const translations = {
 };
 
 const Footer = () => {
-  const { language } = useContext(LanguageContext);
+  const { language, darkMode } = useContext(AppContext);
 
   return (
     <footer style={{
-      backgroundColor: '#2c3e50',
+      backgroundColor: darkMode ? '#1a1a1a' : '#2c3e50',
       color: '#ffffff',
       padding: '20px 0',
       textAlign: 'center',
-      width: '100%'
+      width: '100%',
+      transition: 'background-color 0.3s ease'
     }}>
       <p>&copy; 2024 Martin Siles. {translations[language].rights}</p>
     </footer>

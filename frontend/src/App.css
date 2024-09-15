@@ -27,9 +27,16 @@ header {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-nav {
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+nav {
+  flex-grow: 1;
 }
 
 nav ul {
@@ -46,6 +53,25 @@ nav ul li a {
 }
 
 nav ul li a:hover {
+  color: #3498db;
+}
+
+.controls-container {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle, .language-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 1rem;
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover, .language-toggle:hover {
   color: #3498db;
 }
 
@@ -77,6 +103,24 @@ h1, h2, h3 {
   opacity: 0.5;
 }
 
+/* Dark mode styles */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
+
+.dark-mode header, .dark-mode footer {
+  background-color: #2c3e50;
+}
+
+.dark-mode nav ul li a, .dark-mode .theme-toggle, .dark-mode .language-toggle {
+  color: #f0f0f0;
+}
+
+.dark-mode nav ul li a:hover, .dark-mode .theme-toggle:hover, .dark-mode .language-toggle:hover {
+  color: #3498db;
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
@@ -96,9 +140,8 @@ h1, h2, h3 {
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .header-content {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .menu-icon {
@@ -106,6 +149,7 @@ h1, h2, h3 {
     font-size: 1.5rem;
     cursor: pointer;
     z-index: 100;
+    align-self: flex-end;
   }
 
   .nav-menu {
@@ -136,6 +180,11 @@ h1, h2, h3 {
 
   nav ul li a {
     font-size: 1.2rem;
+  }
+
+  .controls-container {
+    margin-top: 1rem;
+    align-self: flex-end;
   }
 }
 

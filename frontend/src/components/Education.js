@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { LanguageContext } from '../LanguageContext';
+import { AppContext } from '../AppContext';
 import '../styles/education.css';
 
 const translations = {
@@ -26,7 +26,7 @@ const translations = {
 };
 
 const Education = () => {
-  const { language } = useContext(LanguageContext);
+  const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
   const [selectedCert, setSelectedCert] = useState(null);
 
@@ -121,7 +121,7 @@ const Education = () => {
   ];
 
   return (
-    <div className="education-container">
+    <div className={`education-container ${darkMode ? 'dark-mode' : ''}`}>
       <h2>{t.title}</h2>
       
       <section className="education-section">

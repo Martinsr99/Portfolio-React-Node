@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import { LanguageProvider, LanguageContext } from './LanguageContext';
+import { AppProvider, AppContext } from './AppContext';
 import Header from './components/Header';
 import Home from './components/Home';
 import About from './components/About';
@@ -21,7 +21,7 @@ function ScrollToTop() {
 }
 
 function AppContent() {
-  const { language, isPending } = useContext(LanguageContext);
+  const { language, isPending, darkMode } = useContext(AppContext);
 
   useEffect(() => {
     // Add a class to the body when language is changing
@@ -34,7 +34,7 @@ function AppContent() {
 
   return (
     <Router>
-      <div className="App app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div className={`App app-container ${darkMode ? 'dark-mode' : ''}`} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
         <ScrollToTop />
         <main style={{ flex: 1, transition: 'opacity 0.3s ease-in-out', opacity: isPending ? 0.5 : 1 }}>
@@ -54,9 +54,9 @@ function AppContent() {
 
 function App() {
   return (
-    <LanguageProvider>
+    <AppProvider>
       <AppContent />
-    </LanguageProvider>
+    </AppProvider>
   );
 }
 

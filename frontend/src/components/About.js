@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { LanguageContext } from '../LanguageContext';
+import { AppContext } from '../AppContext';
 import bannerGmail from '../images/bannerGmail.png';
 import bannerLinkedin from '../images/bannerLinkedin.png';
 
@@ -42,7 +42,7 @@ const translations = {
 };
 
 const About = () => {
-  const { language } = useContext(LanguageContext);
+  const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
 
   const SocialSection = ({ title, description, linkText, linkUrl, bgColor, textColor, backgroundImage, buttonTextColor }) => (
@@ -118,6 +118,7 @@ const About = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      className={darkMode ? 'dark-mode' : ''}
     >
       <h2>{t.aboutMe}</h2>
       <p>{t.aboutMeDescription}</p>

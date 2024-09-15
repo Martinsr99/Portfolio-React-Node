@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/contact.css';
 import '../styles/toast.css';
-import { LanguageContext } from '../LanguageContext';
+import { AppContext } from '../AppContext';
 
 const translations = {
   es: {
@@ -51,7 +51,7 @@ const Contact = () => {
   const [captchaQuestion, setCaptchaQuestion] = useState('');
   const [captchaAnswer, setCaptchaAnswer] = useState('');
   const [sessionToken, setSessionToken] = useState('');
-  const { language } = useContext(LanguageContext);
+  const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const Contact = () => {
 
     if (captcha !== captchaAnswer) {
       toast.error(t.captchaInvalid, {
-        className: 'custom-toast custom-toast-error'
+        className: `custom-toast custom-toast-error ${darkMode ? 'dark-mode' : ''}`
       });
       return;
     }
@@ -81,7 +81,7 @@ const Contact = () => {
     toast.info(t.sendingMessage, { 
       autoClose: false, 
       toastId: 'sending',
-      className: 'custom-toast custom-toast-info'
+      className: `custom-toast custom-toast-info ${darkMode ? 'dark-mode' : ''}`
     });
 
     try {
@@ -97,7 +97,7 @@ const Contact = () => {
       if (response.ok) {
         toast.dismiss('sending');
         toast.success(t.messageSent, {
-          className: 'custom-toast custom-toast-success'
+          className: `custom-toast custom-toast-success ${darkMode ? 'dark-mode' : ''}`
         });
         setName('');
         setEmail('');
@@ -117,21 +117,21 @@ const Contact = () => {
         const errorText = await response.text();
         toast.dismiss('sending');
         toast.error(`${t.failedToSend} (${errorText})`, {
-          className: 'custom-toast custom-toast-error'
+          className: `custom-toast custom-toast-error ${darkMode ? 'dark-mode' : ''}`
         });
       }
     } catch (error) {
       console.error('Error:', error);
       toast.dismiss('sending');
       toast.error(t.errorOccurred, {
-        className: 'custom-toast custom-toast-error'
+        className: `custom-toast custom-toast-error ${darkMode ? 'dark-mode' : ''}`
       });
     }
   };
 
   return (
     <motion.div
-      className="contact-container"
+      className={`contact-container ${darkMode ? 'dark-mode' : ''}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

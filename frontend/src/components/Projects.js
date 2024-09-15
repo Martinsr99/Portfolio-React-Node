@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { FaBriefcase, FaCode } from 'react-icons/fa';
-import { LanguageContext } from '../LanguageContext';
+import { AppContext } from '../AppContext';
 import '../styles/projects.css';
 
 const translations = {
@@ -18,7 +18,7 @@ const translations = {
 };
 
 const Projects = () => {
-  const { language } = useContext(LanguageContext);
+  const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
 
   const workExperience = [
@@ -126,7 +126,7 @@ const Projects = () => {
 
   return (
     <motion.div
-      className="projects-container"
+      className={`projects-container ${darkMode ? 'dark-mode' : ''}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
