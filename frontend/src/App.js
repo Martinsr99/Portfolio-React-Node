@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { LanguageProvider, LanguageContext } from './LanguageContext';
 import Header from './components/Header';
 import Home from './components/Home';
@@ -24,29 +23,29 @@ function ScrollToTop() {
 function AppContent() {
   const { language, isPending } = useContext(LanguageContext);
 
+  useEffect(() => {
+    // Add a class to the body when language is changing
+    if (isPending) {
+      document.body.classList.add('language-transition');
+    } else {
+      document.body.classList.remove('language-transition');
+    }
+  }, [isPending]);
+
   return (
     <Router>
       <div className="App app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Header />
         <ScrollToTop />
-        <AnimatePresence mode='wait'>
-          <motion.main
-            key={language}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.05 }}
-            style={{ opacity: isPending ? 0.8 : 1, flex: 1 }}
-          >
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/education" element={<Education />} />
-            </Routes>
-          </motion.main>
-        </AnimatePresence>
+        <main style={{ flex: 1, transition: 'opacity 0.3s ease-in-out', opacity: isPending ? 0.5 : 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/education" element={<Education />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>
