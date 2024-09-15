@@ -5,7 +5,7 @@ import {
   FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs, FaSun, FaMoon, FaFileDownload
 } from 'react-icons/fa';
 import { 
-  SiJavascript, SiTypescript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiNextdotjs, SiNestjs, SiExpress 
+  SiJavascript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiNextdotjs, SiNestjs, SiExpress 
 } from 'react-icons/si';
 import { DiGo, DiDocker } from 'react-icons/di';
 import { TbBrandNextjs } from 'react-icons/tb';
@@ -21,7 +21,6 @@ const iconMap = {
   Python: FaPython,
   Java: FaJava,
   JavaScript: SiJavascript,
-  TypeScript: SiTypescript,
   CSS: SiCss3,
   HTML: SiHtml5,
   SQL: FaDatabase,

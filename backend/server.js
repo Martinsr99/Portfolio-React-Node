@@ -34,7 +34,6 @@ app.get('/api/info', (req, res) => {
     bio: 'Soy un apasionado desarrollador full stack con experiencia en crear soluciones web innovadoras y eficientes. Me especializo en JavaScript y sus frameworks modernos, siempre buscando aprender y aplicar las últimas tecnologías en mis proyectos.',
     skills: [
       { name: 'JavaScript', version: 'ES2021', details: 'Amplia experiencia en desarrollo frontend y backend' },
-      { name: 'TypeScript', version: '4.x', details: 'Desarrollo de aplicaciones con tipado estático' },
       { name: 'React', version: '18.x', details: 'Desarrollo de aplicaciones SPA y componentes reutilizables' },
       { name: 'Node.js', version: '16.x', details: 'Creación de APIs RESTful y microservicios' },
       { name: 'Python', version: '3.9', details: 'Análisis de datos y automatización de tareas' },
