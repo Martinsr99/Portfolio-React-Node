@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import axios from 'axios';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { 
-  FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs, FaSun, FaMoon
+  FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs, FaSun, FaMoon, FaFileDownload
 } from 'react-icons/fa';
 import { 
   SiJavascript, SiTypescript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiNextdotjs, SiNestjs, SiExpress 
@@ -44,7 +44,9 @@ const translations = {
     details: "Detalles",
     fullStackDeveloper: "Desarrollador Full Stack",
     bio: "Soy un apasionado desarrollador full stack con experiencia en crear soluciones web innovadoras y eficientes. Me especializo en JavaScript y sus frameworks modernos, siempre buscando aprender y aplicar las últimas tecnologías en mis proyectos.",
-    toggleTheme: "Cambiar tema"
+    toggleTheme: "Cambiar tema",
+    downloadCV: "Descargar CV",
+    viewCV: "Ver CV"
   },
   en: {
     title: "My Skills",
@@ -52,7 +54,9 @@ const translations = {
     details: "Details",
     fullStackDeveloper: "Full Stack Developer",
     bio: "I'm a passionate full stack developer with experience in creating innovative and efficient web solutions. I specialize in JavaScript and its modern frameworks, always looking to learn and apply the latest technologies in my projects.",
-    toggleTheme: "Toggle theme"
+    toggleTheme: "Toggle theme",
+    downloadCV: "Download CV",
+    viewCV: "View CV"
   }
 };
 
@@ -145,6 +149,32 @@ const Home = () => {
             <p className="bio">
               {translations[language].bio}
             </p>
+            <motion.div 
+              className="cv-download-section"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <motion.a 
+                href="/cv/Martin-Siles-Software-Engineer.pdf" 
+                download="Martin-Siles-Software-Engineer.pdf"
+                className="cv-button download"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaFileDownload /> {translations[language].downloadCV}
+              </motion.a>
+              <motion.a 
+                href="/cv/Martin-Siles-Software-Engineer.pdf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="cv-button view"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {translations[language].viewCV}
+              </motion.a>
+            </motion.div>
           </div>
 
           <div 
