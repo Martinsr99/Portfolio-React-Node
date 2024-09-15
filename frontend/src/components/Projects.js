@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { FaBriefcase, FaCode } from 'react-icons/fa';
 import { LanguageContext } from '../LanguageContext';
+import '../styles/projects.css';
 
 const translations = {
   es: {
