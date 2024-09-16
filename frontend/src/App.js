@@ -21,7 +21,7 @@ function ScrollToTop() {
 }
 
 function AppContent() {
-  const { language, isPending, darkMode } = useContext(AppContext);
+  const { isPending, darkMode } = useContext(AppContext);
 
   useEffect(() => {
     // Add a class to the body when language is changing
