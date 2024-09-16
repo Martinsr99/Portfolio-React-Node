@@ -2,10 +2,6 @@
 
 This project is a personal portfolio website built with React.
 
-## Recent Changes
-
-The project has been updated to remove the backend server and use static data for content. EmailJS is now used for handling contact form submissions. These changes allow for easier deployment and maintenance of the portfolio website as a purely frontend application.
-
 ## Setup
 
 1. Clone the repository
