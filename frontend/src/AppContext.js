@@ -1,4 +1,5 @@
 import React, { createContext, useState, useTransition, useEffect } from 'react';
+import { staticData } from './data/staticData';
 
 export const AppContext = createContext();
 
@@ -26,7 +27,7 @@ export const AppProvider = ({ children }) => {
   }, [darkMode]);
 
   return (
-    <AppContext.Provider value={{ language, toggleLanguage, isPending, darkMode, toggleTheme }}>
+    <AppContext.Provider value={{ language, toggleLanguage, isPending, darkMode, toggleTheme, staticData }}>
       {children}
     </AppContext.Provider>
   );

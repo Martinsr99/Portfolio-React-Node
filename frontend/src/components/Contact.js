@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../styles/contact.css';
 import '../styles/toast.css';
 import { AppContext } from '../AppContext';
+import emailjs from 'emailjs-com';
 
 const translations = {
   es: {
@@ -50,7 +51,6 @@ const Contact = () => {
   const [captcha, setCaptcha] = useState('');
   const [captchaQuestion, setCaptchaQuestion] = useState('');
   const [captchaAnswer, setCaptchaAnswer] = useState('');
-  const [sessionToken, setSessionToken] = useState('');
   const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
 
@@ -60,12 +60,6 @@ const Contact = () => {
     const num2 = Math.floor(Math.random() * 10);
     setCaptchaQuestion(`${num1} + ${num2} = ?`);
     setCaptchaAnswer((num1 + num2).toString());
-
-    // Generate a session token
-    fetch('http://localhost:5000/api/generate-token')
-      .then(response => response.json())
-      .then(data => setSessionToken(data.token))
-      .catch(error => console.error('Error generating token:', error));
   }, []);
 
   const handleSubmit = async (e) => {
@@ -85,41 +79,26 @@ const Contact = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Session-Token': sessionToken
-        },
-        body: JSON.stringify({ name, email, message, captcha }),
-      });
+      await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        { name, email, message },
+        process.env.REACT_APP_EMAILJS_USER_ID
+      );
 
-      if (response.ok) {
-        toast.dismiss('sending');
-        toast.success(t.messageSent, {
-          className: `custom-toast custom-toast-success ${darkMode ? 'dark-mode' : ''}`
-        });
-        setName('');
-        setEmail('');
-        setMessage('');
-        setCaptcha('');
-        // Generate a new captcha question
-        const num1 = Math.floor(Math.random() * 10);
-        const num2 = Math.floor(Math.random() * 10);
-        setCaptchaQuestion(`${num1} + ${num2} = ?`);
-        setCaptchaAnswer((num1 + num2).toString());
-        // Generate a new session token
-        fetch('http://localhost:5000/api/generate-token')
-          .then(response => response.json())
-          .then(data => setSessionToken(data.token))
-          .catch(error => console.error('Error generating token:', error));
-      } else {
-        const errorText = await response.text();
-        toast.dismiss('sending');
-        toast.error(`${t.failedToSend} (${errorText})`, {
-          className: `custom-toast custom-toast-error ${darkMode ? 'dark-mode' : ''}`
-        });
-      }
+      toast.dismiss('sending');
+      toast.success(t.messageSent, {
+        className: `custom-toast custom-toast-success ${darkMode ? 'dark-mode' : ''}`
+      });
+      setName('');
+      setEmail('');
+      setMessage('');
+      setCaptcha('');
+      // Generate a new captcha question
+      const num1 = Math.floor(Math.random() * 10);
+      const num2 = Math.floor(Math.random() * 10);
+      setCaptchaQuestion(`${num1} + ${num2} = ?`);
+      setCaptchaAnswer((num1 + num2).toString());
     } catch (error) {
       console.error('Error:', error);
       toast.dismiss('sending');
