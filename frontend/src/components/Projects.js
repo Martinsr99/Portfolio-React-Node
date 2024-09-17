@@ -131,6 +131,7 @@ const Projects = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      <div className="background-animation"></div>
       <h2 className="section-title">{t.workExperience}</h2>
       <div className="timeline">
         {workExperience.map((job, index) => (

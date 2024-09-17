@@ -1,5 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
 import { AppContext } from '../AppContext';
+import { educationData } from '../data/educationData';
+import { certificationsData } from '../data/certificationsData';
 import '../styles/education.css';
 
 const translations = {
@@ -11,7 +13,8 @@ const translations = {
     degree: "Título",
     year: "Año",
     viewCertificate: "Ver Certificado",
-    courseContents: "Contenidos del curso:"
+    courseContents: "Contenidos del curso:",
+    certificateNotFound: "Certificado no encontrado"
   },
   en: {
     title: "Education and Certifications",
@@ -21,107 +24,48 @@ const translations = {
     degree: "Degree",
     year: "Year",
     viewCertificate: "View Certificate",
-    courseContents: "Course contents:"
+    courseContents: "Course contents:",
+    certificateNotFound: "Certificate not found"
   }
 };
 
 const Education = () => {
-  const { language, darkMode } = useContext(AppContext);
+  const { language, darkMode, selectedCert, setSelectedCert } = useContext(AppContext);
   const t = translations[language];
-  const [selectedCert, setSelectedCert] = useState(null);
 
-  const educationData = [
-    {
-      institution: "Universidad Tecnológica",
-      degree: "Ingeniería en Informática",
-      year: "2015 - 2019",
-      description: "Especialización en Desarrollo de Software y Sistemas Distribuidos",
-      theme: "university"
-    },
-    {
-      institution: "Cambridge English",
-      degree: "B2 First Certificate in English",
-      year: "2016",
-      description: "Certificado de nivel B2 en inglés según el Marco Común Europeo de Referencia para las lenguas (MCER)",
-      theme: "language"
-    }
-  ];
+  const handleCertSelect = useCallback((cert) => {
+    setSelectedCert(cert);
+  }, [setSelectedCert]);
 
-  const certificationsData = [
-    {
-      name: "React - The Complete Guide",
-      platform: "Udemy",
-      year: "2022",
-      pdfUrl: "/certificates/react-udemy.pdf",
-      contents: [
-        "JSX and React Components",
-        "State and Props",
-        "Hooks (useState, useEffect, useContext, etc.)",
-        "Redux for State Management",
-        "React Router for Navigation",
-        "Advanced Concepts: Context API, Higher-Order Components"
-      ]
-    },
-    {
-      name: "Node.js Developer Course",
-      platform: "Udemy",
-      year: "2021",
-      pdfUrl: "/certificates/node-udemy.pdf",
-      contents: [
-        "Asynchronous Programming in Node.js",
-        "Express.js Framework",
-        "RESTful API Development",
-        "MongoDB and Mongoose",
-        "Authentication and Security",
-        "Deployment and CI/CD"
-      ]
-    },
-    {
-      name: "Python Pro Bootcamp",
-      platform: "Udemy",
-      year: "2020",
-      pdfUrl: "/certificates/python-udemy.pdf",
-      contents: [
-        "Python Fundamentals and OOP",
-        "Web Scraping with Beautiful Soup",
-        "Data Analysis with Pandas",
-        "Web Development with Flask",
-        "GUI Development with Tkinter",
-        "Automation and Scripting"
-      ]
-    },
-    {
-      name: "Angular - The Complete Guide",
-      platform: "Udemy",
-      year: "2022",
-      pdfUrl: "/certificates/angular-udemy.pdf",
-      contents: [
-        "Angular Components and Databinding",
-        "Directives and Pipes",
-        "Services and Dependency Injection",
-        "Routing and Navigation",
-        "Observables and RxJS",
-        "NgRx for State Management"
-      ]
-    },
-    {
-      name: "NestJS - The Complete Developer's Guide",
-      platform: "Udemy",
-      year: "2023",
-      pdfUrl: "/certificates/nest-udemy.pdf",
-      contents: [
-        "NestJS Architecture and Modules",
-        "Dependency Injection and Providers",
-        "Controllers and Routing",
-        "Database Integration with TypeORM",
-        "Authentication and Authorization",
-        "Microservices Architecture"
-      ]
+  const handleCertDeselect = useCallback(() => {
+    setSelectedCert(null);
+  }, [setSelectedCert]);
+
+  const handleKeyDown = useCallback((event, cert) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCertSelect(cert);
     }
-  ];
+  }, [handleCertSelect]);
+
+  const handleCertificateClick = useCallback((event, pdfUrl) => {
+    event.preventDefault();
+    fetch(pdfUrl)
+      .then(response => {
+        if (response.ok) {
+          window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+        } else {
+          alert(t.certificateNotFound);
+        }
+      })
+      .catch(() => {
+        alert(t.certificateNotFound);
+      });
+  }, [t.certificateNotFound]);
 
   return (
     <div className={`education-container ${darkMode ? 'dark-mode' : ''}`}>
+      <div className="background-animation"></div>
       <h2>{t.title}</h2>
       
       <section className="education-section">
@@ -143,13 +87,21 @@ const Education = () => {
             <div
               key={index}
               className="certification-item"
-              onMouseEnter={() => setSelectedCert(cert)}
-              onMouseLeave={() => setSelectedCert(null)}
+              onMouseEnter={() => handleCertSelect(cert)}
+              onMouseLeave={handleCertDeselect}
+              onFocus={() => handleCertSelect(cert)}
+              onBlur={handleCertDeselect}
+              tabIndex={0}
+              onKeyDown={(e) => handleKeyDown(e, cert)}
             >
               <h4>{cert.name}</h4>
               <p>{cert.platform}</p>
               <p>{cert.year}</p>
-              <a href={cert.pdfUrl} target="_blank" rel="noopener noreferrer" className="view-certificate">
+              <a 
+                href={cert.pdfUrl} 
+                onClick={(e) => handleCertificateClick(e, cert.pdfUrl)}
+                className="view-certificate"
+              >
                 {t.viewCertificate}
               </a>
             </div>

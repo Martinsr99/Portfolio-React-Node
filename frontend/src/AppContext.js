@@ -8,8 +8,9 @@ export const AppProvider = ({ children }) => {
   const [isPending, startTransition] = useTransition();
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');
-    return savedMode ? JSON.parse(savedMode) : false;
+    return savedMode ? JSON.parse(savedMode) : true;
   });
+  const [selectedCert, setSelectedCert] = useState(null);
 
   const toggleLanguage = () => {
     startTransition(() => {
@@ -27,7 +28,16 @@ export const AppProvider = ({ children }) => {
   }, [darkMode]);
 
   return (
-    <AppContext.Provider value={{ language, toggleLanguage, isPending, darkMode, toggleTheme, staticData }}>
+    <AppContext.Provider value={{ 
+      language, 
+      toggleLanguage, 
+      isPending, 
+      darkMode, 
+      toggleTheme, 
+      staticData,
+      selectedCert,
+      setSelectedCert
+    }}>
       {children}
     </AppContext.Provider>
   );

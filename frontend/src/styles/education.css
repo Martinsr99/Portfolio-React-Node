@@ -1,20 +1,46 @@
 .education-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  animation: fadeIn 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #f0f4f8 0%, #d0e2f3 50%, #b0d0e8 100%);
+  color: #333333;
+  overflow-x: hidden;
+  position: relative;
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+  padding: 4rem 2rem;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: linear-gradient(45deg, #f3f3f3, #e6e6e6, #f0f0f0);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .education-container h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #2c3e50;
   margin-bottom: 2rem;
   text-align: center;
+  transition: color 0.5s ease-in-out;
 }
 
 .education-section,
@@ -25,48 +51,55 @@
 .education-section h3,
 .certifications-section h3 {
   font-size: 2rem;
-  color: #555;
+  color: #34495e;
   margin-bottom: 1.5rem;
   border-bottom: 2px solid #ddd;
   padding-bottom: 0.5rem;
+  transition: color 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 
 .education-item {
-  background-color: #f8f8f8;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease-in-out;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .education-item:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .education-item h4 {
   font-size: 1.4rem;
-  color: #333;
+  color: #2c3e50;
   margin-bottom: 0.8rem;
+  transition: color 0.5s ease-in-out;
 }
 
 .education-item p {
   margin-bottom: 0.5rem;
-  color: #666;
+  color: #34495e;
   font-size: 1.1rem;
+  transition: color 0.5s ease-in-out;
 }
 
 .education-item strong {
   font-weight: 600;
-  color: #444;
+  color: #2c3e50;
+  transition: color 0.5s ease-in-out;
 }
 
 /* University theme */
 .education-item.university {
-  border-left: 5px solid #4a90e2;
+  border-left: 5px solid #3498db;
 }
 
 .education-item.university::before {
@@ -97,12 +130,12 @@
 }
 
 .certification-item {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
   border: 2px solid #d4af37;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease-in-out;
   cursor: pointer;
   animation: fadeInUp 0.5s ease-out forwards;
   opacity: 0;
@@ -112,6 +145,7 @@
   flex-direction: column;
   height: auto;
   min-height: 200px;
+  backdrop-filter: blur(5px);
 }
 
 .certification-item::before {
@@ -123,6 +157,7 @@
   height: 100px;
   background-color: #d4af37;
   transform: rotate(45deg);
+  transition: background-color 0.5s ease-in-out;
 }
 
 .certification-item::after {
@@ -152,22 +187,25 @@
 .certification-item:hover {
   transform: translateY(-5px) scale(1.03);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .certification-item h4 {
   font-size: 1.5rem;
-  color: #333;
+  color: #2c3e50;
   margin-bottom: 1rem;
   font-family: 'Cormorant Garamond', serif;
   text-align: center;
   border-bottom: 1px solid #d4af37;
   padding-bottom: 0.5rem;
+  transition: color 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 
 .certification-item p {
   margin-bottom: 0.5rem;
-  color: #666;
+  color: #34495e;
   text-align: center;
+  transition: color 0.5s ease-in-out;
 }
 
 .view-certificate {
@@ -178,7 +216,7 @@
   color: #fff;
   text-decoration: none;
   border-radius: 4px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   text-align: center;
   font-weight: bold;
 }
@@ -191,7 +229,7 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.9);
   border: 2px solid #d4af37;
   border-radius: 8px;
   padding: 1.5rem;
@@ -202,6 +240,7 @@
   overflow-y: auto;
   animation: slideIn 0.3s ease-out forwards;
   font-family: 'Cormorant Garamond', serif;
+  transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 
 @keyframes slideIn {
@@ -217,17 +256,19 @@
 
 .certificate-preview h4 {
   font-size: 1.6rem;
-  color: #333;
+  color: #2c3e50;
   margin-bottom: 1rem;
   text-align: center;
   border-bottom: 1px solid #d4af37;
   padding-bottom: 0.5rem;
+  transition: color 0.5s ease-in-out, border-color 0.5s ease-in-out;
 }
 
 .certificate-preview p {
   margin-bottom: 1rem;
-  color: #666;
+  color: #34495e;
   text-align: center;
+  transition: color 0.5s ease-in-out;
 }
 
 .certificate-preview ul {
@@ -238,10 +279,11 @@
 
 .certificate-preview li {
   margin-bottom: 0.8rem;
-  color: #555;
+  color: #34495e;
   font-size: 1rem;
   padding-left: 1.5rem;
   position: relative;
+  transition: color 0.5s ease-in-out;
 }
 
 .certificate-preview li::before {
@@ -250,9 +292,104 @@
   font-weight: bold;
   position: absolute;
   left: 0;
+  transition: color 0.5s ease-in-out;
 }
 
-@media (max-width: 768px) {
+/* Dark mode styles */
+.dark-mode.education-container {
+  background: linear-gradient(135deg, #0a192f 0%, #0c2447 100%);
+  color: #e0e0e0;
+}
+
+.dark-mode .background-animation {
+  background: linear-gradient(45deg, #0a192f, #0c2447, #1a365d);
+  background-size: 400% 400%;
+}
+
+.dark-mode .education-container h2,
+.dark-mode .education-section h3,
+.dark-mode .certifications-section h3 {
+  color: #e0e0e0;
+  border-bottom-color: #444;
+}
+
+.dark-mode .education-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .education-item:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .education-item h4,
+.dark-mode .education-item p,
+.dark-mode .education-item strong {
+  color: #e0e0e0;
+}
+
+.dark-mode .certification-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #d4af37;
+}
+
+.dark-mode .certification-item::before {
+  background-color: #d4af37;
+}
+
+.dark-mode .certification-item h4 {
+  color: #e0e0e0;
+  border-bottom-color: #d4af37;
+}
+
+.dark-mode .certification-item p {
+  color: #b0b0b0;
+}
+
+.dark-mode .view-certificate {
+  background-color: #d4af37;
+  color: #1a1a1a;
+}
+
+.dark-mode .view-certificate:hover {
+  background-color: #b8960c;
+}
+
+.dark-mode .certificate-preview {
+  background-color: rgba(10, 25, 47, 0.9);
+  border-color: #d4af37;
+}
+
+.dark-mode .certificate-preview h4 {
+  color: #e0e0e0;
+  border-bottom-color: #d4af37;
+}
+
+.dark-mode .certificate-preview p,
+.dark-mode .certificate-preview li {
+  color: #b0b0b0;
+}
+
+.dark-mode .certificate-preview li::before {
+  color: #d4af37;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .education-container {
+    padding: 3rem 1rem;
+  }
+
+  .education-container h2 {
+    font-size: 2rem;
+  }
+
+  .education-section h3,
+  .certifications-section h3 {
+    font-size: 1.8rem;
+  }
+
   .certifications-grid {
     grid-template-columns: 1fr;
   }
@@ -262,6 +399,20 @@
     max-width: 350px;
     bottom: 1rem;
     right: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .education-item h4 {
+    font-size: 1.2rem;
+  }
+
+  .education-item p {
+    font-size: 1rem;
+  }
+
+  .certification-item h4 {
+    font-size: 1.3rem;
   }
 }
 
