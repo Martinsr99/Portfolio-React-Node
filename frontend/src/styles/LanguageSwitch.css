@@ -1,59 +1,47 @@
 .language-switch {
-  display: flex;
-  align-items: center;
-}
-
-.language-option {
   background: none;
   border: none;
-  color: #2c3e50;
-  font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
-  padding: 5px 10px;
-  margin: 0 5px;
-  transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
+  padding: 2px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.language-option:hover {
-  color: #3498db;
+.language-switch:hover {
   transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.language-option.active {
-  background-color: rgba(52, 152, 219, 0.2);
-  color: #2c3e50;
+.flag-icon {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
 }
 
 /* Dark mode styles */
-.dark-mode .language-option {
-  color: #e0e0e0;
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.dark-mode .language-option:hover {
-  color: #64b5f6;
-}
-
-.dark-mode .language-option.active {
-  background-color: rgba(100, 181, 246, 0.2);
-  color: #ffffff;
+.dark-mode .language-switch:hover {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-  .language-option {
-    font-size: 0.9rem;
-    padding: 4px 8px;
+  .flag-icon {
+    width: 20px;
+    height: 13px;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .language-option {
-    font-size: 0.8rem;
-    padding: 3px 6px;
+  .flag-icon {
+    width: 18px;
+    height: 12px;
+  }
+  
+  .language-switch {
+    padding: 1px;
   }
 }

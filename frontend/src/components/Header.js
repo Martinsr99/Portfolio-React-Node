@@ -62,15 +62,23 @@ const Header = () => {
           >
             {darkMode ? <FaSun /> : <FaMoon />}
           </motion.button>
-          <motion.button 
-            onClick={toggleLanguage} 
-            className="language-toggle" 
-            aria-label={t.toggleLanguage}
+          <motion.div 
+            className="language-toggle-container"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            {language === 'es' ? 'EN' : 'ES'}
-          </motion.button>
+            <input 
+              type="checkbox" 
+              id="language-toggle" 
+              className="language-toggle-checkbox" 
+              checked={language === 'en'}
+              onChange={toggleLanguage}
+            />
+            <label htmlFor="language-toggle" className="language-toggle-label">
+              <span className="language-toggle-inner"></span>
+              <span className="language-toggle-switch"></span>
+            </label>
+          </motion.div>
         </div>
       </div>
     </header>
