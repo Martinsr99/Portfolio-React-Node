@@ -2,6 +2,7 @@
 .projects-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100vh;
   width: 100%;
   background: linear-gradient(135deg, #f0f4f8 0%, #d0e2f3 50%, #b0d0e8 100%);
@@ -25,15 +26,9 @@
 }
 
 @keyframes gradientBG {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .section-title {
@@ -57,11 +52,18 @@
   content: '';
   position: absolute;
   width: 6px;
-  background-color: #2c3e50;
+  background-color: #3498db;
   top: 0;
   bottom: 0;
   left: 50%;
   margin-left: -3px;
+  animation: grow 1s ease-out forwards;
+  transform-origin: top;
+}
+
+@keyframes grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
 }
 
 .timeline-item {
@@ -76,7 +78,6 @@
   position: absolute;
   width: 25px;
   height: 25px;
-  right: -17px;
   background-color: white;
   border: 4px solid #3498db;
   top: 15px;
@@ -93,20 +94,7 @@
   left: 50%;
 }
 
-.left::before {
-  content: " ";
-  height: 0;
-  position: absolute;
-  top: 22px;
-  width: 0;
-  z-index: 1;
-  right: 30px;
-  border: medium solid #3498db;
-  border-width: 10px 0 10px 10px;
-  border-color: transparent transparent transparent #3498db;
-  transition: border-color 0.5s ease-in-out;
-}
-
+.left::before,
 .right::before {
   content: " ";
   height: 0;
@@ -114,11 +102,24 @@
   top: 22px;
   width: 0;
   z-index: 1;
-  left: 30px;
   border: medium solid #3498db;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.left::before {
+  right: 30px;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent #3498db;
+}
+
+.right::before {
+  left: 30px;
   border-width: 10px 10px 10px 0;
   border-color: transparent #3498db transparent transparent;
-  transition: border-color 0.5s ease-in-out;
+}
+
+.left::after {
+  right: -16px;
 }
 
 .right::after {
@@ -130,8 +131,19 @@
   background-color: white;
   position: relative;
   border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
+
+.timeline-content:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.timeline-item:hover::before {
+  opacity: 0;
+  transform: scale(0);
 }
 
 .timeline-icon {
@@ -143,53 +155,120 @@
 
 .timeline-content h3 {
   color: #2c3e50;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
   transition: color 0.5s ease-in-out;
 }
 
 .timeline-content p {
   color: #34495e;
+  font-size: 1rem;
+  line-height: 1.6;
   transition: color 0.5s ease-in-out;
 }
 
 /* Projects grid styles */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .project-card {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease-in-out;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.2s ease-in-out;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
+  transform: scale(1.05);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .project-icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #3498db;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   transition: color 0.5s ease-in-out;
 }
 
 .project-card h3 {
   color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  transition: color 0.5s ease-in-out;
+}
+
+.project-card h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.project-card h3 a:hover {
+  color: #3498db;
+}
+
+.project-card h4 {
+  color: #3498db;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
   transition: color 0.5s ease-in-out;
 }
 
 .project-card p {
   color: #34495e;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
   transition: color 0.5s ease-in-out;
+}
+
+.visit-site-btn {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.visit-site-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+}
+
+/* martinsil.es specific styles */
+.martinsiles-card {
+  background-color: rgba(52, 152, 219, 0.1);
+  border: 2px solid #3498db;
+}
+
+.martinsiles-card:hover {
+  background-color: rgba(52, 152, 219, 0.2);
+}
+
+.martinsiles-card .project-icon {
+  color: #3498db;
+}
+
+.martinsiles-card h3 {
+  color: #2c3e50;
+}
+
+.martinsiles-card h4 {
+  color: #3498db;
 }
 
 /* Dark mode styles */
@@ -227,7 +306,12 @@
 
 .dark-mode .timeline-content {
   background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.dark-mode .timeline-content:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
 .dark-mode .timeline-icon {
@@ -254,6 +338,36 @@
 
 .dark-mode .project-card h3,
 .dark-mode .project-card p {
+  color: #e0e0e0;
+}
+
+.dark-mode .project-card h3 a:hover {
+  color: #64b5f6;
+}
+
+.dark-mode .visit-site-btn {
+  background-color: #64b5f6;
+}
+
+.dark-mode .visit-site-btn:hover {
+  background-color: #4a90e2;
+}
+
+.dark-mode .martinsiles-card {
+  background-color: rgba(100, 181, 246, 0.1);
+  border: 2px solid #64b5f6;
+}
+
+.dark-mode .martinsiles-card:hover {
+  background-color: rgba(100, 181, 246, 0.2);
+}
+
+.dark-mode .martinsiles-card .project-icon,
+.dark-mode .martinsiles-card h4 {
+  color: #64b5f6;
+}
+
+.dark-mode .martinsiles-card h3 {
   color: #e0e0e0;
 }
 
@@ -293,17 +407,29 @@
   }
 
   .projects-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: 1fr;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
+  .project-icon {
+    font-size: 2rem;
   }
 
-  .project-icon {
+  .project-card h3 {
     font-size: 1.5rem;
+  }
+
+  .project-card h4 {
+    font-size: 1.1rem;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+  }
+
+  .visit-site-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }

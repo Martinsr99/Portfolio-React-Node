@@ -9,11 +9,15 @@ const translations = {
     workExperience: "Experiencia Laboral",
     personalProjects: "Proyectos Personales",
     currently: "Actualmente",
+    webServices: "Servicios Web",
+    martinsilesDescription: "Ofrezco servicios de creación web para negocios locales, ayudándoles a establecer una presencia en línea efectiva y atractiva.",
   },
   en: {
     workExperience: "Work Experience",
     personalProjects: "Personal Projects",
     currently: "Currently",
+    webServices: "Web Services",
+    martinsilesDescription: "I offer web creation services for local businesses, helping them establish an effective and attractive online presence.",
   }
 };
 
@@ -88,42 +92,6 @@ const Projects = () => {
     }
   ];
 
-  const projects = [
-    { 
-      id: 1, 
-      title: {
-        es: 'Plataforma de Comercio Electrónico',
-        en: 'E-commerce Platform'
-      }, 
-      description: {
-        es: 'Una solución de comercio electrónico full-stack utilizando el stack MERN.',
-        en: 'A full-stack e-commerce solution using MERN stack.'
-      }
-    },
-    { 
-      id: 2, 
-      title: {
-        es: 'Aplicación de Gestión de Tareas',
-        en: 'Task Management App'
-      }, 
-      description: {
-        es: 'Una aplicación de gestión de tareas basada en Vue.js y Node.js.',
-        en: 'A Vue.js and Node.js based task management application.'
-      }
-    },
-    { 
-      id: 3, 
-      title: {
-        es: 'Panel de Visualización de Datos',
-        en: 'Data Visualization Dashboard'
-      }, 
-      description: {
-        es: 'Un panel interactivo construido con React y D3.js.',
-        en: 'An interactive dashboard built with React and D3.js.'
-      }
-    },
-  ];
-
   return (
     <motion.div
       className={`projects-container ${darkMode ? 'dark-mode' : ''}`}
@@ -132,7 +100,14 @@ const Projects = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="background-animation"></div>
-      <h2 className="section-title">{t.workExperience}</h2>
+      <motion.h2 
+        className="section-title"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        {t.workExperience}
+      </motion.h2>
       <div className="timeline">
         {workExperience.map((job, index) => (
           <motion.div
@@ -142,7 +117,11 @@ const Projects = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: job.id * 0.2 }}
           >
-            <div className="timeline-content">
+            <motion.div 
+              className="timeline-content"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
               <div className="timeline-icon">
                 <FaBriefcase />
               </div>
@@ -150,28 +129,41 @@ const Projects = () => {
               <p className="period">{job.period[language]}</p>
               <p className="position">{job.position[language]}</p>
               <p>{job.description[language]}</p>
-            </div>
+            </motion.div>
           </motion.div>
         ))}
       </div>
 
-      <h2 className="section-title">{t.personalProjects}</h2>
+      <motion.h2 
+        className="section-title"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        {t.personalProjects}
+      </motion.h2>
       <div className="projects-grid">
-        {projects.map((project) => (
-          <motion.div
-            key={project.id}
-            className="project-card"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: project.id * 0.1 }}
-          >
-            <div className="project-icon">
-              <FaCode />
-            </div>
-            <h3>{project.title[language]}</h3>
-            <p>{project.description[language]}</p>
-          </motion.div>
-        ))}
+        <motion.div
+          className="project-card martinsiles-card"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="project-icon">
+            <FaCode />
+          </div>
+          <h3>
+            <a href="https://martinsil.es" target="_blank" rel="noopener noreferrer">
+              martinsil.es
+            </a>
+          </h3>
+          <h4>{t.webServices}</h4>
+          <p>{t.martinsilesDescription}</p>
+          <a href="https://martinsil.es" target="_blank" rel="noopener noreferrer" className="visit-site-btn">
+            {language === 'es' ? 'Visitar Sitio' : 'Visit Site'}
+          </a>
+        </motion.div>
       </div>
     </motion.div>
   );
