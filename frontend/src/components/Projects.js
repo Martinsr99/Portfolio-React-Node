@@ -1,8 +1,14 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaCode } from 'react-icons/fa';
+import { FaCode } from 'react-icons/fa';
 import { AppContext } from '../AppContext';
 import '../styles/projects.css';
+
+// Importa las imágenes de los logos
+import rawIGamingLogo from '../images/companies/raw-igaming-logo.png';
+import eosolLogo from '../images/companies/eosol-logo.png';
+import nttDataLogo from '../images/companies/ntt-data-logo.jpg';
+import nucleooLogo from '../images/companies/nucleoo-logo.jpeg';
 
 const translations = {
   es: {
@@ -29,6 +35,7 @@ const Projects = () => {
     {
       id: 1,
       company: 'Raw iGaming',
+      logo: rawIGamingLogo,
       period: {
         es: 'Septiembre 2023 - Actualmente',
         en: 'September 2023 - Currently'
@@ -45,6 +52,7 @@ const Projects = () => {
     {
       id: 2,
       company: 'EOSOL',
+      logo: eosolLogo,
       period: {
         es: 'Febrero - Septiembre 2023',
         en: 'February - September 2023'
@@ -61,6 +69,7 @@ const Projects = () => {
     {
       id: 3,
       company: 'NTT DATA',
+      logo: nttDataLogo,
       period: {
         es: 'Noviembre 2021 - Febrero 2023',
         en: 'November 2021 - February 2023'
@@ -77,6 +86,7 @@ const Projects = () => {
     {
       id: 4,
       company: 'NUCLEOO',
+      logo: nucleooLogo,
       period: {
         es: 'Mayo 2021 - Noviembre 2021',
         en: 'May 2021 - November 2021'
@@ -122,8 +132,8 @@ const Projects = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="timeline-icon">
-                <FaBriefcase />
+              <div className="company-logo">
+                <img src={job.logo} alt={`${job.company} logo`} />
               </div>
               <h3>{job.company}</h3>
               <p className="period">{job.period[language]}</p>

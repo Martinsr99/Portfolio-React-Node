@@ -146,11 +146,23 @@
   transform: scale(0);
 }
 
-.timeline-icon {
-  font-size: 1.5rem;
-  color: #3498db;
-  margin-bottom: 1rem;
-  transition: color 0.5s ease-in-out;
+.company-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.company-logo img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
 }
 
 .timeline-content h3 {
@@ -314,8 +326,8 @@
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
-.dark-mode .timeline-icon {
-  color: #64b5f6;
+.dark-mode .company-logo {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .dark-mode .timeline-content h3,
@@ -412,6 +424,11 @@
 }
 
 @media screen and (max-width: 480px) {
+  .company-logo {
+    width: 80px;
+    height: 80px;
+  }
+
   .project-icon {
     font-size: 2rem;
   }
