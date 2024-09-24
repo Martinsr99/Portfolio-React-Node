@@ -149,13 +149,12 @@
 
 /* Dark mode styles */
 .dark-mode.contact-container {
-  background: linear-gradient(135deg, #0a192f 0%, #0c2447 100%);
+  background: rgb(26, 26, 26);
   color: #e0e0e0;
 }
 
 .dark-mode .background-animation {
-  background: linear-gradient(45deg, #0a192f, #0c2447, #1a365d);
-  background-size: 400% 400%;
+  display: none;
 }
 
 .dark-mode .contact-title {
