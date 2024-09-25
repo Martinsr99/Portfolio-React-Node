@@ -17,6 +17,7 @@ const translations = {
     currently: "Actualmente",
     webServices: "Servicios Web",
     martinsilesDescription: "Ofrezco servicios de creación web para negocios locales, ayudándoles a establecer una presencia en línea efectiva y atractiva.",
+    visitSite: "Visitar Sitio"
   },
   en: {
     workExperience: "Work Experience",
@@ -24,6 +25,7 @@ const translations = {
     currently: "Currently",
     webServices: "Web Services",
     martinsilesDescription: "I offer web creation services for local businesses, helping them establish an effective and attractive online presence.",
+    visitSite: "Visit Site"
   }
 };
 
@@ -170,8 +172,13 @@ const Projects = () => {
           </h3>
           <h4>{t.webServices}</h4>
           <p>{t.martinsilesDescription}</p>
-          <a href="https://martinsil.es" target="_blank" rel="noopener noreferrer" className="visit-site-btn">
-            {language === 'es' ? 'Visitar Sitio' : 'Visit Site'}
+          <a 
+            href="https://martinsil.es" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn btn-primary"
+          >
+            {t.visitSite}
           </a>
         </motion.div>
       </div>

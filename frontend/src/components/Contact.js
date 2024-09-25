@@ -180,14 +180,16 @@ const Contact = () => {
             placeholder={t.captchaPlaceholder}
           />
         </motion.div>
-        <motion.button
-          className="submit-button"
-          type="submit"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          {t.sendMessage}
-        </motion.button>
+        <motion.div className="submit-button-container">
+          <motion.button
+            className="btn btn-primary btn-large submit-button"
+            type="submit"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {t.sendMessage}
+          </motion.button>
+        </motion.div>
       </form>
       <ToastContainer position="bottom-right" />
     </motion.div>

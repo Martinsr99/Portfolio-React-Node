@@ -285,49 +285,48 @@
 
 /* Dark mode styles */
 .dark-mode.projects-container {
-  background: linear-gradient(135deg, #0a192f 0%, #0c2447 100%);
+  background: rgb(26, 26, 26);
   color: #e0e0e0;
 }
 
 .dark-mode .background-animation {
-  background: linear-gradient(45deg, #0a192f, #0c2447, #1a365d);
-  background-size: 400% 400%;
+  display: none;
 }
 
 .dark-mode .section-title {
-  color: #e0e0e0;
+  color: #f0f0f0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .dark-mode .timeline::after {
-  background-color: #64b5f6;
+  background-color: #4a90e2;
 }
 
 .dark-mode .timeline-item::after {
-  background-color: #1a365d;
-  border-color: #64b5f6;
+  background-color: #333333;
+  border-color: #4a90e2;
 }
 
 .dark-mode .left::before {
-  border-color: transparent transparent transparent #64b5f6;
+  border-color: transparent transparent transparent #4a90e2;
 }
 
 .dark-mode .right::before {
-  border-color: transparent #64b5f6 transparent transparent;
+  border-color: transparent #4a90e2 transparent transparent;
 }
 
 .dark-mode .timeline-content {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: #333333;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .dark-mode .timeline-content:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #404040;
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
 .dark-mode .company-logo {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #404040;
 }
 
 .dark-mode .timeline-content h3,
@@ -336,16 +335,16 @@
 }
 
 .dark-mode .project-card {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: #333333;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .dark-mode .project-card:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #404040;
 }
 
 .dark-mode .project-icon {
-  color: #64b5f6;
+  color: #4a90e2;
 }
 
 .dark-mode .project-card h3,
@@ -353,30 +352,35 @@
   color: #e0e0e0;
 }
 
+.dark-mode .project-card h4 {
+  color: #4a90e2;
+}
+
 .dark-mode .project-card h3 a:hover {
-  color: #64b5f6;
+  color: #4a90e2;
 }
 
 .dark-mode .visit-site-btn {
-  background-color: #64b5f6;
+  background-color: #4a90e2;
+  color: #f0f0f0;
 }
 
 .dark-mode .visit-site-btn:hover {
-  background-color: #4a90e2;
+  background-color: #3a7bc8;
 }
 
 .dark-mode .martinsiles-card {
-  background-color: rgba(100, 181, 246, 0.1);
-  border: 2px solid #64b5f6;
+  background-color: rgba(74, 144, 226, 0.1);
+  border: 2px solid #4a90e2;
 }
 
 .dark-mode .martinsiles-card:hover {
-  background-color: rgba(100, 181, 246, 0.2);
+  background-color: rgba(74, 144, 226, 0.2);
 }
 
 .dark-mode .martinsiles-card .project-icon,
 .dark-mode .martinsiles-card h4 {
-  color: #64b5f6;
+  color: #4a90e2;
 }
 
 .dark-mode .martinsiles-card h3 {
