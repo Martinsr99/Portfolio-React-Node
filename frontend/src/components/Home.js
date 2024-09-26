@@ -11,6 +11,7 @@ import { TbBrandNextjs } from 'react-icons/tb';
 import { AppContext } from '../AppContext';
 import profileImage from '../images/profile-image.jpg';
 import '../styles/home.css';
+import '../styles/buttons.css';
 import { staticData } from '../data/staticData';
 
 const iconMap = {
@@ -100,7 +101,7 @@ const Home = () => {
             <motion.a 
               href="/cv/Martin-Siles-Software-Engineer.pdf" 
               download="Martin-Siles-Software-Engineer.pdf"
-              className="cv-button download"
+              className="btn btn-primary cv-button download"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -110,7 +111,7 @@ const Home = () => {
               href="/cv/Martin-Siles-Software-Engineer.pdf" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="cv-button view"
+              className="btn btn-secondary cv-button view"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

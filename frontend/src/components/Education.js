@@ -3,6 +3,7 @@ import { AppContext } from '../AppContext';
 import { educationData } from '../data/educationData';
 import { certificationsData } from '../data/certificationsData';
 import '../styles/education.css';
+import '../styles/buttons.css';
 
 const translations = {
   es: {
@@ -100,7 +101,7 @@ const Education = () => {
               <a 
                 href={cert.pdfUrl} 
                 onClick={(e) => handleCertificateClick(e, cert.pdfUrl)}
-                className="view-certificate"
+                className="btn btn-primary view-certificate"
               >
                 {t.viewCertificate}
               </a>
