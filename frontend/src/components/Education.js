@@ -51,18 +51,8 @@ const Education = () => {
 
   const handleCertificateClick = useCallback((event, pdfUrl) => {
     event.preventDefault();
-    fetch(pdfUrl)
-      .then(response => {
-        if (response.ok) {
-          window.open(pdfUrl, '_blank', 'noopener,noreferrer');
-        } else {
-          alert(t.certificateNotFound);
-        }
-      })
-      .catch(() => {
-        alert(t.certificateNotFound);
-      });
-  }, [t.certificateNotFound]);
+    window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+  }, []);
 
   return (
     <div className={`education-container ${darkMode ? 'dark-mode' : ''}`}>
@@ -98,13 +88,14 @@ const Education = () => {
               <h4>{cert.name}</h4>
               <p>{cert.platform}</p>
               <p>{cert.year}</p>
-              <a 
-                href={cert.pdfUrl} 
-                onClick={(e) => handleCertificateClick(e, cert.pdfUrl)}
-                className="btn btn-primary view-certificate"
-              >
-                {t.viewCertificate}
-              </a>
+              <div className="certificate-button-container">
+                <button 
+                  onClick={(e) => handleCertificateClick(e, cert.pdfUrl)}
+                  className="btn btn-primary btn-certificate"
+                >
+                  {t.viewCertificate}
+                </button>
+              </div>
             </div>
           ))}
         </div>
