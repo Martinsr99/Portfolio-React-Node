@@ -30,7 +30,14 @@ function AppContent() {
     } else {
       document.body.classList.remove('language-transition');
     }
-  }, [isPending]);
+
+    // Apply dark mode class to body
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  }, [isPending, darkMode]);
 
   return (
     <Router>
