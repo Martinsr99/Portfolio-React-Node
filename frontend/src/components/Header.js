@@ -1,14 +1,35 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useContext, useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { AppContext } from '../AppContext';
 import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 
 const Header = () => {
   const { language, toggleLanguage, darkMode, toggleTheme } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   const translations = {
     es: {
@@ -34,39 +55,32 @@ const Header = () => {
   const t = translations[language];
 
   return (
-    <header className="header">
+    <header className={`header ${scrolled ? 'scrolled' : ''} ${darkMode ? 'dark' : 'light'}`}>
       <div className="header-content">
-        <div className="menu-icon" onClick={toggleMenu}>
+        <div 
+          className="menu-icon" 
+          onClick={toggleMenu}
+        >
           {isOpen ? <FaTimes /> : <FaBars />}
         </div>
         <nav className={`nav-menu ${isOpen ? 'show' : ''}`}>
-          <motion.ul
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <motion.li whileHover={{ scale: 1.1 }}><Link to="/" onClick={toggleMenu}>{t.home}</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.1 }}><Link to="/about" onClick={toggleMenu}>{t.about}</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.1 }}><Link to="/projects" onClick={toggleMenu}>{t.projects}</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.1 }}><Link to="/education" onClick={toggleMenu}>{t.education}</Link></motion.li>
-            <motion.li whileHover={{ scale: 1.1 }}><Link to="/contact" onClick={toggleMenu}>{t.contact}</Link></motion.li>
-          </motion.ul>
+          <ul>
+            <li><Link to="/" onClick={toggleMenu}>{t.home}</Link></li>
+            <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
+            <li><Link to="/projects" onClick={toggleMenu}>{t.projects}</Link></li>
+            <li><Link to="/education" onClick={toggleMenu}>{t.education}</Link></li>
+            <li><Link to="/contact" onClick={toggleMenu}>{t.contact}</Link></li>
+          </ul>
         </nav>
         <div className="controls-container">
-          <motion.button 
+          <button 
             onClick={toggleTheme} 
             className="theme-toggle" 
             aria-label={t.toggleTheme}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
           >
             {darkMode ? <FaSun /> : <FaMoon />}
-          </motion.button>
-          <motion.div 
-            className="language-toggle-container"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          </button>
+          <div className="language-toggle-container">
             <input 
               type="checkbox" 
               id="language-toggle" 
@@ -78,7 +92,7 @@ const Header = () => {
               <span className="language-toggle-inner"></span>
               <span className="language-toggle-switch"></span>
             </label>
-          </motion.div>
+          </div>
         </div>
       </div>
     </header>
