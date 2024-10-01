@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../AppContext';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const translations = {
   es: {
@@ -10,19 +12,48 @@ const translations = {
   }
 };
 
+const iconVariants = {
+  hover: {
+    scale: 1.2,
+    transition: {
+      duration: 0.3,
+      yoyo: Infinity
+    }
+  }
+};
+
 const Footer = () => {
-  const { language, darkMode } = useContext(AppContext);
+  const { language } = useContext(AppContext);
 
   return (
-    <footer style={{
-      backgroundColor: darkMode ? '#1a1a1a' : '#2c3e50',
-      color: '#ffffff',
-      padding: '20px 0',
-      textAlign: 'center',
-      width: '100%',
-      transition: 'background-color 0.3s ease'
-    }}>
-      <p>&copy; 2024 Martin Siles. {translations[language].rights}</p>
+    <footer>
+      <div className="footer-content">
+        <div className="footer-links">
+          <motion.a
+            href="https://github.com/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            className="social-icon"
+            whileHover="hover"
+            variants={iconVariants}
+          >
+            <FaGithub />
+          </motion.a>
+          <motion.a
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            className="social-icon"
+            whileHover="hover"
+            variants={iconVariants}
+          >
+            <FaLinkedin />
+          </motion.a>
+        </div>
+        <p className="copyright">&copy; 2024 Martin Siles. {translations[language].rights}</p>
+      </div>
     </footer>
   );
 };
