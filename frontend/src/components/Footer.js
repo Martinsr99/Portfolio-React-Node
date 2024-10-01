@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../AppContext';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaYoutube } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const translations = {
@@ -30,7 +30,7 @@ const Footer = () => {
       <div className="footer-content">
         <div className="footer-links">
           <motion.a
-            href="https://github.com/yourusername"
+            href="https://github.com/Martinsr99"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
@@ -41,7 +41,7 @@ const Footer = () => {
             <FaGithub />
           </motion.a>
           <motion.a
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/martinsilesreche/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
@@ -50,6 +50,17 @@ const Footer = () => {
             variants={iconVariants}
           >
             <FaLinkedin />
+          </motion.a>
+          <motion.a
+            href="https://www.youtube.com/@martinsiles"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            className="social-icon"
+            whileHover="hover"
+            variants={iconVariants}
+          >
+            <FaYoutube />
           </motion.a>
         </div>
         <p className="copyright">&copy; 2024 Martin Siles. {translations[language].rights}</p>
