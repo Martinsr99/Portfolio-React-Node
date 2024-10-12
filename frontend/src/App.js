@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AppProvider, AppContext } from './AppContext';
 import Header from './components/Header';
 import Home from './components/Home';
 import About from './components/About';
-import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Education from './components/Education';
 import Footer from './components/Footer';
@@ -22,6 +21,7 @@ function ScrollToTop() {
 
 function AppContent() {
   const { isPending, darkMode } = useContext(AppContext);
+  const projectsRef = useRef(null);
 
   useEffect(() => {
     // Add a class to the body when language is changing
@@ -39,16 +39,19 @@ function AppContent() {
     }
   }, [isPending, darkMode]);
 
+  const scrollToProjects = () => {
+    projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <Router>
       <div className={`App app-container ${darkMode ? 'dark-mode' : ''}`} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Header />
+        <Header scrollToProjects={scrollToProjects} />
         <ScrollToTop />
         <main style={{ flex: 1, transition: 'opacity 0.3s ease-in-out', opacity: isPending ? 0.5 : 1 }}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home projectsRef={projectsRef} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/education" element={<Education />} />
           </Routes>

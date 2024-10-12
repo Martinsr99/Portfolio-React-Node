@@ -1,45 +1,13 @@
 /* Projects component styles */
-.projects-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  width: 100%;
-  background: linear-gradient(135deg, #f0f4f8 0%, #d0e2f3 50%, #b0d0e8 100%);
-  color: #333333;
-  overflow-x: hidden;
-  position: relative;
-  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
-  padding: 4rem 2rem;
-}
-
-.background-animation {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  background: linear-gradient(45deg, #f3f3f3, #e6e6e6, #f0f0f0);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-}
-
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 .section-title {
-  font-size: 3rem; /* Aumenta el tamaño */
+  font-size: 3rem;
   margin-bottom: 2rem;
   text-align: center;
   background: linear-gradient(135deg, #3498db, #2ecc71);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; /* Efecto de texto degradado */
+  -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  animation: fadeInText 1s ease-in-out; /* Suaviza la entrada del texto */
+  animation: fadeInText 1s ease-in-out;
 }
 
 @keyframes fadeInText {
@@ -53,7 +21,6 @@
   }
 }
 
-
 /* Timeline styles */
 .timeline {
   position: relative;
@@ -66,14 +33,14 @@
   content: '';
   position: absolute;
   width: 6px;
-  background: linear-gradient(180deg, #3498db, #2ecc71); /* Degradado para la barra */
+  background: linear-gradient(180deg, #3498db, #2ecc71);
   top: 0;
   bottom: 0;
   left: 50%;
   margin-left: -3px;
-  animation: grow 2s ease-out forwards, pulse 1.5s infinite; /* Añadir animación de crecimiento y pulso */
+  animation: grow 2s ease-out forwards, pulse 1.5s infinite;
   transform-origin: top;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
 
@@ -89,7 +56,6 @@
   }
 }
 
-
 .timeline-item {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   padding: 10px 40px;
@@ -104,7 +70,7 @@
 }
 
 .timeline-item:hover {
-  transform: scale(1.03) translateY(-10px); /* Efecto de hover para agrandar y levantar ligeramente */
+  transform: scale(1.03) translateY(-10px);
 }
 
 @keyframes fadeInSlide {
@@ -339,15 +305,6 @@
 }
 
 /* Dark mode styles */
-.dark-mode.projects-container {
-  background: rgb(26, 26, 26);
-  color: #e0e0e0;
-}
-
-.dark-mode .background-animation {
-  display: none;
-}
-
 .dark-mode .section-title {
   color: #f0f0f0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
@@ -444,10 +401,6 @@
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-  .projects-container {
-    padding: 3rem 1rem;
-  }
-
   .section-title {
     font-size: 2rem;
   }

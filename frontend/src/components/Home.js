@@ -1,4 +1,5 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs, FaFileDownload
@@ -13,6 +14,7 @@ import profileImage from '../images/profile-image.jpg';
 import '../styles/home.css';
 import '../styles/buttons.css';
 import { staticData } from '../data/staticData';
+import Projects from './Projects';
 
 const iconMap = {
   React: FaReact,
@@ -59,6 +61,14 @@ const Home = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
   const { language, darkMode } = useContext(AppContext);
   const skillsRef = useRef(null);
+  const projectsRef = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash === '#projects') {
+      projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location]);
 
   const themeVariants = {
     hidden: { opacity: 0 },
@@ -156,6 +166,10 @@ const Home = () => {
               );
             })}
           </div>
+        </div>
+
+        <div id="projects" ref={projectsRef}>
+          <Projects />
         </div>
       </motion.div>
     </div>
