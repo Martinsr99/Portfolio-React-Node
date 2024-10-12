@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
+import { ReactTyped as Typed } from 'react-typed'; // Alias si es necesario usar ReactTyped
 import { FaCode } from 'react-icons/fa';
 import { AppContext } from '../AppContext';
 import '../styles/projects.css';
@@ -112,14 +113,21 @@ const Projects = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="background-animation"></div>
+
       <motion.h2 
         className="section-title"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        {t.workExperience}
+        <Typed
+          strings={[t.workExperience]} // Texto animado con efecto de escritura
+          typeSpeed={50}
+          backSpeed={30}
+          loop={false}
+        />
       </motion.h2>
+
       <div className="timeline">
         {workExperience.map((job, index) => (
           <motion.div
