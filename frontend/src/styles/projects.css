@@ -73,6 +73,17 @@
   background-color: inherit;
   width: 50%;
   z-index: 2;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: fadeInSlide 0.5s ease-out forwards;
+  animation-delay: calc(var(--item-index) * 0.2s);
+}
+
+@keyframes fadeInSlide {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .timeline-item::after {
@@ -134,14 +145,14 @@
   position: relative;
   border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   text-align: center;
   z-index: 2;
 }
 
 .timeline-content:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
 .timeline-item:hover::before {
@@ -160,6 +171,11 @@
   border-radius: 50%;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.timeline-content:hover .company-logo {
+  transform: rotate(10deg);
 }
 
 .company-logo img {
@@ -197,15 +213,15 @@
   border-radius: 15px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   text-align: center;
 }
 
 .project-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05) translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   background-color: rgba(255, 255, 255, 0.9);
 }
 
@@ -213,7 +229,16 @@
   font-size: 2.5rem;
   color: #3498db;
   margin-bottom: 1.5rem;
-  transition: color 0.5s ease-in-out;
+  transition: color 0.5s ease-in-out, transform 0.3s ease;
+}
+
+.project-card:hover .project-icon {
+  animation: bounce 0.5s ease infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-10px); }
 }
 
 .project-card h3 {
@@ -325,7 +350,7 @@
 
 .dark-mode .timeline-content:hover {
   background-color: #404040;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
 .dark-mode .company-logo {
