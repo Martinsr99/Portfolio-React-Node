@@ -105,7 +105,6 @@
 
 .timeline-item:hover {
   transform: scale(1.03) translateY(-10px); /* Efecto de hover para agrandar y levantar ligeramente */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra al hacer hover */
 }
 
 @keyframes fadeInSlide {
@@ -251,7 +250,6 @@
 .project-card:hover {
   transform: scale(1.05) translateY(-10px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .project-icon {
