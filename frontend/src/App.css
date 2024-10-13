@@ -263,9 +263,18 @@ h1, h2, h3 {
     right: -100%;
     width: 60%;
     height: 100vh;
-    background-color: var(--primary-color);
     transition: right var(--transition-speed) ease-in-out;
     z-index: 99;
+  }
+
+  .light .nav-menu {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .nav-menu {
+    background-color: rgba(26, 26, 26, 0.95);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
   }
 
   .nav-menu.show {
@@ -285,6 +294,14 @@ h1, h2, h3 {
 
   .nav-menu ul li a {
     font-size: 1.2rem;
+  }
+
+  .light .nav-menu ul li a {
+    color: var(--text-color-dark);
+  }
+
+  .dark .nav-menu ul li a {
+    color: var(--text-color-light);
   }
 
   .controls-container {
