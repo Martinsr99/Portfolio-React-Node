@@ -217,8 +217,8 @@
 
 /* Projects grid styles */
 .projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  justify-content: center;
   gap: 2rem;
   margin-top: 2rem;
   width: 100%;
@@ -309,6 +309,8 @@
 .martinsiles-card {
   background-color: rgba(52, 152, 219, 0.1);
   border: 2px solid #3498db;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 .martinsiles-card:hover {
@@ -453,8 +455,8 @@
     left: 0%;
   }
 
-  .projects-grid {
-    grid-template-columns: 1fr;
+  .martinsiles-card {
+    max-width: 90%;
   }
 }
 
@@ -483,5 +485,12 @@
   .visit-site-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+  }
+
+  .martinsiles-card {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
   }
 }

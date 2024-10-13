@@ -34,26 +34,44 @@ const Projects = () => {
   const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
   const workExperienceTitleRef = useRef(null);
+  const personalProjectsTitleRef = useRef(null);
   const [isWorkExperienceTitleVisible, setIsWorkExperienceTitleVisible] = useState(false);
+  const [isPersonalProjectsTitleVisible, setIsPersonalProjectsTitleVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
+    const observerOptions = {
+      threshold: 0.1
+    };
+
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setIsWorkExperienceTitleVisible(true);
+          if (entry.target === workExperienceTitleRef.current) {
+            setIsWorkExperienceTitleVisible(true);
+          } else if (entry.target === personalProjectsTitleRef.current) {
+            setIsPersonalProjectsTitleVisible(true);
+          }
           observer.unobserve(entry.target);
         }
-      },
-      { threshold: 0.1 }
-    );
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
 
     if (workExperienceTitleRef.current) {
       observer.observe(workExperienceTitleRef.current);
     }
 
+    if (personalProjectsTitleRef.current) {
+      observer.observe(personalProjectsTitleRef.current);
+    }
+
     return () => {
       if (workExperienceTitleRef.current) {
         observer.unobserve(workExperienceTitleRef.current);
+      }
+      if (personalProjectsTitleRef.current) {
+        observer.unobserve(personalProjectsTitleRef.current);
       }
     };
   }, []);
@@ -185,12 +203,20 @@ const Projects = () => {
 
       <div className="personal-projects-section">
         <motion.h2 
-          className="section-title"
+          ref={personalProjectsTitleRef}
+          className="section-title personal-projects-title"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {t.personalProjects}
+          {isPersonalProjectsTitleVisible && (
+            <Typed
+              strings={[t.personalProjects]}
+              typeSpeed={50}
+              backSpeed={30}
+              loop={false}
+            />
+          )}
         </motion.h2>
         <div className="projects-grid">
           <motion.div
