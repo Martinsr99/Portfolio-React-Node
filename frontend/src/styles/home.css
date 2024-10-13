@@ -74,6 +74,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  margin-bottom: 4rem; 
 }
 
 .intro-section {
@@ -85,8 +86,8 @@
   min-height: 100vh;
   padding: 2rem;
   box-sizing: border-box;
+  margin-bottom: 4rem; /* Add more margin to the bottom of the skills section */
 }
-
 .profile-image {
   width: 200px;
   height: 200px;

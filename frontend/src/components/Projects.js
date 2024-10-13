@@ -138,84 +138,88 @@ const Projects = () => {
     >
       <div className="background-animation"></div>
 
-      <motion.h2 
-        ref={workExperienceTitleRef}
-        className="section-title"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        {isWorkExperienceTitleVisible && (
-          <Typed
-            strings={[t.workExperience]}
-            typeSpeed={50}
-            backSpeed={30}
-            loop={false}
-          />
-        )}
-      </motion.h2>
+      <div className="work-experience-section">
+        <motion.h2 
+          ref={workExperienceTitleRef}
+          className="section-title work-experience-title"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {isWorkExperienceTitleVisible && (
+            <Typed
+              strings={[t.workExperience]}
+              typeSpeed={50}
+              backSpeed={30}
+              loop={false}
+            />
+          )}
+        </motion.h2>
 
-      <div className="timeline">
-        {workExperience.map((job, index) => (
-          <motion.div
-            key={job.id}
-            className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: job.id * 0.2 }}
-          >
-            <motion.div 
-              className="timeline-content"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
+        <div className="timeline">
+          {workExperience.map((job, index) => (
+            <motion.div
+              key={job.id}
+              className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: job.id * 0.2 }}
             >
-              <div className="company-logo">
-                <img src={job.logo} alt={`${job.company} logo`} />
-              </div>
-              <h3>{job.company}</h3>
-              <p className="period">{job.period[language]}</p>
-              <p className="position">{job.position[language]}</p>
-              <p>{job.description[language]}</p>
+              <motion.div 
+                className="timeline-content"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="company-logo">
+                  <img src={job.logo} alt={`${job.company} logo`} />
+                </div>
+                <h3>{job.company}</h3>
+                <p className="period">{job.period[language]}</p>
+                <p className="position">{job.position[language]}</p>
+                <p>{job.description[language]}</p>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
 
-      <motion.h2 
-        className="section-title"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        {t.personalProjects}
-      </motion.h2>
-      <div className="projects-grid">
-        <motion.div
-          className="project-card martinsiles-card"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.2 }}
+      <div className="personal-projects-section">
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="project-icon">
-            <FaCode />
-          </div>
-          <h3>
-            <a href="https://martinsil.es" target="_blank" rel="noopener noreferrer">
-              martinsil.es
-            </a>
-          </h3>
-          <h4>{t.webServices}</h4>
-          <p>{t.martinsilesDescription}</p>
-          <a 
-            href="https://martinsil.es" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="btn btn-primary"
+          {t.personalProjects}
+        </motion.h2>
+        <div className="projects-grid">
+          <motion.div
+            className="project-card martinsiles-card"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           >
-            {t.visitSite}
-          </a>
-        </motion.div>
+            <div className="project-icon">
+              <FaCode />
+            </div>
+            <h3>
+              <a href="https://martinsil.es" target="_blank" rel="noopener noreferrer">
+                martinsil.es
+              </a>
+            </h3>
+            <h4>{t.webServices}</h4>
+            <p>{t.martinsilesDescription}</p>
+            <a 
+              href="https://martinsil.es" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn btn-primary"
+            >
+              {t.visitSite}
+            </a>
+          </motion.div>
+        </div>
       </div>
     </motion.div>
   );
