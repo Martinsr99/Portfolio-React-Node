@@ -73,12 +73,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 2rem;
   position: relative;
 }
 
 .intro-section {
   min-height: 100vh;
+  padding: 4rem 2rem;
+}
+
+.skills-section {
+  min-height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .profile-image {
