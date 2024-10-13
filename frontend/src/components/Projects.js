@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ReactTyped as Typed } from 'react-typed'; // Alias si es necesario usar ReactTyped
+import { ReactTyped as Typed } from 'react-typed';
 import { FaCode } from 'react-icons/fa';
 import { AppContext } from '../AppContext';
 import '../styles/projects.css';
@@ -33,6 +33,30 @@ const translations = {
 const Projects = () => {
   const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
+  const workExperienceTitleRef = useRef(null);
+  const [isWorkExperienceTitleVisible, setIsWorkExperienceTitleVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsWorkExperienceTitleVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (workExperienceTitleRef.current) {
+      observer.observe(workExperienceTitleRef.current);
+    }
+
+    return () => {
+      if (workExperienceTitleRef.current) {
+        observer.unobserve(workExperienceTitleRef.current);
+      }
+    };
+  }, []);
 
   const workExperience = [
     {
@@ -115,17 +139,20 @@ const Projects = () => {
       <div className="background-animation"></div>
 
       <motion.h2 
+        ref={workExperienceTitleRef}
         className="section-title"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <Typed
-          strings={[t.workExperience]} // Texto animado con efecto de escritura
-          typeSpeed={50}
-          backSpeed={30}
-          loop={false}
-        />
+        {isWorkExperienceTitleVisible && (
+          <Typed
+            strings={[t.workExperience]}
+            typeSpeed={50}
+            backSpeed={30}
+            loop={false}
+          />
+        )}
       </motion.h2>
 
       <div className="timeline">
