@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ReactTyped as Typed } from 'react-typed';
 import { 
   FaReact, FaNodeJs, FaPython, FaJava, FaDatabase, FaAws, FaAngular, FaVuejs, FaFileDownload
 } from 'react-icons/fa';
@@ -59,8 +60,10 @@ const translations = {
 
 const Home = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
+  const [isSkillsTitleVisible, setIsSkillsTitleVisible] = useState(false);
   const { language, darkMode } = useContext(AppContext);
   const skillsRef = useRef(null);
+  const skillsTitleRef = useRef(null);
   const projectsRef = useRef(null);
   const location = useLocation();
 
@@ -69,6 +72,28 @@ const Home = () => {
       projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [location]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsSkillsTitleVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (skillsTitleRef.current) {
+      observer.observe(skillsTitleRef.current);
+    }
+
+    return () => {
+      if (skillsTitleRef.current) {
+        observer.unobserve(skillsTitleRef.current);
+      }
+    };
+  }, []);
 
   const themeVariants = {
     hidden: { opacity: 0 },
@@ -134,9 +159,22 @@ const Home = () => {
           ref={skillsRef}
           className="skills-section"
         >
-          <h3 className="skills-title">
-            {translations[language].title}
-          </h3>
+          <motion.h2 
+            ref={skillsTitleRef}
+            className="section-title skills-title"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            {isSkillsTitleVisible && (
+              <Typed
+                strings={[translations[language].title]}
+                typeSpeed={50}
+                backSpeed={30}
+                loop={false}
+              />
+            )}
+          </motion.h2>
           <div className="skills-grid">
             {staticData.skills.map((skill, index) => {
               const Icon = iconMap[skill.name] || FaDatabase;
