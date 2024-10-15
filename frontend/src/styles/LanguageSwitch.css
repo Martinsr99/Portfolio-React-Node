@@ -1,47 +1,95 @@
-.language-switch {
-  background: none;
-  border: none;
+.language-toggle-container {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  margin-left: 10px;
+}
+
+.language-toggle-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.language-toggle-label {
+  position: absolute;
   cursor: pointer;
-  padding: 2px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
 }
 
-.language-switch:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+.language-toggle-inner {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
 }
 
-.flag-icon {
-  width: 24px;
-  height: 16px;
-  object-fit: cover;
-  border-radius: 2px;
+.language-toggle-checkbox:checked + .language-toggle-label {
+  background-color: #2196F3;
+}
+
+.language-toggle-checkbox:checked + .language-toggle-label .language-toggle-inner {
+  transform: translateX(24px);
+}
+
+.language-toggle-label:before {
+  position: absolute;
+  content: "ES";
+  left: 5px;
+  top: 2px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.language-toggle-checkbox:checked + .language-toggle-label:before {
+  content: "EN";
+  left: 28px;
 }
 
 /* Dark mode styles */
-.dark-mode .language-switch:hover {
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+.dark .language-toggle-label {
+  background-color: #555;
+}
+
+.dark .language-toggle-checkbox:checked + .language-toggle-label {
+  background-color: #3a86ff;
 }
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-  .flag-icon {
-    width: 20px;
-    height: 13px;
+  .language-toggle-container {
+    width: 45px;
+    height: 24px;
   }
-}
 
-@media screen and (max-width: 480px) {
-  .flag-icon {
+  .language-toggle-inner {
+    height: 18px;
     width: 18px;
-    height: 12px;
   }
-  
-  .language-switch {
-    padding: 1px;
+
+  .language-toggle-checkbox:checked + .language-toggle-label .language-toggle-inner {
+    transform: translateX(21px);
+  }
+
+  .language-toggle-label:before {
+    font-size: 10px;
+    top: 3px;
+  }
+
+  .language-toggle-checkbox:checked + .language-toggle-label:before {
+    left: 25px;
   }
 }

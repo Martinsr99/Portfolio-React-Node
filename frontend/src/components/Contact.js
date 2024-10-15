@@ -1,11 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useContext, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/contact.css';
 import '../styles/toast.css';
 import { AppContext } from '../AppContext';
 import emailjs from 'emailjs-com';
+import { FaUser, FaEnvelope, FaCommentAlt, FaLock } from 'react-icons/fa';
 
 const translations = {
   es: {
@@ -53,6 +54,8 @@ const Contact = () => {
   const [captchaAnswer, setCaptchaAnswer] = useState('');
   const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
+  const titleRef = useRef(null);
+  const isInView = useInView(titleRef, { once: true });
 
   useEffect(() => {
     // Generate a simple captcha question
@@ -115,7 +118,15 @@ const Contact = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="contact-title">{t.getInTouch}</h2>
+      <motion.h2 
+        ref={titleRef}
+        className={`contact-title gradient-text ${isInView ? 'animate-underline' : ''}`}
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        {t.getInTouch}
+      </motion.h2>
       <form onSubmit={handleSubmit} className="contact-form">
         <motion.div
           className="form-group"
@@ -123,15 +134,18 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <label htmlFor="name">{t.name}</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            placeholder={t.yourName}
-          />
+          <div className="input-container">
+            <FaUser className="input-icon" />
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder={t.yourName}
+            />
+            <label htmlFor="name" className={name ? 'filled' : ''}>{t.name}</label>
+          </div>
         </motion.div>
         <motion.div
           className="form-group"
@@ -139,15 +153,18 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <label htmlFor="email">{t.email}</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder={t.yourEmail}
-          />
+          <div className="input-container">
+            <FaEnvelope className="input-icon" />
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder={t.yourEmail}
+            />
+            <label htmlFor="email" className={email ? 'filled' : ''}>{t.email}</label>
+          </div>
         </motion.div>
         <motion.div
           className="form-group"
@@ -155,14 +172,17 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <label htmlFor="message">{t.message}</label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-            placeholder={t.yourMessageHere}
-          ></textarea>
+          <div className="input-container">
+            <FaCommentAlt className="input-icon" />
+            <textarea
+              id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+              placeholder={t.yourMessageHere}
+            ></textarea>
+            <label htmlFor="message" className={message ? 'filled' : ''}>{t.message}</label>
+          </div>
         </motion.div>
         <motion.div
           className="form-group"
@@ -170,15 +190,18 @@ const Contact = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
         >
-          <label htmlFor="captcha">{t.captcha}: {captchaQuestion}</label>
-          <input
-            type="text"
-            id="captcha"
-            value={captcha}
-            onChange={(e) => setCaptcha(e.target.value)}
-            required
-            placeholder={t.captchaPlaceholder}
-          />
+          <div className="input-container">
+            <FaLock className="input-icon" />
+            <input
+              type="text"
+              id="captcha"
+              value={captcha}
+              onChange={(e) => setCaptcha(e.target.value)}
+              required
+              placeholder={t.captchaPlaceholder}
+            />
+            <label htmlFor="captcha" className={captcha ? 'filled' : ''}>{t.captcha}: {captchaQuestion}</label>
+          </div>
         </motion.div>
         <motion.div className="submit-button-container">
           <motion.button

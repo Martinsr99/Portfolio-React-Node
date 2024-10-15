@@ -39,7 +39,7 @@ const Header = () => {
       education: 'Educación',
       contact: 'Contacto',
       toggleTheme: 'Cambiar tema',
-      toggleLanguage: 'Switch to English'
+      toggleLanguage: 'EN'
     },
     en: {
       home: 'Home',
@@ -48,7 +48,7 @@ const Header = () => {
       education: 'Education',
       contact: 'Contact',
       toggleTheme: 'Toggle theme',
-      toggleLanguage: 'Cambiar a Español'
+      toggleLanguage: 'ES'
     }
   };
 
@@ -80,19 +80,13 @@ const Header = () => {
           >
             {darkMode ? <FaSun /> : <FaMoon />}
           </button>
-          <div className="language-toggle-container">
-            <input 
-              type="checkbox" 
-              id="language-toggle" 
-              className="language-toggle-checkbox" 
-              checked={language === 'en'}
-              onChange={toggleLanguage}
-            />
-            <label htmlFor="language-toggle" className="language-toggle-label">
-              <span className="language-toggle-inner"></span>
-              <span className="language-toggle-switch"></span>
-            </label>
-          </div>
+          <button 
+            onClick={toggleLanguage} 
+            className="language-toggle"
+            aria-label={t.toggleLanguage}
+          >
+            {t.toggleLanguage}
+          </button>
         </div>
       </div>
     </header>
