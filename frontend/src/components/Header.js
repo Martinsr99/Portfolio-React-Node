@@ -7,17 +7,21 @@ import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 const Header = () => {
   const { language, toggleLanguage, darkMode, toggleTheme } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
+      const currentScrollY = window.scrollY;
+      if (currentScrollY < lastScrollY) {
+        setVisible(true);
+      } else {
+        setVisible(false);
       }
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -25,7 +29,7 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [scrolled]);
+  }, [lastScrollY]);
 
   useEffect(() => {
     setIsOpen(false);
@@ -55,7 +59,7 @@ const Header = () => {
   const t = translations[language];
 
   return (
-    <header className={`header ${scrolled ? 'scrolled' : ''} ${darkMode ? 'dark' : 'light'}`}>
+    <header className={`header ${visible ? 'visible' : 'hidden'} ${darkMode ? 'dark' : 'light'}`}>
       <div className="header-content">
         <div 
           className="menu-icon" 
