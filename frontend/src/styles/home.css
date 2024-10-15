@@ -6,7 +6,6 @@
   width: 100%;
   background: linear-gradient(135deg, #f0f4f8 0%, #d0e2f3 50%, #b0d0e8 100%);
   color: #333333;
-  overflow-x: hidden;
   position: relative;
   transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
@@ -73,20 +72,20 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  margin-bottom: 4rem; 
 }
 
 .intro-section {
-  min-height: 100vh;
-  padding: 4rem 2rem;
+  height: 100vh;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .skills-section {
   min-height: 100vh;
   padding: 2rem;
   box-sizing: border-box;
-  margin-bottom: 4rem; /* Add more margin to the bottom of the skills section */
 }
+
 .profile-image {
   width: 200px;
   height: 200px;
@@ -336,7 +335,7 @@
 
   .intro-section,
   .skills-section {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
   }
 
   .name {
