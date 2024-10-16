@@ -16,6 +16,7 @@ import '../styles/home.css';
 import '../styles/buttons.css';
 import { staticData } from '../data/staticData';
 import Projects from './Projects';
+import Testimonials from './Testimonials';
 
 const iconMap = {
   React: FaReact,
@@ -205,6 +206,8 @@ const Home = () => {
             })}
           </div>
         </div>
+
+        <Testimonials />
 
         <div id="projects" ref={projectsRef}>
           <Projects />

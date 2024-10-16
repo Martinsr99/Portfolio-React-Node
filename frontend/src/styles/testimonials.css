@@ -1,0 +1,118 @@
+.testimonials {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.testimonials h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-color-dark);
+  font-size: 2.5rem;
+}
+
+.testimonials-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.testimonial-card {
+  background-color: var(--background-light);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.testimonial-text {
+  font-style: italic;
+  margin-bottom: 1rem;
+  color: var(--text-color-dark);
+  line-height: 1.6;
+}
+
+.testimonial-author {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  color: var(--text-color-dark);
+}
+
+.testimonial-author a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.testimonial-author a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.testimonial-position {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+
+/* Dark mode styles */
+.dark-mode .testimonials {
+  background-color: var(--background-dark);
+}
+
+.dark-mode .testimonials h2 {
+  color: var(--text-color-light);
+}
+
+.dark-mode .testimonial-card {
+  background-color: #34495e;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .testimonial-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .testimonial-text,
+.dark-mode .testimonial-author {
+  color: var(--text-color-light);
+}
+
+.dark-mode .testimonial-author a {
+  color: #3498db;
+}
+
+.dark-mode .testimonial-author a:hover {
+  color: #2980b9;
+}
+
+.dark-mode .testimonial-position {
+  color: #3498db;
+}
+
+@media (max-width: 768px) {
+  .testimonials-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial-card {
+    width: 100%;
+    max-width: 100%;
+  }
+}
