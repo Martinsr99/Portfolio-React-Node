@@ -2,11 +2,21 @@
 .contact-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 2rem;
   min-height: 100vh;
   background: linear-gradient(135deg, #f0f4f8 0%, #d0e2f3 50%, #b0d0e8 100%);
   transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.contact-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .contact-title {
@@ -58,7 +68,6 @@
 
 .contact-form {
   width: 100%;
-  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -217,16 +226,12 @@ textarea::placeholder {
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-  .contact-container {
+  .contact-content {
     padding: 1rem;
   }
 
   .contact-title {
     font-size: 2rem;
-  }
-
-  .contact-form {
-    max-width: 100%;
   }
 
   input,
