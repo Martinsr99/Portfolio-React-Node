@@ -1,4 +1,5 @@
 import React, { useContext, useCallback } from 'react';
+import { ReactTyped as Typed } from 'react-typed';
 import { AppContext } from '../AppContext';
 import { educationData } from '../data/educationData';
 import { certificationsData } from '../data/certificationsData';
@@ -57,7 +58,14 @@ const Education = () => {
   return (
     <div className={`education-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className="background-animation"></div>
-      <h2>{t.title}</h2>
+      <h2 className="section-title">
+        <Typed
+          strings={[t.title]}
+          typeSpeed={50}
+          backSpeed={30}
+          loop={false}
+        />
+      </h2>
       
       <section className="education-section">
         <h3>{t.education}</h3>
