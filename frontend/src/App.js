@@ -52,7 +52,6 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home projectsRef={projectsRef} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/education" element={<Education />} />
           </Routes>
         </main>

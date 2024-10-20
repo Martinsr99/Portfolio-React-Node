@@ -1,30 +1,34 @@
-import React, { useContext, useCallback, useMemo } from 'react';
+import React, { useContext, useCallback, useMemo, useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppContext } from '../AppContext';
+import Contact from './Contact';
+import { ReactTyped } from 'react-typed';
 import '../styles/about.css';
 
 const translations = {
   es: {
+    pageTitle: "¿Dónde encontrarme?",
     youtubeTitle: "¡Visita mi Canal de YouTube!",
     youtubeDescription: "Suscríbete a mi canal para tutoriales perspicaces, consejos de codificación y discusiones tecnológicas. Aprende sobre lo último en desarrollo web e ingeniería de software.",
-    youtubeButton: "Visita Mi Canal de YouTube",
+    youtubeButton: "YouTube",
     linkedinTitle: "¡Conéctate conmigo en LinkedIn!",
     linkedinDescription: "Únete a mi red profesional para actualizaciones de carrera, perspectivas de la industria y oportunidades de networking. Crezcamos juntos en el mundo de la tecnología.",
-    linkedinButton: "Visita Mi Perfil de LinkedIn",
+    linkedinButton: "LinkedIn",
     githubTitle: "¡Explora mis proyectos en GitHub!",
     githubDescription: "Descubre mis repositorios, contribuciones a proyectos de código abierto y más. Observa mi evolución como desarrollador a través de mi código.",
-    githubButton: "Visita Mi Perfil de GitHub"
+    githubButton: "GitHub"
   },
   en: {
+    pageTitle: "Where to find me?",
     youtubeTitle: "Check out my YouTube Channel!",
     youtubeDescription: "Subscribe to my channel for insightful tutorials, coding tips, and tech discussions. Learn about the latest in web development and software engineering.",
-    youtubeButton: "Visit My YouTube Channel",
+    youtubeButton: "YouTube",
     linkedinTitle: "Connect with me on LinkedIn!",
     linkedinDescription: "Join my professional network for career updates, industry insights, and networking opportunities. Let's grow together in the tech world.",
-    linkedinButton: "Visit My LinkedIn Profile",
+    linkedinButton: "LinkedIn",
     githubTitle: "Explore my projects on GitHub!",
     githubDescription: "Discover my repositories, open-source contributions, and more. See my evolution as a developer through my code.",
-    githubButton: "Visit My GitHub Profile"
+    githubButton: "GitHub"
   }
 };
 
@@ -53,9 +57,46 @@ const cardVariants = {
   }
 };
 
+const titleVariants = {
+  hidden: { opacity: 0, y: -50 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  }
+};
+
 const About = () => {
   const { language, darkMode } = useContext(AppContext);
   const t = translations[language];
+  const [isTitleVisible, setIsTitleVisible] = useState(false);
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsTitleVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, []);
 
   const SocialSection = useCallback(({ title, description, linkText, linkUrl, sectionClass, buttonClass }) => (
     <motion.div
@@ -119,6 +160,22 @@ const About = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
+        <motion.h2
+          ref={titleRef}
+          className="about-title gradient-text"
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {isTitleVisible && (
+            <ReactTyped
+              strings={[t.pageTitle]}
+              typeSpeed={50}
+              backSpeed={30}
+              loop={false}
+            />
+          )}
+        </motion.h2>
         <motion.div 
           className="social-sections-container"
           variants={containerVariants}
@@ -129,6 +186,7 @@ const About = () => {
             <SocialSection key={index} {...section} />
           ))}
         </motion.div>
+        <Contact />
       </motion.div>
     </AnimatePresence>
   );
