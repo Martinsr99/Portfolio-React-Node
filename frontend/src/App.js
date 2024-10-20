@@ -4,8 +4,6 @@ import { AppProvider, AppContext } from './AppContext';
 import Header from './components/Header';
 import Home from './components/Home';
 import About from './components/About';
-import Contact from './components/Contact';
-import Education from './components/Education';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -52,7 +50,6 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home projectsRef={projectsRef} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/education" element={<Education />} />
           </Routes>
         </main>
         <Footer />

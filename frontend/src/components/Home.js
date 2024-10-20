@@ -14,9 +14,11 @@ import { AppContext } from '../AppContext';
 import profileImage from '../images/profile-image.jpg';
 import '../styles/home.css';
 import '../styles/buttons.css';
+import '../styles/education.css';
 import { staticData } from '../data/staticData';
 import Projects from './Projects';
 import Testimonials from './Testimonials';
+import Education from './Education';
 
 const iconMap = {
   React: FaReact,
@@ -212,6 +214,8 @@ const Home = () => {
         <div id="projects" ref={projectsRef}>
           <Projects />
         </div>
+
+        <Education />
       </motion.div>
     </div>
   );

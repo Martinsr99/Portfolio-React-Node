@@ -38,19 +38,15 @@ const Header = () => {
   const translations = {
     es: {
       home: 'Inicio',
-      about: 'Sobre Mí',
       projects: 'Proyectos',
-      education: 'Educación',
-      contact: 'Contacto',
+      about: 'Sobre Mí',
       toggleTheme: 'Cambiar tema',
       toggleLanguage: 'EN'
     },
     en: {
       home: 'Home',
-      about: 'About',
       projects: 'Projects',
-      education: 'Education',
-      contact: 'Contact',
+      about: 'About',
       toggleTheme: 'Toggle theme',
       toggleLanguage: 'ES'
     }
@@ -70,10 +66,8 @@ const Header = () => {
         <nav className={`nav-menu ${isOpen ? 'show' : ''}`}>
           <ul>
             <li><Link to="/" onClick={toggleMenu}>{t.home}</Link></li>
-            <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
             <li><Link to="/#projects" onClick={toggleMenu}>{t.projects}</Link></li>
-            <li><Link to="/education" onClick={toggleMenu}>{t.education}</Link></li>
-            <li><Link to="/contact" onClick={toggleMenu}>{t.contact}</Link></li>
+            <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
           </ul>
         </nav>
         <div className="controls-container">
