@@ -10,8 +10,10 @@
 .testimonials h2 {
   text-align: center;
   margin-bottom: 2rem;
-  color: var(--text-color-dark);
   font-size: 2.5rem;
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .testimonials-container {
@@ -76,7 +78,9 @@
 }
 
 .dark-mode .testimonials h2 {
-  color: var(--text-color-light);
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .dark-mode .testimonial-card {
