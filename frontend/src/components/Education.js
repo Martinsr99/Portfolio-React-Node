@@ -1,4 +1,5 @@
-import React, { useContext, useCallback } from 'react';
+import React, { useContext, useCallback, useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ReactTyped as Typed } from 'react-typed';
 import { AppContext } from '../AppContext';
 import { educationData } from '../data/educationData';
@@ -9,22 +10,12 @@ import '../styles/buttons.css';
 const translations = {
   es: {
     title: "Educación y Certificaciones",
-    education: "Educación",
-    certifications: "Certificaciones",
-    institution: "Institución",
-    degree: "Título",
-    year: "Año",
     viewCertificate: "Ver Certificado",
     courseContents: "Contenidos del curso:",
     certificateNotFound: "Certificado no encontrado"
   },
   en: {
     title: "Education and Certifications",
-    education: "Education",
-    certifications: "Certifications",
-    institution: "Institution",
-    degree: "Degree",
-    year: "Year",
     viewCertificate: "View Certificate",
     courseContents: "Course contents:",
     certificateNotFound: "Certificate not found"
@@ -33,6 +24,7 @@ const translations = {
 
 const Education = () => {
   const { language, darkMode, selectedCert, setSelectedCert } = useContext(AppContext);
+  const [activeTab, setActiveTab] = useState('education');
   const t = translations[language];
 
   const handleCertSelect = useCallback((cert) => {
@@ -43,85 +35,118 @@ const Education = () => {
     setSelectedCert(null);
   }, [setSelectedCert]);
 
-  const handleKeyDown = useCallback((event, cert) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleCertSelect(cert);
-    }
-  }, [handleCertSelect]);
-
   const handleCertificateClick = useCallback((event, pdfUrl) => {
     event.preventDefault();
     window.open(pdfUrl, '_blank', 'noopener,noreferrer');
   }, []);
 
+  const sortedCertificationsData = useMemo(() => {
+    return [...certificationsData].sort((a, b) => {
+      // Assuming the year is in 'YYYY' format. If not, adjust this logic.
+      return parseInt(b.year) - parseInt(a.year);
+    });
+  }, [certificationsData]);
+
+  const timelineData = activeTab === 'education' ? educationData : sortedCertificationsData;
+
   return (
-    <div className={`education-container ${darkMode ? 'dark-mode' : ''}`}>
-      <div className="background-animation"></div>
-      <h2 className="section-title">
+    <motion.div 
+      className={`education-container ${darkMode ? 'dark-mode' : ''}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.h2 
+        className="section-title"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
         <Typed
           strings={[t.title]}
           typeSpeed={50}
           backSpeed={30}
           loop={false}
         />
-      </h2>
+      </motion.h2>
+
+      <div className="tab-container">
+        <button 
+          className={`tab-button ${activeTab === 'education' ? 'active' : ''}`} 
+          onClick={() => setActiveTab('education')}
+        >
+          Education
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'certifications' ? 'active' : ''}`} 
+          onClick={() => setActiveTab('certifications')}
+        >
+          Certifications
+        </button>
+      </div>
       
-      <section className="education-section">
-        <h3>{t.education}</h3>
-        {educationData.map((edu, index) => (
-          <div key={index} className={`education-item ${edu.theme}`}>
-            <h4>{edu.institution}</h4>
-            <p><strong>{t.degree}:</strong> {edu.degree}</p>
-            <p><strong>{t.year}:</strong> {edu.year}</p>
-            <p>{edu.description}</p>
-          </div>
-        ))}
-      </section>
-
-      <section className="certifications-section">
-        <h3>{t.certifications}</h3>
-        <div className="certifications-grid">
-          {certificationsData.map((cert, index) => (
-            <div
-              key={index}
-              className="certification-item"
-              onMouseEnter={() => handleCertSelect(cert)}
-              onMouseLeave={handleCertDeselect}
-              onFocus={() => handleCertSelect(cert)}
-              onBlur={handleCertDeselect}
-              tabIndex={0}
-              onKeyDown={(e) => handleKeyDown(e, cert)}
+      <div className="timeline">
+        {timelineData.map((item, index) => (
+          <motion.div
+            key={index}
+            className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
+            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <motion.div 
+              className="timeline-content"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
             >
-              <h4>{cert.name}</h4>
-              <p>{cert.platform}</p>
-              <p>{cert.year}</p>
-              <div className="certificate-button-container">
-                <button 
-                  onClick={(e) => handleCertificateClick(e, cert.pdfUrl)}
-                  className="btn btn-primary btn-certificate"
-                >
-                  {t.viewCertificate}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+              {activeTab === 'education' ? (
+                <>
+                  <h3>{item.institution}</h3>
+                  <p className="date">{item.year}</p>
+                  <p className="degree">{item.degree}</p>
+                  <p>{item.description}</p>
+                </>
+              ) : (
+                <>
+                  <h3>{item.name}</h3>
+                  <p className="date">{item.year}</p>
+                  <p className="platform">{item.platform}</p>
+                  <motion.button 
+                    onClick={(e) => handleCertificateClick(e, item.pdfUrl)}
+                    className="btn btn-primary btn-certificate"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {t.viewCertificate}
+                  </motion.button>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
 
-      {selectedCert && (
-        <div className="certificate-preview">
-          <h4>{selectedCert.name}</h4>
-          <p>{selectedCert.platform} - {selectedCert.year}</p>
-          <p><strong>{t.courseContents}</strong></p>
-          <ul>
-            {selectedCert.contents.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div 
+            className="certificate-preview"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h4>{selectedCert.name}</h4>
+            <p>{selectedCert.platform} - {selectedCert.year}</p>
+            <p><strong>{t.courseContents}</strong></p>
+            <ul>
+              {selectedCert.contents.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
