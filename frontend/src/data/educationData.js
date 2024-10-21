@@ -1,9 +1,9 @@
 export const educationData = [
   {
-    institution: "Universidad Tecnológica",
-    degree: "Ingeniería en Informática",
-    year: "2015 - 2019",
-    description: "Especialización en Desarrollo de Software y Sistemas Distribuidos",
+    institution: "Universidad de Granada",
+    degree: "Ingeniería de Telecomunicaciones",
+    year: "2017 - 2021",
+    description: "Especialización en Telemática",
     theme: "university"
   },
   {

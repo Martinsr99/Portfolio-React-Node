@@ -211,11 +211,11 @@ const Home = () => {
 
         <Testimonials />
 
+        <Education />
+
         <div id="projects" ref={projectsRef}>
           <Projects />
         </div>
-
-        <Education />
       </motion.div>
     </div>
   );
