@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useState, useMemo } from 'react';
+import React, { useContext, useCallback, useState, useMemo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ReactTyped as Typed } from 'react-typed';
 import { AppContext } from '../AppContext';
@@ -9,7 +9,7 @@ import '../styles/buttons.css';
 
 const translations = {
   es: {
-    title: "Educación y Certificaciones",
+    title: "Certificaciones y Educación",
     viewCertificate: "Ver Certificado",
     courseContents: "Contenidos del curso:",
     certificateNotFound: "Certificado no encontrado",
@@ -17,7 +17,7 @@ const translations = {
     duration: "Duración:"
   },
   en: {
-    title: "Education and Certifications",
+    title: "Certifications and Education",
     viewCertificate: "View Certificate",
     courseContents: "Course contents:",
     certificateNotFound: "Certificate not found",
@@ -28,8 +28,32 @@ const translations = {
 
 const Education = () => {
   const { language, darkMode, selectedCert, setSelectedCert } = useContext(AppContext);
-  const [activeTab, setActiveTab] = useState('education');
+  const [activeTab, setActiveTab] = useState('certifications');
+  const [isTitleVisible, setIsTitleVisible] = useState(false);
+  const titleRef = useRef(null);
   const t = translations[language];
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsTitleVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (titleRef.current) {
+      observer.observe(titleRef.current);
+    }
+
+    return () => {
+      if (titleRef.current) {
+        observer.unobserve(titleRef.current);
+      }
+    };
+  }, []);
 
   const handleCertSelect = useCallback((cert) => {
     setSelectedCert(cert);
@@ -50,7 +74,7 @@ const Education = () => {
     });
   }, [certificationsData]);
 
-  const timelineData = activeTab === 'education' ? educationData : sortedCertificationsData;
+  const timelineData = activeTab === 'certifications' ? sortedCertificationsData : educationData;
 
   return (
     <motion.div 
@@ -60,31 +84,34 @@ const Education = () => {
       transition={{ duration: 0.5 }}
     >
       <motion.h2 
+        ref={titleRef}
         className="section-title"
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
-        <Typed
-          strings={[t.title]}
-          typeSpeed={50}
-          backSpeed={30}
-          loop={false}
-        />
+        {isTitleVisible && (
+          <Typed
+            strings={[t.title]}
+            typeSpeed={50}
+            backSpeed={30}
+            loop={false}
+          />
+        )}
       </motion.h2>
 
       <div className="tab-container">
-        <button 
-          className={`tab-button ${activeTab === 'education' ? 'active' : ''}`} 
-          onClick={() => setActiveTab('education')}
-        >
-          Education
-        </button>
         <button 
           className={`tab-button ${activeTab === 'certifications' ? 'active' : ''}`} 
           onClick={() => setActiveTab('certifications')}
         >
           Certifications
+        </button>
+        <button 
+          className={`tab-button ${activeTab === 'education' ? 'active' : ''}`} 
+          onClick={() => setActiveTab('education')}
+        >
+          Education
         </button>
       </div>
       
@@ -102,14 +129,7 @@ const Education = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              {activeTab === 'education' ? (
-                <>
-                  <h3>{item.institution}</h3>
-                  <p className="date">{item.year}</p>
-                  <p className="degree">{item.degree}</p>
-                  <p>{item.description}</p>
-                </>
-              ) : (
+              {activeTab === 'certifications' ? (
                 <>
                   <h3>{item.name}</h3>
                   <p className="date">{item.date}</p>
@@ -124,6 +144,13 @@ const Education = () => {
                   >
                     {t.viewCertificate}
                   </motion.button>
+                </>
+              ) : (
+                <>
+                  <h3>{item.institution}</h3>
+                  <p className="date">{item.year}</p>
+                  <p className="degree">{item.degree}</p>
+                  <p>{item.description}</p>
                 </>
               )}
             </motion.div>

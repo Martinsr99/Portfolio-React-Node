@@ -1,17 +1,20 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from '../AppContext';
 import { ReactTyped } from 'react-typed';
+import { motion } from 'framer-motion';
 import '../styles/testimonials.css';
 
 const Testimonials = () => {
   const { language } = useContext(AppContext);
   const titleRef = useRef(null);
+  const [isTitleVisible, setIsTitleVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          titleRef.current.classList.add('visible');
+          setIsTitleVisible(true);
+          observer.unobserve(entry.target);
         }
       },
       { threshold: 0.1 }
@@ -65,17 +68,31 @@ const Testimonials = () => {
 
   return (
     <section className="testimonials">
-      <h2 ref={titleRef}>
-        <ReactTyped
-          strings={[language === 'es' ? 'Testimonios' : 'Testimonials']}
-          typeSpeed={50}
-          backSpeed={30}
-          loop={false}
-        />
-      </h2>
+      <motion.h2 
+        ref={titleRef}
+        className="section-title"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {isTitleVisible && (
+          <ReactTyped
+            strings={[language === 'es' ? 'Testimonios' : 'Testimonials']}
+            typeSpeed={50}
+            backSpeed={30}
+            loop={false}
+          />
+        )}
+      </motion.h2>
       <div className="testimonials-container">
-        {testimonials[language].map((testimonial) => (
-          <div key={testimonial.id} className="testimonial-card fade-in-up">
+        {testimonials[language].map((testimonial, index) => (
+          <motion.div 
+            key={testimonial.id} 
+            className="testimonial-card"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.2 }}
+          >
             <p className="testimonial-text">"{testimonial.text}"</p>
             <p className="testimonial-author">
               <a href={testimonial.linkedin} target="_blank" rel="noopener noreferrer">
@@ -83,7 +100,7 @@ const Testimonials = () => {
               </a>
             </p>
             <p className="testimonial-position">{testimonial.position}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
