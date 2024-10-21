@@ -12,13 +12,17 @@ const translations = {
     title: "Educación y Certificaciones",
     viewCertificate: "Ver Certificado",
     courseContents: "Contenidos del curso:",
-    certificateNotFound: "Certificado no encontrado"
+    certificateNotFound: "Certificado no encontrado",
+    instructor: "Instructor:",
+    duration: "Duración:"
   },
   en: {
     title: "Education and Certifications",
     viewCertificate: "View Certificate",
     courseContents: "Course contents:",
-    certificateNotFound: "Certificate not found"
+    certificateNotFound: "Certificate not found",
+    instructor: "Instructor:",
+    duration: "Duration:"
   }
 };
 
@@ -42,8 +46,7 @@ const Education = () => {
 
   const sortedCertificationsData = useMemo(() => {
     return [...certificationsData].sort((a, b) => {
-      // Assuming the year is in 'YYYY' format. If not, adjust this logic.
-      return parseInt(b.year) - parseInt(a.year);
+      return new Date(b.date) - new Date(a.date);
     });
   }, [certificationsData]);
 
@@ -109,8 +112,10 @@ const Education = () => {
               ) : (
                 <>
                   <h3>{item.name}</h3>
-                  <p className="date">{item.year}</p>
+                  <p className="date">{item.date}</p>
                   <p className="platform">{item.platform}</p>
+                  {item.instructor && <p><strong>{t.instructor}</strong> {item.instructor}</p>}
+                  {item.duration && <p><strong>{t.duration}</strong> {item.duration}</p>}
                   <motion.button 
                     onClick={(e) => handleCertificateClick(e, item.pdfUrl)}
                     className="btn btn-primary btn-certificate"
@@ -136,7 +141,9 @@ const Education = () => {
             transition={{ duration: 0.3 }}
           >
             <h4>{selectedCert.name}</h4>
-            <p>{selectedCert.platform} - {selectedCert.year}</p>
+            <p>{selectedCert.platform} - {selectedCert.date}</p>
+            {selectedCert.instructor && <p><strong>{t.instructor}</strong> {selectedCert.instructor}</p>}
+            {selectedCert.duration && <p><strong>{t.duration}</strong> {selectedCert.duration}</p>}
             <p><strong>{t.courseContents}</strong></p>
             <ul>
               {selectedCert.contents.map((item, index) => (
