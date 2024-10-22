@@ -12,6 +12,17 @@
   --background-light: #ffffff;
   --background-dark: #1a1a1a;
   --transition-speed: 0.3s;
+
+  /* Scrollbar variables */
+  --scrollbar-width: 10px;
+  --scrollbar-track-light: rgba(0, 0, 0, 0.1);
+  --scrollbar-thumb-light: rgba(52, 152, 219, 0.6);
+  --scrollbar-thumb-hover-light: rgba(52, 152, 219, 0.8);
+  
+  /* Dark mode scrollbar variables */
+  --scrollbar-track-dark: var(--primary-color);
+  --scrollbar-thumb-dark: var(--secondary-color);
+  --scrollbar-thumb-hover-dark: #2980b9; /* Darker shade of secondary color */
 }
 
 * {
@@ -30,26 +41,26 @@ body, html {
 
 /* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: var(--scrollbar-width);
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--scrollbar-track-light);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(52, 152, 219, 0.6); /* semi-transparent secondary color */
-  border-radius: 5px;
+  background: var(--scrollbar-thumb-light);
+  border-radius: calc(var(--scrollbar-width) / 2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(52, 152, 219, 0.8); /* slightly more opaque on hover */
+  background: var(--scrollbar-thumb-hover-light);
 }
 
 /* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(52, 152, 219, 0.6) rgba(0, 0, 0, 0.1);
+  scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track-light);
 }
 
 .app-container {
@@ -85,6 +96,23 @@ h1, h2, h3 {
 
 .dark-mode .app-container {
   background-color: var(--background-dark);
+}
+
+/* Dark mode scrollbar styles */
+.dark-mode::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-dark);
+}
+
+.dark-mode::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-dark);
+}
+
+.dark-mode::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-dark);
+}
+
+.dark-mode * {
+  scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track-dark);
 }
 
 @keyframes fadeInUp {
