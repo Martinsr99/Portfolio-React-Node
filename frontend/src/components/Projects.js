@@ -8,8 +8,8 @@ import '../styles/projects.css';
 // Importa las imágenes de los logos
 import rawIGamingLogo from '../images/companies/raw-igaming-logo.png';
 import eosolLogo from '../images/companies/eosol-logo.png';
-import nttDataLogo from '../images/companies/ntt-data-logo.jpg';
-import nucleooLogo from '../images/companies/nucleoo-logo.jpeg';
+import nttDataLogo from '../images/companies/ntt-data-logo.png';
+import nucleooLogo from '../images/companies/nucleoo-logo.png';
 
 const translations = {
   es: {
