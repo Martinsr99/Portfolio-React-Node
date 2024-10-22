@@ -28,6 +28,30 @@ body, html {
   overflow-x: hidden;
 }
 
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(52, 152, 219, 0.6); /* semi-transparent secondary color */
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(52, 152, 219, 0.8); /* slightly more opaque on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(52, 152, 219, 0.6) rgba(0, 0, 0, 0.1);
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
