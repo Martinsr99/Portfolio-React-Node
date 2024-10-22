@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppContext } from '../AppContext';
 import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
@@ -10,6 +10,7 @@ const Header = () => {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -37,14 +38,14 @@ const Header = () => {
 
   const translations = {
     es: {
-      home: 'Inicio',
+      cv: 'CV',
       projects: 'Proyectos',
       about: 'Sobre Mí',
       toggleTheme: 'Cambiar tema',
       toggleLanguage: 'EN'
     },
     en: {
-      home: 'Home',
+      cv: 'CV',
       projects: 'Projects',
       about: 'About',
       toggleTheme: 'Toggle theme',
@@ -53,6 +54,20 @@ const Header = () => {
   };
 
   const t = translations[language];
+
+  const scrollToTop = (event) => {
+    event.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/');
+      // We need to wait for the navigation to complete before scrolling
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    toggleMenu();
+  };
 
   return (
     <header className={`header ${visible ? 'visible' : 'hidden'} ${darkMode ? 'dark' : 'light'}`}>
@@ -65,7 +80,7 @@ const Header = () => {
         </div>
         <nav className={`nav-menu ${isOpen ? 'show' : ''}`}>
           <ul>
-            <li><Link to="/" onClick={toggleMenu}>{t.home}</Link></li>
+            <li><a href="#" onClick={scrollToTop}>{t.cv}</a></li>
             <li><Link to="/#projects" onClick={toggleMenu}>{t.projects}</Link></li>
             <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
           </ul>
