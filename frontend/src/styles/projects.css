@@ -178,16 +178,12 @@
 }
 
 .company-logo {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   margin: 0 auto 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   transition: transform 0.3s ease;
 }
 
@@ -196,8 +192,8 @@
 }
 
 .company-logo img {
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
@@ -362,10 +358,6 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.dark-mode .company-logo {
-  background-color: #404040;
-}
-
 .dark-mode .timeline-content h3,
 .dark-mode .timeline-content p {
   color: #e0e0e0;
@@ -462,8 +454,8 @@
 
 @media screen and (max-width: 480px) {
   .company-logo {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 
   .project-icon {
