@@ -61,21 +61,21 @@
   bottom: 0;
   left: 50%;
   margin-left: -3px;
-  animation: grow 2s ease-out forwards, pulse 1.5s infinite;
+  animation: grow 2s ease-out forwards, pulse 3s infinite;
   transform-origin: top;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.6), 0 0 20px rgba(46, 204, 113, 0.4);
+    box-shadow: 0 0 3px rgba(52, 152, 219, 0.3), 0 0 6px rgba(46, 204, 113, 0.2);
   }
   50% {
-    box-shadow: 0 0 20px rgba(52, 152, 219, 0.8), 0 0 30px rgba(46, 204, 113, 0.6);
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.4), 0 0 9px rgba(46, 204, 113, 0.3);
   }
   100% {
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.6), 0 0 20px rgba(46, 204, 113, 0.4);
+    box-shadow: 0 0 3px rgba(52, 152, 219, 0.3), 0 0 6px rgba(46, 204, 113, 0.2);
   }
 }
 
