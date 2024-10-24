@@ -139,7 +139,7 @@ const Education = () => {
                   <p className="date">{item.date}</p>
                   <p className="platform">{item.platform}</p>
                   {item.instructor && <p><strong>{t.instructor}</strong> {item.instructor}</p>}
-                  {item.duration && <p><strong>{t.duration}</strong> {item.duration}</p>}
+                  {item.duration && <p><strong>{t.duration}</strong> {item.duration[language]}</p>}
                   <motion.button 
                     onClick={(e) => handleCertificateClick(e, item.pdfUrl)}
                     className="btn btn-primary btn-certificate"
@@ -174,7 +174,7 @@ const Education = () => {
             <h4>{selectedCert.name[language]}</h4>
             <p>{selectedCert.platform} - {selectedCert.date}</p>
             {selectedCert.instructor && <p><strong>{t.instructor}</strong> {selectedCert.instructor}</p>}
-            {selectedCert.duration && <p><strong>{t.duration}</strong> {selectedCert.duration}</p>}
+            {selectedCert.duration && <p><strong>{t.duration}</strong> {selectedCert.duration[language]}</p>}
             <p><strong>{t.courseContents}</strong></p>
             <ul>
               {selectedCert.contents[language].map((item, index) => (

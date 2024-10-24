@@ -8,7 +8,10 @@ export const certificationsData = [
     date: "2023-12-27",
     pdfUrl: "/certificates/nest-udemy.pdf",
     instructor: "Fernando Herrera",
-    duration: "25 horas en total",
+    duration: {
+      es: "25 horas",
+      en: "25 hours"
+    },
     contents: {
       es: [
         "Arquitectura y Módulos NestJS",
@@ -37,7 +40,10 @@ export const certificationsData = [
     date: "2023-06-01",
     pdfUrl: "/certificates/angular-udemy.pdf",
     instructor: "Fernando Herrera",
-    duration: "32 horas en total",
+    duration: {
+      es: "32 horas",
+      en: "32 hours"
+    },
     contents: {
       es: [
         "Conceptos Avanzados de Angular",
@@ -68,7 +74,10 @@ export const certificationsData = [
     date: "2023-04-10",
     pdfUrl: "/certificates/react-udemy.pdf",
     instructor: "Fernando Herrera",
-    duration: "54 horas en total",
+    duration: {
+      es: "54 horas",
+      en: "54 hours"
+    },
     contents: {
       es: [
         "Fundamentos de React y JSX",
@@ -99,7 +108,10 @@ export const certificationsData = [
     date: "2023-04-25",
     pdfUrl: "/certificates/python-udemy.pdf",
     instructor: "Gaston Fenske",
-    duration: "18 horas en total",
+    duration: {
+      es: "18 horas",
+      en: "18 hours"
+    },
     contents: {
       es: [
         "Desarrollo backend con Python",
@@ -128,7 +140,10 @@ export const certificationsData = [
     date: "2022-11-05",
     pdfUrl: "/certificates/node-udemy.pdf",
     instructor: "Fernando Herrera",
-    duration: "28.5 horas en total",
+    duration: {
+      es: "28.5 horas",
+      en: "28.5 hours"
+    },
     contents: {
       es: [
         "Fundamentos de Node.js",
