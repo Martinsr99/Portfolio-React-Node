@@ -42,25 +42,6 @@ const iconMap = {
   Express: SiExpress
 };
 
-const translations = {
-  es: {
-    title: "Mis Habilidades",
-    version: "Versión",
-    details: "Detalles",
-    fullStackDeveloper: "Desarrollador Full Stack",
-    downloadCV: "Descargar CV",
-    viewCV: "Ver CV"
-  },
-  en: {
-    title: "My Skills",
-    version: "Version",
-    details: "Details",
-    fullStackDeveloper: "Full Stack Developer",
-    downloadCV: "Download CV",
-    viewCV: "View CV"
-  }
-};
-
 const Home = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
   const [isSkillsTitleVisible, setIsSkillsTitleVisible] = useState(false);
@@ -69,6 +50,8 @@ const Home = () => {
   const skillsTitleRef = useRef(null);
   const projectsRef = useRef(null);
   const location = useLocation();
+
+  const currentLanguageData = staticData[language].home;
 
   useEffect(() => {
     if (location.hash === '#projects') {
@@ -118,17 +101,17 @@ const Home = () => {
         <div className="intro-section">
           <img 
             src={profileImage}
-            alt={staticData.name} 
+            alt={currentLanguageData.name} 
             className="profile-image"
           />
           <h1 className="name">
-            {staticData.name}
+            {currentLanguageData.name}
           </h1>
           <h2 className="title">
-            {translations[language].fullStackDeveloper}
+            {currentLanguageData.role}
           </h2>
           <p className="bio">
-            {staticData.bio}
+            {currentLanguageData.bio}
           </p>
           <motion.div 
             id="cv-section"
@@ -144,7 +127,7 @@ const Home = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaFileDownload /> {translations[language].downloadCV}
+              <FaFileDownload /> {currentLanguageData.downloadCV}
             </motion.a>
             <motion.a 
               href="/cv/Martin-Siles-Software-Engineer.pdf" 
@@ -154,7 +137,7 @@ const Home = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {translations[language].viewCV}
+              {currentLanguageData.viewCV}
             </motion.a>
           </motion.div>
         </div>
@@ -172,7 +155,7 @@ const Home = () => {
           >
             {isSkillsTitleVisible && (
               <Typed
-                strings={[translations[language].title]}
+                strings={[currentLanguageData.skills.title]}
                 typeSpeed={50}
                 backSpeed={30}
                 loop={false}
@@ -200,7 +183,7 @@ const Home = () => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <p>{skill.details}</p>
+                        <p>{skill.details[language]}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

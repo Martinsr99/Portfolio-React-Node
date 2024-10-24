@@ -14,7 +14,9 @@ const translations = {
     courseContents: "Contenidos del curso:",
     certificateNotFound: "Certificado no encontrado",
     instructor: "Instructor:",
-    duration: "Duración:"
+    duration: "Duración:",
+    certifications: "Certificaciones",
+    education: "Educación"
   },
   en: {
     title: "Certifications and Education",
@@ -22,7 +24,9 @@ const translations = {
     courseContents: "Course contents:",
     certificateNotFound: "Certificate not found",
     instructor: "Instructor:",
-    duration: "Duration:"
+    duration: "Duration:",
+    certifications: "Certifications",
+    education: "Education"
   }
 };
 
@@ -105,13 +109,13 @@ const Education = () => {
           className={`tab-button ${activeTab === 'certifications' ? 'active' : ''}`} 
           onClick={() => setActiveTab('certifications')}
         >
-          Certifications
+          {t.certifications}
         </button>
         <button 
           className={`tab-button ${activeTab === 'education' ? 'active' : ''}`} 
           onClick={() => setActiveTab('education')}
         >
-          Education
+          {t.education}
         </button>
       </div>
       
@@ -131,7 +135,7 @@ const Education = () => {
             >
               {activeTab === 'certifications' ? (
                 <>
-                  <h3>{item.name}</h3>
+                  <h3>{item.name[language]}</h3>
                   <p className="date">{item.date}</p>
                   <p className="platform">{item.platform}</p>
                   {item.instructor && <p><strong>{t.instructor}</strong> {item.instructor}</p>}
@@ -149,8 +153,8 @@ const Education = () => {
                 <>
                   <h3>{item.institution}</h3>
                   <p className="date">{item.year}</p>
-                  <p className="degree">{item.degree}</p>
-                  <p>{item.description}</p>
+                  <p className="degree">{item.degree[language]}</p>
+                  <p>{item.description[language]}</p>
                 </>
               )}
             </motion.div>
@@ -167,13 +171,13 @@ const Education = () => {
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.3 }}
           >
-            <h4>{selectedCert.name}</h4>
+            <h4>{selectedCert.name[language]}</h4>
             <p>{selectedCert.platform} - {selectedCert.date}</p>
             {selectedCert.instructor && <p><strong>{t.instructor}</strong> {selectedCert.instructor}</p>}
             {selectedCert.duration && <p><strong>{t.duration}</strong> {selectedCert.duration}</p>}
             <p><strong>{t.courseContents}</strong></p>
             <ul>
-              {selectedCert.contents.map((item, index) => (
+              {selectedCert.contents[language].map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
