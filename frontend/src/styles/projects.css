@@ -195,6 +195,11 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.company-logo a:hover img {
+  transform: scale(1.1);
 }
 
 .timeline-content h3 {
@@ -202,6 +207,17 @@
   font-size: 1.4rem;
   margin-bottom: 0.5rem;
   transition: color 0.5s ease-in-out;
+}
+
+.timeline-content h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.timeline-content h3 a:hover {
+  color: #3498db;
+  text-decoration: none;
 }
 
 .timeline-content p {
@@ -361,6 +377,14 @@
 .dark-mode .timeline-content h3,
 .dark-mode .timeline-content p {
   color: #e0e0e0;
+}
+
+.dark-mode .timeline-content h3 a {
+  color: #e0e0e0;
+}
+
+.dark-mode .timeline-content h3 a:hover {
+  color: #4a90e2;
 }
 
 .dark-mode .project-card {

@@ -81,6 +81,7 @@ const Projects = () => {
       id: 1,
       company: 'Raw iGaming',
       logo: rawIGamingLogo,
+      linkedIn: 'https://www.linkedin.com/company/raw-igaming/',
       period: {
         es: 'Septiembre 2023 - Actualmente',
         en: 'September 2023 - Currently'
@@ -98,6 +99,7 @@ const Projects = () => {
       id: 2,
       company: 'EOSOL',
       logo: eosolLogo,
+      linkedIn: 'https://www.linkedin.com/company/eosol-group/',
       period: {
         es: 'Febrero - Septiembre 2023',
         en: 'February - September 2023'
@@ -115,6 +117,7 @@ const Projects = () => {
       id: 3,
       company: 'NTT DATA',
       logo: nttDataLogo,
+      linkedIn: 'https://www.linkedin.com/company/ntt-data-europe-latam/',
       period: {
         es: 'Noviembre 2021 - Febrero 2023',
         en: 'November 2021 - February 2023'
@@ -132,6 +135,7 @@ const Projects = () => {
       id: 4,
       company: 'NUCLEOO',
       logo: nucleooLogo,
+      linkedIn: 'https://www.linkedin.com/company/nucleoo/',
       period: {
         es: 'Mayo 2021 - Noviembre 2021',
         en: 'May 2021 - November 2021'
@@ -189,9 +193,15 @@ const Projects = () => {
                 transition={{ duration: 0.2 }}
               >
                 <div className="company-logo">
-                  <img src={job.logo} alt={`${job.company} logo`} />
+                  <a href={job.linkedIn} target="_blank" rel="noopener noreferrer">
+                    <img src={job.logo} alt={`${job.company} logo`} />
+                  </a>
                 </div>
-                <h3>{job.company}</h3>
+                <h3>
+                  <a href={job.linkedIn} target="_blank" rel="noopener noreferrer">
+                    {job.company}
+                  </a>
+                </h3>
                 <p className="period">{job.period[language]}</p>
                 <p className="position">{job.position[language]}</p>
                 <p>{job.description[language]}</p>
