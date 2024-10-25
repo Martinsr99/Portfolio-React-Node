@@ -98,7 +98,7 @@ const About = () => {
     };
   }, []);
 
-  const SocialSection = useCallback(({ title, description, linkText, linkUrl, sectionClass, buttonClass }) => (
+  const SocialSection = useCallback(({ title, description, linkText, linkUrl, sectionClass, buttonClass, youtubeEmbed }) => (
     <motion.div
       layout
       className={`social-section ${sectionClass}`}
@@ -106,6 +106,16 @@ const About = () => {
       whileHover={{ scale: 1.03 }}
       transition={{ duration: 0.2, layout: { duration: 0.2 } }}
     >
+      {youtubeEmbed && (
+        <iframe
+          className="youtube-iframe"
+          src="https://www.youtube.com/embed/y6MNk25ANMM?autoplay=1&mute=1&start=50"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      )}
       <div className="social-content">
         <h3>{title}</h3>
         <p>{description}</p>
@@ -130,7 +140,8 @@ const About = () => {
       linkText: t.youtubeButton,
       linkUrl: "https://www.youtube.com/@martinsiles",
       sectionClass: "youtube-section",
-      buttonClass: "youtube-button"
+      buttonClass: "youtube-button",
+      youtubeEmbed: true
     },
     {
       title: t.linkedinTitle,
