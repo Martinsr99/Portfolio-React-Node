@@ -34,6 +34,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   will-change: transform;
+  min-height: 300px;
 }
 
 .social-section:hover {
@@ -68,10 +69,154 @@
   transition: opacity 0.3s ease;
 }
 
-/* Ocultar descripción en hover para la sección de YouTube */
-.youtube-section:hover p {
+/* Ocultar descripción en hover para todas las secciones */
+.social-section:hover p {
   opacity: 0;
   pointer-events: none;
+}
+
+/* LinkedIn Preview Styles */
+.linkedin-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  background: rgba(0, 115, 177, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.linkedin-section:hover .linkedin-preview {
+  opacity: 1;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stat-item h4 {
+  color: white;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.skills {
+  grid-column: span 2;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.skill-tag {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  color: white;
+  font-size: 0.9rem;
+}
+
+/* GitHub Preview Styles */
+.github-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  background: rgba(13, 17, 23, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.github-section:hover .github-preview {
+  opacity: 1;
+}
+
+.github-activity {
+  width: 100%;
+  max-width: 600px;
+}
+
+.contribution-graph {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 2rem;
+}
+
+.contribution-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.contribution-cell {
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.contribution-cell:nth-child(3n) {
+  background-color: rgba(26, 127, 55, 0.8);
+}
+
+.contribution-cell:nth-child(5n) {
+  background-color: rgba(39, 159, 67, 0.8);
+}
+
+.github-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-value {
+  color: #58a6ff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  color: white;
+  font-size: 0.9rem;
 }
 
 @keyframes pulse {
@@ -229,6 +374,18 @@
   .social-button {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills {
+    grid-column: span 1;
+  }
+
+  .github-stats {
+    grid-template-columns: 1fr;
   }
 }
 

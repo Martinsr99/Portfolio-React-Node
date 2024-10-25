@@ -14,9 +14,21 @@ const translations = {
     linkedinTitle: "¡Conéctate conmigo en LinkedIn!",
     linkedinDescription: "Únete a mi red profesional para actualizaciones de carrera, perspectivas de la industria y oportunidades de networking. Crezcamos juntos en el mundo de la tecnología.",
     linkedinButton: "LinkedIn",
+    linkedinStats: {
+      role: "Software Engineer",
+      experience: "+4 años de experiencia",
+      skills: ["React", "Angular", "Node.js", "NestJS"],
+      education: "Ingeniería Informática"
+    },
     githubTitle: "¡Explora mis proyectos en GitHub!",
     githubDescription: "Descubre mis repositorios, contribuciones a proyectos de código abierto y más. Observa mi evolución como desarrollador a través de mi código.",
-    githubButton: "GitHub"
+    githubButton: "GitHub",
+    githubStats: {
+      repos: "Repositorios Públicos",
+      contributions: "Contribuciones este año",
+      stars: "Estrellas recibidas",
+      followers: "Seguidores"
+    }
   },
   en: {
     pageTitle: "Where to find me?",
@@ -26,9 +38,21 @@ const translations = {
     linkedinTitle: "Connect with me on LinkedIn!",
     linkedinDescription: "Join my professional network for career updates, industry insights, and networking opportunities. Let's grow together in the tech world.",
     linkedinButton: "LinkedIn",
+    linkedinStats: {
+      role: "Software Engineer",
+      experience: "+4 years of experience",
+      skills: ["React", "Angular", "Node.js", "NestJS"],
+      education: "Computer Engineering"
+    },
     githubTitle: "Explore my projects on GitHub!",
     githubDescription: "Discover my repositories, open-source contributions, and more. See my evolution as a developer through my code.",
-    githubButton: "GitHub"
+    githubButton: "GitHub",
+    githubStats: {
+      repos: "Public Repositories",
+      contributions: "Contributions this year",
+      stars: "Stars received",
+      followers: "Followers"
+    }
   }
 };
 
@@ -98,7 +122,7 @@ const About = () => {
     };
   }, []);
 
-  const SocialSection = useCallback(({ title, description, linkText, linkUrl, sectionClass, buttonClass, youtubeEmbed }) => (
+  const SocialSection = useCallback(({ title, description, linkText, linkUrl, sectionClass, buttonClass, youtubeEmbed, stats }) => (
     <motion.div
       layout
       className={`social-section ${sectionClass}`}
@@ -115,6 +139,58 @@ const About = () => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
+      )}
+      {stats && sectionClass === 'linkedin-section' && (
+        <div className="linkedin-preview">
+          <div className="stats-grid">
+            <div className="stat-item">
+              <h4>{stats.role}</h4>
+            </div>
+            <div className="stat-item">
+              <h4>{stats.experience}</h4>
+            </div>
+            <div className="stat-item skills">
+              <h4>Skills</h4>
+              <div className="skills-list">
+                {stats.skills.map((skill, index) => (
+                  <span key={index} className="skill-tag">{skill}</span>
+                ))}
+              </div>
+            </div>
+            <div className="stat-item">
+              <h4>{stats.education}</h4>
+            </div>
+          </div>
+        </div>
+      )}
+      {stats && sectionClass === 'github-section' && (
+        <div className="github-preview">
+          <div className="github-activity">
+            <div className="contribution-graph">
+              {[...Array(7)].map((_, i) => (
+                <div key={i} className="contribution-row">
+                  {[...Array(7)].map((_, j) => (
+                    <div key={j} className="contribution-cell"></div>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="github-stats">
+              <div className="stat-box">
+                <span className="stat-value">20+</span>
+                <span className="stat-label">{stats.repos}</span>
+              </div>
+              <div className="stat-box">
+                <span className="stat-value">500+</span>
+                <span className="stat-label">{stats.contributions}</span>
+              </div>
+              <div className="stat-box">
+                <span className="stat-value">50+</span>
+                <span className="stat-label">{stats.stars}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
       <div className="social-content">
         <h3>{title}</h3>
@@ -149,7 +225,8 @@ const About = () => {
       linkText: t.linkedinButton,
       linkUrl: "https://www.linkedin.com/in/martinsilesreche/",
       sectionClass: "linkedin-section",
-      buttonClass: "linkedin-button"
+      buttonClass: "linkedin-button",
+      stats: t.linkedinStats
     },
     {
       title: t.githubTitle,
@@ -157,7 +234,8 @@ const About = () => {
       linkText: t.githubButton,
       linkUrl: "https://github.com/Martinsr99",
       sectionClass: "github-section",
-      buttonClass: "github-button"
+      buttonClass: "github-button",
+      stats: t.githubStats
     }
   ], [t]);
 
