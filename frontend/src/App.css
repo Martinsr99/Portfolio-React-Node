@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+/* Optimize font loading */
+@font-face {
+  font-family: 'Roboto';
+  font-display: swap;
+  src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+}
+
 @import './styles/buttons.css';
 @import './styles/footer.css';
 @import './styles/header.css';
@@ -12,55 +18,57 @@
   --background-light: #ffffff;
   --background-dark: #1a1a1a;
   --transition-speed: 0.3s;
-
-  /* Scrollbar variables */
   --scrollbar-width: 10px;
   --scrollbar-track-light: rgba(0, 0, 0, 0.1);
   --scrollbar-thumb-light: rgba(52, 152, 219, 0.6);
   --scrollbar-thumb-hover-light: rgba(52, 152, 219, 0.8);
-  
-  /* Dark mode scrollbar variables */
   --scrollbar-track-dark: var(--primary-color);
   --scrollbar-thumb-dark: var(--secondary-color);
-  --scrollbar-thumb-hover-dark: #2980b9; /* Darker shade of secondary color */
+  --scrollbar-thumb-hover-dark: #2980b9;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
+/* Improve paint performance */
 body, html {
   font-family: var(--main-font);
   line-height: 1.6;
   color: var(--text-color-dark);
   min-height: 100vh;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar Styles */
-::-webkit-scrollbar {
-  width: var(--scrollbar-width);
-}
+/* Optimize scrollbar for better performance */
+@media (min-width: 769px) {
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-light);
-}
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-light);
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb-light);
-  border-radius: calc(var(--scrollbar-width) / 2);
-}
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-light);
+    border-radius: calc(var(--scrollbar-width) / 2);
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover-light);
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover-light);
+  }
 
-/* For Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track-light);
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb-light) var(--scrollbar-track-light);
+  }
 }
 
 .app-container {
@@ -68,6 +76,8 @@ body, html {
   flex-direction: column;
   min-height: 100vh;
   transition: background-color var(--transition-speed) ease;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 main {
@@ -75,6 +85,8 @@ main {
   display: flex;
   flex-direction: column;
   transition: opacity var(--transition-speed) ease-in-out;
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 5000px;
 }
 
 h1, h2, h3 {
@@ -98,21 +110,31 @@ h1, h2, h3 {
   background-color: var(--background-dark);
 }
 
-/* Dark mode scrollbar styles */
-.dark-mode::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-dark);
+/* Dark mode scrollbar styles - only for desktop */
+@media (min-width: 769px) {
+  .dark-mode::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-dark);
+  }
+
+  .dark-mode::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-dark);
+  }
+
+  .dark-mode::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover-dark);
+  }
+
+  .dark-mode * {
+    scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track-dark);
+  }
 }
 
-.dark-mode::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb-dark);
-}
-
-.dark-mode::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover-dark);
-}
-
-.dark-mode * {
-  scrollbar-color: var(--scrollbar-thumb-dark) var(--scrollbar-track-dark);
+/* Reduce animations on mobile for better performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 @keyframes fadeInUp {
@@ -126,11 +148,14 @@ h1, h2, h3 {
   }
 }
 
-.fade-in-up {
-  animation: fadeInUp 0.5s ease-out;
+/* Only apply animations on non-mobile devices */
+@media (min-width: 769px) {
+  .fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+  }
 }
 
-/* New utility classes */
+/* Utility classes */
 .section-padding {
   padding: 4rem 2rem;
 }
@@ -150,8 +175,39 @@ h1, h2, h3 {
   padding: 0 1rem;
 }
 
+/* Mobile optimizations */
 @media (max-width: 768px) {
   .section-padding {
-    padding: 3rem 1rem;
+    padding: 2rem 1rem;
   }
+
+  .container {
+    padding: 0 0.5rem;
+  }
+
+  /* Improve touch targets on mobile */
+  button, 
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.5rem;
+  }
+
+  /* Optimize images for mobile */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Add loading="lazy" to images via CSS where possible */
+img:not([loading]) {
+  loading: lazy;
+}
+
+/* Prevent layout shifts */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: attr(width) / attr(height);
 }

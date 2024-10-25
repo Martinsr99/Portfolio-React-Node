@@ -1,11 +1,27 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import React, { useContext, useEffect, useRef, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AppProvider, AppContext } from './AppContext';
 import Header from './components/Header';
-import Home from './components/Home';
-import About from './components/About';
 import Footer from './components/Footer';
 import './App.css';
+
+// Lazy load components
+const Home = lazy(() => import('./components/Home'));
+const About = lazy(() => import('./components/About'));
+
+// Loading component
+const LoadingFallback = () => (
+  <div style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    height: '100vh',
+    width: '100%',
+    fontSize: '1.2rem'
+  }}>
+    Loading...
+  </div>
+);
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -35,6 +51,21 @@ function AppContent() {
     } else {
       document.body.classList.remove('dark-mode');
     }
+
+    // Preload other components after initial load
+    const preloadComponents = () => {
+      const componentsToPreload = ['./components/Projects', './components/Education', './components/Contact'];
+      componentsToPreload.forEach(path => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = path;
+        document.head.appendChild(link);
+      });
+    };
+
+    // Preload after a short delay to not block initial render
+    const timer = setTimeout(preloadComponents, 2000);
+    return () => clearTimeout(timer);
   }, [isPending, darkMode]);
 
   const scrollToProjects = () => {
@@ -43,14 +74,34 @@ function AppContent() {
 
   return (
     <Router>
-      <div className={`App app-container ${darkMode ? 'dark-mode' : ''}`} style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div 
+        className={`App app-container ${darkMode ? 'dark-mode' : ''}`} 
+        style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          minHeight: '100vh',
+          width: '100%',
+          maxWidth: '100vw',
+          overflowX: 'hidden'
+        }}
+      >
         <Header scrollToProjects={scrollToProjects} />
         <ScrollToTop />
-        <main style={{ flex: 1, transition: 'opacity 0.3s ease-in-out', opacity: isPending ? 0.5 : 1 }}>
-          <Routes>
-            <Route path="/" element={<Home projectsRef={projectsRef} />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
+        <main style={{ 
+          flex: 1, 
+          transition: 'opacity var(--transition-speed) ease-in-out', 
+          opacity: isPending ? 0.5 : 1,
+          width: '100%',
+          maxWidth: '100vw',
+          overflowX: 'hidden'
+        }}>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Home projectsRef={projectsRef} />} />
+              <Route path="/about" element={<About />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>
