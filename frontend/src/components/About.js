@@ -15,10 +15,10 @@ const translations = {
     linkedinDescription: "Únete a mi red profesional para actualizaciones de carrera, perspectivas de la industria y oportunidades de networking. Crezcamos juntos en el mundo de la tecnología.",
     linkedinButton: "LinkedIn",
     linkedinStats: {
-      role: "Software Engineer",
+      role: "FullStack Engineer",
       experience: "+4 años de experiencia",
-      skills: ["React", "Angular", "Node.js", "NestJS"],
-      education: "Ingeniería Informática"
+      skills: ["React", "Angular", "Node.js", "Python"],
+      education: "Ingeniería telecomunicaciones"
     },
     githubTitle: "¡Explora mis proyectos en GitHub!",
     githubDescription: "Descubre mis repositorios, contribuciones a proyectos de código abierto y más. Observa mi evolución como desarrollador a través de mi código.",
@@ -39,10 +39,10 @@ const translations = {
     linkedinDescription: "Join my professional network for career updates, industry insights, and networking opportunities. Let's grow together in the tech world.",
     linkedinButton: "LinkedIn",
     linkedinStats: {
-      role: "Software Engineer",
+      role: "FullStack Engineer",
       experience: "+4 years of experience",
-      skills: ["React", "Angular", "Node.js", "NestJS"],
-      education: "Computer Engineering"
+      skills: ["React", "Angular", "Node.js", "Python"],
+      education: "Telecommunications Engineering"
     },
     githubTitle: "Explore my projects on GitHub!",
     githubDescription: "Discover my repositories, open-source contributions, and more. See my evolution as a developer through my code.",
