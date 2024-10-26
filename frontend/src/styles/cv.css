@@ -43,6 +43,9 @@
 .animated-eyes {
   display: inline-block;
   transition: transform 0.3s ease;
+  position: relative;
+  top: -2px;
+  margin-left: 4px;
 }
 
 .cv-button:hover .animated-eyes {
@@ -52,9 +55,9 @@
 
 @keyframes eyeMove {
   0% { transform: translateX(0); }
-  25% { transform: translateX(3px); }
-  50% { transform: translateX(-3px); }
-  75% { transform: translateX(3px); }
+  25% { transform: translateX(2px); }
+  50% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
   100% { transform: translateX(0); }
 }
 
