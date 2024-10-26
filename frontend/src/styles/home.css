@@ -34,6 +34,25 @@
   }
 }
 
+/* Animación para los ojos */
+.animated-eyes {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.cv-button:hover .animated-eyes {
+  animation: eyeMove 1s infinite;
+  transform-origin: center;
+}
+
+@keyframes eyeMove {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(3px); }
+  50% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
 .controls-container {
   position: fixed;
   top: 80px;

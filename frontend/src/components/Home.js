@@ -89,6 +89,15 @@ const Home = () => {
     }
   };
 
+  const renderViewCVText = (text) => {
+    const [baseText, emoji] = text.split('👀');
+    return (
+      <>
+        {baseText}<span className="animated-eyes">👀</span>
+      </>
+    );
+  };
+
   return (
     <div className={`home-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className="background-animation"></div>
@@ -137,7 +146,7 @@ const Home = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {currentLanguageData.viewCV}
+              {renderViewCVText(currentLanguageData.viewCV)}
             </motion.a>
           </motion.div>
         </div>
