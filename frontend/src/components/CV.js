@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { FaDownload } from 'react-icons/fa';
 import { AppContext } from '../AppContext';
 import { staticData } from '../data/staticData';
 import '../styles/cv.css';
@@ -34,7 +33,7 @@ const CV = () => {
         whileTap={{ scale: 0.95 }}
       >
         <span className="download-icon-wrapper">
-          <FaDownload className="download-icon" />
+          <span className="download-emoji">📄</span>
         </span>
         {currentLanguageData.downloadCV}
       </motion.a>

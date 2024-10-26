@@ -16,7 +16,7 @@
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
@@ -37,7 +37,7 @@
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* Download button icon styles */
+/* Download button emoji styles */
 .download-icon-wrapper {
   display: inline-flex;
   align-items: center;
@@ -45,21 +45,22 @@
   position: relative;
 }
 
-.download-icon {
-  font-size: 1.1rem;
+.download-emoji {
+  font-size: 1.2rem;
   transition: transform 0.3s ease;
+  display: inline-block;
 }
 
-.cv-button.download:hover .download-icon {
-  animation: downloadBounce 1s infinite;
+.cv-button.download:hover .download-emoji {
+  animation: documentBounce 0.6s infinite;
 }
 
-@keyframes downloadBounce {
+@keyframes documentBounce {
   0%, 100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(3px);
+    transform: translateY(-3px);
   }
 }
 
