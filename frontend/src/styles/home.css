@@ -34,25 +34,6 @@
   }
 }
 
-/* Animación para los ojos */
-.animated-eyes {
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.cv-button:hover .animated-eyes {
-  animation: eyeMove 1s infinite;
-  transform-origin: center;
-}
-
-@keyframes eyeMove {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(3px); }
-  50% { transform: translateX(-3px); }
-  75% { transform: translateX(3px); }
-  100% { transform: translateX(0); }
-}
-
 .controls-container {
   position: fixed;
   top: 80px;
@@ -84,23 +65,13 @@
   transform: scale(1.1);
 }
 
-.intro-section,
-.skills-section {
+.intro-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-}
-
-.intro-section {
   height: 100vh;
-  padding: 2rem;
-  box-sizing: border-box;
-}
-
-.skills-section {
-  min-height: 100vh;
   padding: 2rem;
   box-sizing: border-box;
 }
@@ -146,142 +117,11 @@
   transition: color 0.5s ease-in-out;
 }
 
-/* New CV download section styles */
-.cv-download-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2rem;
-  gap: 1rem;
-}
-
-.cv-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 30px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.cv-button.download {
-  background-color: #3498db;
-  color: white;
-}
-
-.cv-button.view {
-  background-color: #2ecc71;
-  color: white;
-}
-
-.cv-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
-}
-
-.cv-button svg {
-  margin-right: 0.5rem;
-}
-
 .section-title {
   font-size: 2.5rem;
   margin-bottom: 40px;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   transition: color 0.5s ease-in-out;
-}
-
-.skills-title {
-  color: #3498db;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-.skills-title.visible {
-  opacity: 1;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.skill-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease-in-out;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.skill-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
-.skill-icon {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  color: #3498db;
-  transition: transform 0.3s ease, color 0.5s ease-in-out, opacity 0.3s ease;
-}
-
-.skill-item:hover .skill-icon {
-  opacity: 0;
-}
-
-.skill-name {
-  font-size: 1.2rem;
-  text-align: center;
-  margin-top: 10px;
-  color: #2c3e50;
-  font-weight: 600;
-  transition: color 0.5s ease-in-out, opacity 0.3s ease;
-}
-
-.skill-item:hover .skill-name {
-  opacity: 0;
-}
-
-.skill-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(52, 152, 219, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.3s ease, background-color 0.5s ease-in-out;
-  border-radius: 15px;
-  padding: 20px;
-}
-
-.skill-item:hover .skill-overlay {
-  opacity: 1;
-}
-
-.skill-overlay p {
-  color: #ecf0f1;
-  font-size: 0.9rem;
-  text-align: center;
 }
 
 /* Dark mode styles */
@@ -295,36 +135,11 @@
   background-size: 400% 400%;
 }
 
-.dark-mode .skill-item {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.dark-mode .skill-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
 .dark-mode .name,
 .dark-mode .title,
 .dark-mode .bio {
   color: #e0e0e0;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.dark-mode .skills-title {
-  color: #64b5f6;
-}
-
-.dark-mode .skill-icon {
-  color: #64b5f6;
-}
-
-.dark-mode .skill-name {
-  color: #ffffff;
-}
-
-.dark-mode .skill-overlay {
-  background-color: rgba(25, 118, 210, 0.9);
 }
 
 .dark-mode .theme-toggle {
@@ -336,15 +151,6 @@
   color: #64b5f6;
 }
 
-/* Dark mode styles for CV buttons */
-.dark-mode .cv-button.download {
-  background-color: #2980b9;
-}
-
-.dark-mode .cv-button.view {
-  background-color: #27ae60;
-}
-
 /* Responsive styles */
 @media screen and (max-width: 768px) {
   .controls-container {
@@ -352,8 +158,7 @@
     right: 10px;
   }
 
-  .intro-section,
-  .skills-section {
+  .intro-section {
     padding: 2rem 1rem;
   }
 
@@ -371,35 +176,5 @@
 
   .section-title {
     font-size: 2rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 20px;
-  }
-
-  .skill-icon {
-    font-size: 3rem;
-  }
-
-  .cv-download-section {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .cv-button {
-    width: 100%;
-    max-width: 250px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .skills-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 15px;
-  }
-
-  .skill-icon {
-    font-size: 2.5rem;
   }
 }
