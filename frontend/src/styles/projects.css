@@ -480,6 +480,11 @@
   .martinsiles-card {
     width: 80%;
   }
+
+  /* Dark mode mobile fixes */
+  .dark-mode .timeline-item::before {
+    border-color: transparent #4a90e2 transparent transparent;
+  }
 }
 
 @media screen and (max-width: 480px) {
