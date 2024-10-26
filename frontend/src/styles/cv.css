@@ -16,8 +16,10 @@
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
 .cv-button.download {
@@ -35,11 +37,33 @@
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
-.cv-button svg {
+/* Download button icon styles */
+.download-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
   margin-right: 0.5rem;
+  position: relative;
 }
 
-/* Animación para los ojos */
+.download-icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.cv-button.download:hover .download-icon {
+  animation: downloadBounce 1s infinite;
+}
+
+@keyframes downloadBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* View button eyes animation */
 .animated-eyes {
   display: inline-block;
   transition: transform 0.3s ease;
@@ -61,7 +85,26 @@
   100% { transform: translateX(0); }
 }
 
-/* Dark mode styles for CV buttons */
+/* Button hover effects */
+.cv-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.cv-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Dark mode styles */
 .dark-mode .cv-button.download {
   background-color: #2980b9;
 }

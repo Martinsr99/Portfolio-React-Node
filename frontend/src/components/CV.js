@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import { FaFileDownload } from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa';
 import { AppContext } from '../AppContext';
 import { staticData } from '../data/staticData';
 import '../styles/cv.css';
@@ -33,7 +33,10 @@ const CV = () => {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <FaFileDownload /> {currentLanguageData.downloadCV}
+        <span className="download-icon-wrapper">
+          <FaDownload className="download-icon" />
+        </span>
+        {currentLanguageData.downloadCV}
       </motion.a>
       <motion.a 
         href="/cv/Martin-Siles-Software-Engineer.pdf" 
