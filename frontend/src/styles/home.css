@@ -34,15 +34,6 @@
   }
 }
 
-.controls-container {
-  position: fixed;
-  top: 80px;
-  right: 20px;
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-}
-
 .theme-toggle {
   background: none;
   border: none;
@@ -153,11 +144,6 @@
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-  .controls-container {
-    top: 70px;
-    right: 10px;
-  }
-
   .intro-section {
     padding: 2rem 1rem;
   }

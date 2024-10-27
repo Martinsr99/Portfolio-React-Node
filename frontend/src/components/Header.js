@@ -42,7 +42,6 @@ const Header = () => {
     event.preventDefault();
     if (location.pathname !== '/') {
       navigate('/');
-      // We need to wait for the navigation to complete before scrolling
       setTimeout(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 100);
@@ -54,13 +53,11 @@ const Header = () => {
 
   return (
     <header className={`header ${visible ? 'visible' : 'hidden'} ${darkMode ? 'dark' : 'light'}`}>
+      <div className="menu-icon" onClick={toggleMenu}>
+        {isOpen ? <FaTimes /> : <FaBars />}
+      </div>
+
       <div className="header-content">
-        <div 
-          className="menu-icon" 
-          onClick={toggleMenu}
-        >
-          {isOpen ? <FaTimes /> : <FaBars />}
-        </div>
         <nav className={`nav-menu ${isOpen ? 'show' : ''}`}>
           <ul>
             <li><a href="#" onClick={scrollToTop}>{t.cv}</a></li>
@@ -68,6 +65,9 @@ const Header = () => {
             <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
           </ul>
         </nav>
+      </div>
+
+      <div className="controls-wrapper">
         <div className="controls-container">
           <button 
             onClick={toggleTheme} 
