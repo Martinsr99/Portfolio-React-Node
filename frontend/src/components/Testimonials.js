@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { AppContext } from '../AppContext';
 import { ReactTyped } from 'react-typed';
 import { motion } from 'framer-motion';
+import { testimonialsTranslations } from '../data/testimonialsTranslations';
 import '../styles/testimonials.css';
 
 const Testimonials = () => {
   const { language } = useContext(AppContext);
   const titleRef = useRef(null);
   const [isTitleVisible, setIsTitleVisible] = useState(false);
+  const t = testimonialsTranslations[language];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -31,41 +33,6 @@ const Testimonials = () => {
     };
   }, []);
 
-  const testimonials = {
-    es: [
-      {
-        id: 1,
-        name: "Irene Aguilera Gómez",
-        position: "Diseñadora Gráfica",
-        text: "Martin es un programador Full Stack sobresaliente. Su capacidad para entender y aplicar soluciones efectivas es increíble. Traduce ideas complejas en resultados prácticos y eficientes.",
-        linkedin: "https://www.linkedin.com/in/irene-aguilera-g%C3%B3mez-543420330/"
-      },
-      {
-        id: 2,
-        name: "Ismael Calero Morales",
-        position: "Desarrollador Backend",
-        text: "La habilidad de Martin para resolver problemas complejos es asombrosa. Es un mentor paciente y dedicado que inspira a pensar diferente. Su ética de trabajo y capacidad de aprendizaje son ejemplares.",
-        linkedin: "https://www.linkedin.com/in/thismadev/"
-      }
-    ],
-    en: [
-      {
-        id: 1,
-        name: "Irene Aguilera Gómez",
-        position: "Graphic Designer",
-        text: "Martin is an outstanding Full Stack programmer. His ability to understand and apply effective solutions is incredible. He translates complex ideas into practical and efficient results.",
-        linkedin: "https://www.linkedin.com/in/irene-aguilera-g%C3%B3mez-543420330/"
-      },
-      {
-        id: 2,
-        name: "Ismael Calero Morales",
-        position: "Backend Developer",
-        text: "Martin's ability to solve complex problems is amazing. He's a patient and dedicated mentor who inspires different thinking. His work ethic and learning capacity are exemplary.",
-        linkedin: "https://www.linkedin.com/in/thismadev/"
-      }
-    ]
-  };
-
   return (
     <section className="testimonials">
       <motion.h2 
@@ -77,7 +44,7 @@ const Testimonials = () => {
       >
         {isTitleVisible && (
           <ReactTyped
-            strings={[language === 'es' ? 'Testimonios' : 'Testimonials']}
+            strings={[t.sectionTitle]}
             typeSpeed={50}
             backSpeed={30}
             loop={false}
@@ -85,7 +52,7 @@ const Testimonials = () => {
         )}
       </motion.h2>
       <div className="testimonials-container">
-        {testimonials[language].map((testimonial, index) => (
+        {t.testimonials.map((testimonial, index) => (
           <motion.div 
             key={testimonial.id} 
             className="testimonial-card"

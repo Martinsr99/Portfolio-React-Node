@@ -10,7 +10,8 @@ import {
 import { DiGo, DiDocker } from 'react-icons/di';
 import { TbBrandNextjs } from 'react-icons/tb';
 import { AppContext } from '../AppContext';
-import { staticData } from '../data/staticData';
+import { skillsTranslations } from '../data/skillsTranslations';
+import { homeTranslations } from '../data/homeTranslations';
 import '../styles/skills.css';
 
 const iconMap = {
@@ -41,7 +42,7 @@ const Skills = () => {
   const { language } = useContext(AppContext);
   const skillsTitleRef = useRef(null);
 
-  const currentLanguageData = staticData[language].home;
+  const currentLanguageData = homeTranslations[language];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -84,7 +85,7 @@ const Skills = () => {
         )}
       </motion.h2>
       <div className="skills-grid">
-        {staticData.skills.map((skill) => {
+        {skillsTranslations.skills.map((skill) => {
           const Icon = iconMap[skill.name] || FaDatabase;
           return (
             <div

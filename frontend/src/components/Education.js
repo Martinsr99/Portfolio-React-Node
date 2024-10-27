@@ -4,38 +4,16 @@ import { ReactTyped as Typed } from 'react-typed';
 import { AppContext } from '../AppContext';
 import { educationData } from '../data/educationData';
 import { certificationsData } from '../data/certificationsData';
+import { educationTranslations } from '../data/educationTranslations';
 import '../styles/education.css';
 import '../styles/buttons.css';
-
-const translations = {
-  es: {
-    title: "Certificaciones y Educación",
-    viewCertificate: "Ver Certificado",
-    courseContents: "Contenidos del curso:",
-    certificateNotFound: "Certificado no encontrado",
-    instructor: "Instructor:",
-    duration: "Duración:",
-    certifications: "Certificaciones",
-    education: "Educación"
-  },
-  en: {
-    title: "Certifications and Education",
-    viewCertificate: "View Certificate",
-    courseContents: "Course contents:",
-    certificateNotFound: "Certificate not found",
-    instructor: "Instructor:",
-    duration: "Duration:",
-    certifications: "Certifications",
-    education: "Education"
-  }
-};
 
 const Education = () => {
   const { language, darkMode, selectedCert, setSelectedCert } = useContext(AppContext);
   const [activeTab, setActiveTab] = useState('certifications');
   const [isTitleVisible, setIsTitleVisible] = useState(false);
   const titleRef = useRef(null);
-  const t = translations[language];
+  const t = educationTranslations[language];
 
   useEffect(() => {
     const observer = new IntersectionObserver(

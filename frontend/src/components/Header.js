@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppContext } from '../AppContext';
 import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
+import { headerTranslations } from '../data/headerTranslations';
 
 const Header = () => {
   const { language, toggleLanguage, darkMode, toggleTheme } = useContext(AppContext);
@@ -11,6 +12,7 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
+  const t = headerTranslations[language];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -35,25 +37,6 @@ const Header = () => {
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
-
-  const translations = {
-    es: {
-      cv: 'CV',
-      projects: 'Proyectos',
-      about: 'Sobre Mí',
-      toggleTheme: 'Cambiar tema',
-      toggleLanguage: 'EN'
-    },
-    en: {
-      cv: 'CV',
-      projects: 'Projects',
-      about: 'About',
-      toggleTheme: 'Toggle theme',
-      toggleLanguage: 'ES'
-    }
-  };
-
-  const t = translations[language];
 
   const scrollToTop = (event) => {
     event.preventDefault();

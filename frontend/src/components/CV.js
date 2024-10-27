@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import { AppContext } from '../AppContext';
-import { staticData } from '../data/staticData';
+import { homeTranslations } from '../data/homeTranslations';
 import '../styles/cv.css';
 
 const CV = () => {
   const { language } = useContext(AppContext);
-  const currentLanguageData = staticData[language].home;
+  const currentLanguageData = homeTranslations[language];
 
   const renderViewCVText = (text) => {
     const [baseText] = text.split('👀');

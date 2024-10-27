@@ -6,7 +6,7 @@ import profileImage from '../images/profile-image.jpg';
 import '../styles/home.css';
 import '../styles/buttons.css';
 import '../styles/education.css';
-import { staticData } from '../data/staticData';
+import { homeTranslations } from '../data/homeTranslations';
 import Projects from './Projects';
 import Testimonials from './Testimonials';
 import Education from './Education';
@@ -18,7 +18,7 @@ const Home = () => {
   const projectsRef = useRef(null);
   const location = useLocation();
 
-  const currentLanguageData = staticData[language].home;
+  const currentLanguageData = homeTranslations[language];
 
   useEffect(() => {
     if (location.hash === '#projects') {

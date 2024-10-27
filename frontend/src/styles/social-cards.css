@@ -1,0 +1,534 @@
+/* Social Sections Container */
+.social-sections-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-section {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  will-change: transform;
+  min-height: 300px;
+}
+
+.social-section:hover {
+  transform: translateY(-5px);
+}
+
+.social-content {
+  padding: 3rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.social-section h3 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.social-section p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: #f0f0f0;
+  max-width: 80%;
+  transition: opacity 0.3s ease;
+}
+
+/* Ocultar descripción en hover para todas las secciones */
+.social-section:hover p {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* LinkedIn Preview Styles */
+.linkedin-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(0, 115, 177, 0.98), rgba(0, 88, 135, 0.98));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.linkedin-preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+  transform: skewY(-2deg) translateY(-30px);
+}
+
+.linkedin-preview::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  transform: skewY(2deg) translateY(30px);
+}
+
+.linkedin-section:hover .linkedin-preview {
+  opacity: 1;
+}
+
+.stats-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+.stat-item.role {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+}
+
+.stat-item.role h4 {
+  font-size: 1.4rem;
+  text-align: center;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.stat-item.role h4::before {
+  content: '👨‍💻';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+.stat-item.experience h4 {
+  color: #E7E7E7;
+  text-align: center;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.stat-item.experience h4::before {
+  content: '🚀';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+.skills {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+}
+
+.skills h4 {
+  text-align: center;
+  margin-bottom: 0.75rem;
+  color: #ffffff;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.skills h4::before {
+  content: '💻';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.skill-tag {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.skill-tag:hover::before {
+  transform: translateX(100%);
+}
+
+.stat-item.education {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.15);
+  position: relative;
+  padding-left: 2rem;
+}
+
+.stat-item.education h4 {
+  color: #E7E7E7;
+  position: relative;
+}
+
+.stat-item.education::before {
+  content: '🎓';
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+/* GitHub Preview Styles */
+.github-preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  background: rgba(13, 17, 23, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.github-section:hover .github-preview {
+  opacity: 1;
+}
+
+.github-activity {
+  width: 100%;
+  max-width: 600px;
+}
+
+.contribution-graph {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 4px;
+  margin-bottom: 2rem;
+}
+
+.contribution-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.contribution-cell {
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.contribution-cell:nth-child(3n) {
+  background-color: rgba(26, 127, 55, 0.8);
+}
+
+.contribution-cell:nth-child(5n) {
+  background-color: rgba(39, 159, 67, 0.8);
+}
+
+.github-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-value {
+  color: #58a6ff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stat-label {
+  color: white;
+  font-size: 0.9rem;
+}
+
+/* Social Button Styles */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+.social-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  max-width: 200px;
+  border: 2px solid transparent;
+  will-change: transform;
+  animation: pulse 2s infinite;
+}
+
+.social-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Specific styles for each social platform */
+.youtube-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/bannerYoutube.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.youtube-section .youtube-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.youtube-section:hover .youtube-iframe {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.youtube-button {
+  background-color: #FF0000;
+  color: #ffffff;
+}
+
+.youtube-button:hover {
+  background-color: #ffffff;
+  color: #FF0000;
+  border-color: #FF0000;
+}
+
+.linkedin-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/bannerLinkedin.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.linkedin-button {
+  background-color: #0077B5;
+  color: #ffffff;
+}
+
+.linkedin-button:hover {
+  background-color: #ffffff;
+  color: #0077B5;
+  border-color: #0077B5;
+}
+
+.github-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/github.webp');
+  background-size: cover;
+  background-position: center;
+}
+
+.github-button {
+  background-color: #161B22;
+  color: #ffffff;
+}
+
+.github-button:hover {
+  background-color: #ffffff;
+  color: #161B22;
+  border-color: #161B22;
+}
+
+/* Dark mode styles */
+.dark-mode .social-section {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .social-section:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .social-section {
+    margin-bottom: 2rem;
+  }
+
+  .social-content {
+    padding: 2rem;
+  }
+
+  .social-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .social-section p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .social-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .stats-grid {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .stat-item {
+    padding: 0.8rem;
+  }
+
+  .stat-item.role h4 {
+    font-size: 1.2rem;
+  }
+
+  .skills-list {
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .github-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Hover effects */
+.social-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background-color 0.2s ease;
+  z-index: 1;
+}
+
+.social-section:hover::before {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Reduce layout shifts */
+.social-section, .social-button {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
