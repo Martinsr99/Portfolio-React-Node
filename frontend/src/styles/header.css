@@ -155,7 +155,14 @@
     width: 60%;
     height: calc(100vh - 60px);
     transition: right 0.3s ease-in-out;
-    background-color: var(--background-color);
+  }
+
+  .light .nav-menu {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .dark .nav-menu {
+    background-color: rgba(26, 26, 26, 0.95);
   }
 
   .nav-menu.show {
