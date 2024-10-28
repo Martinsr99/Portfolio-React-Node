@@ -65,6 +65,9 @@ const Projects = () => {
     };
   }, []);
 
+  const workExperienceTitle = language === 'en' ? "Work Experience" : "Experiencia Laboral";
+  const personalProjectsTitle = language === 'en' ? "Personal Projects" : "Proyectos Personales";
+
   return (
     <motion.div
       className={`projects-container ${darkMode ? 'dark-mode' : ''}`}
@@ -84,7 +87,7 @@ const Projects = () => {
         >
           {isWorkExperienceTitleVisible && (
             <Typed
-              strings={[t.workExperience]}
+              strings={[workExperienceTitle]}
               typeSpeed={50}
               backSpeed={30}
               loop={false}
@@ -135,7 +138,7 @@ const Projects = () => {
         >
           {isPersonalProjectsTitleVisible && (
             <Typed
-              strings={[t.personalProjects]}
+              strings={[personalProjectsTitle]}
               typeSpeed={50}
               backSpeed={30}
               loop={false}
