@@ -9,6 +9,13 @@ import emailjs from 'emailjs-com';
 import { FaUser, FaEnvelope, FaCommentAlt, FaLock } from 'react-icons/fa';
 import { contactTranslations } from '../data/contactTranslations';
 
+// Configuración de EmailJS
+const EMAILJS_CONFIG = {
+  SERVICE_ID: 'service_a6sf31g',
+  TEMPLATE_ID: 'template_reiq3p8',
+  USER_ID: 'EYkeFnewCJu9h2o6O'
+};
+
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -47,10 +54,10 @@ const Contact = () => {
 
     try {
       await emailjs.send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
         { name, email, message },
-        process.env.REACT_APP_EMAILJS_USER_ID
+        EMAILJS_CONFIG.USER_ID
       );
 
       toast.dismiss('sending');
