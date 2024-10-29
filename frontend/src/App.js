@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AppProvider, AppContext } from './AppContext';
+import { PulseLoader } from 'react-spinners';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import './App.css';
@@ -11,20 +12,24 @@ const Home = lazy(() => import('./components/Home'));
 const About = lazy(() => import('./components/About'));
 
 // Loading component
-const LoadingFallback = () => (
-  <div className="loading-container">
-    <div className="loading-content">
-      <img 
-        src="/logo.webp" 
-        alt="Loading..." 
-        className="loading-logo"
-      />
-      <div className="loading-text">
-        Loading...
+const LoadingFallback = () => {
+  const { darkMode } = useContext(AppContext);
+  return (
+    <div className="loading-container">
+      <div className="loading-content">
+        <PulseLoader 
+          color={darkMode ? "#ffffff" : "#000000"} 
+          size={15}
+          margin={2}
+          speedMultiplier={0.8}
+        />
+        <div className="loading-text">
+          Loading...
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 function ScrollToTop() {
   const { pathname } = useLocation();
