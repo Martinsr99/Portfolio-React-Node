@@ -4,6 +4,7 @@ import { AppProvider, AppContext } from './AppContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import './App.css';
+import './styles/loading.css';
 
 // Lazy load components
 const Home = lazy(() => import('./components/Home'));
@@ -11,15 +12,17 @@ const About = lazy(() => import('./components/About'));
 
 // Loading component
 const LoadingFallback = () => (
-  <div style={{ 
-    display: 'flex', 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    height: '100vh',
-    width: '100%',
-    fontSize: '1.2rem'
-  }}>
-    Loading...
+  <div className="loading-container">
+    <div className="loading-content">
+      <img 
+        src="/logo.webp" 
+        alt="Loading..." 
+        className="loading-logo"
+      />
+      <div className="loading-text">
+        Loading...
+      </div>
+    </div>
   </div>
 );
 
