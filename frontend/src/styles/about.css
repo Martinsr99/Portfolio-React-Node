@@ -4,7 +4,6 @@
   min-height: auto;
   margin: 0 auto;
   padding: 4rem 2rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
   background: linear-gradient(135deg, #f0f4f8 0%, #d0e2f3 50%, #b0d0e8 100%);
   background-size: 100% 100%;
   background-attachment: fixed;

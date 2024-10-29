@@ -51,35 +51,26 @@ const About = () => {
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={darkMode ? 'dark' : 'light'}
-        className={`about-container ${darkMode ? 'dark-mode' : ''}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
+    <div className={`about-container ${darkMode ? 'dark-mode' : ''}`}>
+      <motion.h2
+        ref={titleRef}
+        className="about-title gradient-text"
+        variants={titleVariants}
+        initial="hidden"
+        animate="visible"
       >
-        <motion.h2
-          ref={titleRef}
-          className="about-title gradient-text"
-          variants={titleVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {isTitleVisible && (
-            <ReactTyped
-              strings={[t.pageTitle]}
-              typeSpeed={50}
-              backSpeed={30}
-              loop={false}
-            />
-          )}
-        </motion.h2>
-        <SocialCards translations={socialCardsT} />
-        <Contact />
-      </motion.div>
-    </AnimatePresence>
+        {isTitleVisible && (
+          <ReactTyped
+            strings={[t.pageTitle]}
+            typeSpeed={50}
+            backSpeed={30}
+            loop={false}
+          />
+        )}
+      </motion.h2>
+      <SocialCards translations={socialCardsT} />
+      <Contact />
+    </div>
   );
 };
 
