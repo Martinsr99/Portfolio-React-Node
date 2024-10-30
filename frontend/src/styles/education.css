@@ -17,6 +17,11 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  min-height: 5rem; /* Increased min-height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
 }
 
 .tab-container {
@@ -340,6 +345,8 @@
 @media screen and (max-width: 480px) {
   .section-title {
     font-size: 2rem;
+    min-height: 7rem; /* Significantly increased min-height for mobile */
+    line-height: 1.2;
   }
 
   .timeline-content h3 {
