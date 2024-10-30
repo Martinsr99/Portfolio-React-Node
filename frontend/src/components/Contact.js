@@ -1,11 +1,12 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Swal from 'sweetalert2';
+import ReCAPTCHA from 'react-google-recaptcha';
 import '../styles/contact.css';
 import '../styles/modal.css';
 import { AppContext } from '../AppContext';
 import emailjs from 'emailjs-com';
-import { FaUser, FaEnvelope, FaCommentAlt, FaLock } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaCommentAlt } from 'react-icons/fa';
 import { contactTranslations } from '../data/contactTranslations';
 
 // Configuración de EmailJS
@@ -15,25 +16,19 @@ const EMAILJS_CONFIG = {
   USER_ID: 'EYkeFnewCJu9h2o6O'
 };
 
+// Clave del sitio de reCAPTCHA
+const RECAPTCHA_SITE_KEY = '6LeW23AqAAAAANZosTkEe6SH4LAAgSxQQhCn6MIm';
+
 const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [captcha, setCaptcha] = useState('');
-  const [captchaQuestion, setCaptchaQuestion] = useState('');
-  const [captchaAnswer, setCaptchaAnswer] = useState('');
+  const [recaptchaValue, setRecaptchaValue] = useState(null);
   const { language, darkMode } = useContext(AppContext);
   const t = contactTranslations[language];
   const titleRef = useRef(null);
+  const recaptchaRef = useRef(null);
   const isInView = useInView(titleRef, { once: true });
-
-  useEffect(() => {
-    // Generate a simple captcha question
-    const num1 = Math.floor(Math.random() * 10);
-    const num2 = Math.floor(Math.random() * 10);
-    setCaptchaQuestion(`${num1} + ${num2} = ?`);
-    setCaptchaAnswer((num1 + num2).toString());
-  }, []);
 
   const showLoadingModal = () => {
     return Swal.fire({
@@ -89,7 +84,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (captcha !== captchaAnswer) {
+    if (!recaptchaValue) {
       showErrorModal(t.captchaInvalid);
       return;
     }
@@ -110,17 +105,19 @@ const Contact = () => {
       setName('');
       setEmail('');
       setMessage('');
-      setCaptcha('');
-      // Generate a new captcha question
-      const num1 = Math.floor(Math.random() * 10);
-      const num2 = Math.floor(Math.random() * 10);
-      setCaptchaQuestion(`${num1} + ${num2} = ?`);
-      setCaptchaAnswer((num1 + num2).toString());
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      setRecaptchaValue(null);
     } catch (error) {
       console.error('Error:', error);
       loadingModal.close();
       showErrorModal(t.errorOccurred);
     }
+  };
+
+  const handleRecaptchaChange = (value) => {
+    setRecaptchaValue(value);
   };
 
   return (
@@ -198,23 +195,17 @@ const Contact = () => {
             </div>
           </motion.div>
           <motion.div
-            className="form-group"
+            className="form-group recaptcha-container"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <div className="input-container">
-              <FaLock className="input-icon" />
-              <input
-                type="text"
-                id="captcha"
-                value={captcha}
-                onChange={(e) => setCaptcha(e.target.value)}
-                required
-                placeholder={t.captchaPlaceholder}
-              />
-              <label htmlFor="captcha" className={captcha ? 'filled' : ''}>{t.captcha}: {captchaQuestion}</label>
-            </div>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={RECAPTCHA_SITE_KEY}
+              onChange={handleRecaptchaChange}
+              theme={darkMode ? 'dark' : 'light'}
+            />
           </motion.div>
           <motion.div className="submit-button-container">
             <motion.button

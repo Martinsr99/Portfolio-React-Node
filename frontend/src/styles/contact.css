@@ -173,6 +173,30 @@ textarea::placeholder {
   transform: translateY(0);
 }
 
+/* Estilos para reCAPTCHA */
+.recaptcha-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.recaptcha-container > div {
+  transform-origin: left top;
+  transition: transform 0.3s ease;
+}
+
+@media screen and (max-width: 400px) {
+  .recaptcha-container > div {
+    transform: scale(0.9);
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .recaptcha-container > div {
+    transform: scale(0.8);
+  }
+}
+
 /* Dark mode styles */
 .dark-mode.contact-container {
   background: #1a1a1a;
