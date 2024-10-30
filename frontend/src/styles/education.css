@@ -17,7 +17,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  min-height: 5rem; /* Increased min-height */
+  min-height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -345,7 +345,7 @@
 @media screen and (max-width: 480px) {
   .section-title {
     font-size: 2rem;
-    min-height: 7rem; /* Significantly increased min-height for mobile */
+    min-height: 7rem;
     line-height: 1.2;
   }
 
@@ -358,12 +358,15 @@
   }
 
   .btn-certificate {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem; /* Reduced from 0.9rem */
+    padding: 0.5rem 1rem; /* Reduced padding */
+    letter-spacing: 0.5px; /* Reduced letter spacing */
   }
 
   .tab-button {
-    font-size: 0.9rem;
-    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem; /* Reduced from 0.9rem */
+    padding: 0.5rem 1rem; /* Reduced padding */
+    letter-spacing: 0.5px; /* Reduced letter spacing */
+    margin: 0 0.25rem; /* Reduced margin between buttons */
   }
 }

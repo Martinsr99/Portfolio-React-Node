@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2';
 import '../styles/contact.css';
-import '../styles/toast.css';
+import '../styles/modal.css';
 import { AppContext } from '../AppContext';
 import emailjs from 'emailjs-com';
 import { FaUser, FaEnvelope, FaCommentAlt, FaLock } from 'react-icons/fa';
@@ -36,21 +35,66 @@ const Contact = () => {
     setCaptchaAnswer((num1 + num2).toString());
   }, []);
 
+  const showLoadingModal = () => {
+    return Swal.fire({
+      title: t.sendingMessage,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+      customClass: {
+        popup: darkMode ? 'dark-mode swal2-popup' : 'swal2-popup'
+      }
+    });
+  };
+
+  const showSuccessModal = () => {
+    return Swal.fire({
+      icon: 'success',
+      title: t.messageSent,
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false,
+      showCloseButton: true,
+      allowOutsideClick: true,
+      didOpen: () => {
+        const timerProgressBar = Swal.getPopup().querySelector('.swal2-timer-progress-bar');
+        if (timerProgressBar) {
+          timerProgressBar.style.height = '0.25rem';
+          timerProgressBar.style.background = 'linear-gradient(to right, #3498db, #2ecc71)';
+        }
+      },
+      customClass: {
+        popup: darkMode ? 'dark-mode swal2-popup' : 'swal2-popup',
+        closeButton: 'swal2-close-button'
+      }
+    });
+  };
+
+  const showErrorModal = (message) => {
+    return Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: message,
+      showConfirmButton: true,
+      showCloseButton: true,
+      allowOutsideClick: true,
+      customClass: {
+        popup: darkMode ? 'dark-mode swal2-popup' : 'swal2-popup',
+        closeButton: 'swal2-close-button'
+      }
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (captcha !== captchaAnswer) {
-      toast.error(t.captchaInvalid, {
-        className: `custom-toast custom-toast-error ${darkMode ? 'dark-mode' : ''}`
-      });
+      showErrorModal(t.captchaInvalid);
       return;
     }
 
-    toast.info(t.sendingMessage, { 
-      autoClose: false, 
-      toastId: 'sending',
-      className: `custom-toast custom-toast-info ${darkMode ? 'dark-mode' : ''}`
-    });
+    const loadingModal = showLoadingModal();
 
     try {
       await emailjs.send(
@@ -60,10 +104,9 @@ const Contact = () => {
         EMAILJS_CONFIG.USER_ID
       );
 
-      toast.dismiss('sending');
-      toast.success(t.messageSent, {
-        className: `custom-toast custom-toast-success ${darkMode ? 'dark-mode' : ''}`
-      });
+      loadingModal.close();
+      await showSuccessModal();
+      
       setName('');
       setEmail('');
       setMessage('');
@@ -75,10 +118,8 @@ const Contact = () => {
       setCaptchaAnswer((num1 + num2).toString());
     } catch (error) {
       console.error('Error:', error);
-      toast.dismiss('sending');
-      toast.error(t.errorOccurred, {
-        className: `custom-toast custom-toast-error ${darkMode ? 'dark-mode' : ''}`
-      });
+      loadingModal.close();
+      showErrorModal(t.errorOccurred);
     }
   };
 
@@ -187,7 +228,6 @@ const Contact = () => {
           </motion.div>
         </form>
       </div>
-      <ToastContainer position="bottom-right" />
     </motion.div>
   );
 };

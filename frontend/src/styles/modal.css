@@ -1,0 +1,45 @@
+.swal2-popup {
+  border-radius: 15px !important;
+  padding: 2em !important;
+}
+
+.swal2-title {
+  font-size: 1.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
+.swal2-timer-progress-bar {
+  background: linear-gradient(to right, #3498db, #2ecc71) !important;
+  height: 0.25rem !important;
+}
+
+.dark-mode .swal2-popup {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+}
+
+.dark-mode .swal2-title {
+  color: #ffffff !important;
+}
+
+.dark-mode .swal2-timer-progress-bar {
+  background: linear-gradient(to right, #3498db, #2ecc71) !important;
+}
+
+.swal2-close {
+  font-size: 2em !important;
+  color: #95a5a6 !important;
+  transition: color 0.3s ease !important;
+}
+
+.swal2-close:hover {
+  color: #3498db !important;
+}
+
+.dark-mode .swal2-close {
+  color: #bdc3c7 !important;
+}
+
+.dark-mode .swal2-close:hover {
+  color: #3498db !important;
+}
