@@ -1,6 +1,36 @@
 export const certificationsData = [
   {
     name: {
+      es: "Ingeniería de Prompts con ChatGPT para Desarrolladores",
+      en: "ChatGPT Prompt Engineering for Developers"
+    },
+    platform: "DeepLearning.AI",
+    date: "2024-01-09",
+    pdfUrl: "/certificates/openAI-deeplearning.pdf",
+    instructor: "OpenAI",
+    duration: {
+      es: "4 horas",
+      en: "4 hours"
+    },
+    contents: {
+      es: [
+        "Principios de Ingeniería de Prompts",
+        "Técnicas de Prompt Engineering",
+        "Desarrollo de aplicaciones con la API de ChatGPT",
+        "Mejores prácticas para interactuar con LLMs",
+        "Optimización de resultados con prompts efectivos"
+      ],
+      en: [
+        "Prompt Engineering Principles",
+        "Prompt Engineering Techniques",
+        "Building Applications with ChatGPT API",
+        "Best Practices for LLM Interaction",
+        "Optimizing Results with Effective Prompts"
+      ]
+    }
+  },
+  {
+    name: {
       es: "Nest: Desarrollo backend escalable con Node",
       en: "Nest: Scalable Backend Development with Node"
     },
