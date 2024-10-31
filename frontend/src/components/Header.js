@@ -63,6 +63,7 @@ const Header = () => {
             <li><a href="#" onClick={scrollToTop}>{t.cv}</a></li>
             <li><Link to="/#projects" onClick={toggleMenu}>{t.projects}</Link></li>
             <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
+            <li><Link to="/portfolio" onClick={toggleMenu}>{t.portfolio}</Link></li>
           </ul>
         </nav>
       </div>

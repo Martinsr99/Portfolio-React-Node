@@ -3,6 +3,7 @@ export const headerTranslations = {
     cv: 'CV',
     projects: 'Proyectos',
     about: 'Sobre Mí',
+    portfolio: 'Portfolio',
     toggleTheme: 'Cambiar tema',
     toggleLanguage: 'EN'
   },
@@ -10,6 +11,7 @@ export const headerTranslations = {
     cv: 'CV',
     projects: 'Projects',
     about: 'About',
+    portfolio: 'Portfolio',
     toggleTheme: 'Toggle theme',
     toggleLanguage: 'ES'
   }

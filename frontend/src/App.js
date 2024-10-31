@@ -10,6 +10,7 @@ import './styles/loading.css';
 // Lazy load components
 const Home = lazy(() => import('./components/Home'));
 const About = lazy(() => import('./components/About'));
+const Portfolio = lazy(() => import('./components/Portfolio'));
 
 // Loading component
 const LoadingFallback = () => {
@@ -62,7 +63,7 @@ function AppContent() {
 
     // Preload other components after initial load
     const preloadComponents = () => {
-      const componentsToPreload = ['./components/Projects', './components/Education', './components/Contact'];
+      const componentsToPreload = ['./components/Projects', './components/Education', './components/Contact', './components/Portfolio'];
       componentsToPreload.forEach(path => {
         const link = document.createElement('link');
         link.rel = 'prefetch';
@@ -107,6 +108,7 @@ function AppContent() {
             <Routes>
               <Route path="/" element={<Home projectsRef={projectsRef} />} />
               <Route path="/about" element={<About />} />
+              <Route path="/portfolio" element={<Portfolio />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
