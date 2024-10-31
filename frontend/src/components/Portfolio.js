@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { AppContext } from '../AppContext';
 import { ReactTyped } from 'react-typed';
+import { AppContext } from '../AppContext';
 import { portfolioTranslations } from '../data/portfolioTranslations';
 import cssQualityImage from '../images/portfolio/cssQuality.png';
 import '../styles/portfolio.css';
@@ -47,6 +47,14 @@ const Portfolio = () => {
     };
   }, []);
 
+  const renderPointsList = (points) => (
+    <ul className="points-list">
+      {points.map((point, index) => (
+        <li key={index}>{point}</li>
+      ))}
+    </ul>
+  );
+
   return (
     <div className="portfolio-section">
       <motion.h2
@@ -86,6 +94,30 @@ const Portfolio = () => {
               />
             </div>
           </div>
+        </section>
+
+        <section className="architecture">
+          <h3>{t.architectureTitle}</h3>
+          <p>{t.architectureDescription}</p>
+          {renderPointsList(t.architecturePoints)}
+        </section>
+
+        <section className="performance">
+          <h3>{t.performanceTitle}</h3>
+          <p>{t.performanceDescription}</p>
+          {renderPointsList(t.performancePoints)}
+        </section>
+
+        <section className="accessibility">
+          <h3>{t.accessibilityTitle}</h3>
+          <p>{t.accessibilityDescription}</p>
+          {renderPointsList(t.accessibilityPoints)}
+        </section>
+
+        <section className="seo">
+          <h3>{t.seoTitle}</h3>
+          <p>{t.seoDescription}</p>
+          {renderPointsList(t.seoPoints)}
         </section>
 
         <section className="tech-stack">

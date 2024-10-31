@@ -13,7 +13,7 @@
   background: linear-gradient(135deg, #3498db, #2ecc71);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   animation: fadeInText 1s ease-in-out;
 }
 
@@ -35,15 +35,16 @@
 }
 
 .portfolio-container section {
-  background: var(--card-background);
+  background: #ffffff;
   border-radius: 10px;
   padding: 2rem;
-  box-shadow: var(--card-shadow);
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 .portfolio-container section:hover {
   transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .css-metrics-title {
@@ -53,7 +54,7 @@
 }
 
 .css-metrics-title h3 {
-  color: var(--text-color);
+  color: #2c3e50;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
   position: relative;
@@ -67,12 +68,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: var(--primary-color);
+  background-color: #3498db;
   transition: width 0.3s ease;
 }
 
 .css-metrics-title:hover h3 {
-  color: var(--primary-color);
+  color: #3498db;
 }
 
 .css-metrics-title:hover h3::after {
@@ -80,15 +81,15 @@
 }
 
 .portfolio-container h3 {
-  color: var(--text-color);
+  color: #2c3e50;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
 }
 
-.metrics-content p {
-  margin-bottom: 2rem;
+.portfolio-container p {
+  margin-bottom: 1.5rem;
   line-height: 1.6;
-  color: var(--text-color);
+  color: #34495e;
   font-size: 1.1rem;
 }
 
@@ -113,6 +114,44 @@
   transform: scale(1.02);
 }
 
+.points-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.points-list li {
+  padding: 1.2rem;
+  background: #f5f6fa;
+  border-radius: 8px;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  border: 1px solid #e1e8ed;
+  display: flex;
+  align-items: center;
+}
+
+.points-list li::before {
+  content: '•';
+  color: #3498db;
+  font-size: 1.5em;
+  margin-right: 0.5rem;
+}
+
+.points-list li:hover {
+  transform: translateX(5px);
+  background: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+.points-list li:hover::before {
+  color: white;
+}
+
 .tech-details ul,
 .features-list ul {
   list-style: none;
@@ -125,24 +164,98 @@
 .tech-details li,
 .features-list li {
   padding: 1.2rem;
-  background: var(--hover-color);
+  background: #f5f6fa;
   border-radius: 8px;
   text-align: center;
-  color: var(--text-color);
+  color: #2c3e50;
   transition: all 0.3s ease;
   font-size: 1.1rem;
+  border: 1px solid #e1e8ed;
 }
 
 .tech-details li:hover,
 .features-list li:hover {
   transform: scale(1.05);
-  background: var(--primary-color);
+  background: #3498db;
   color: white;
+  border-color: #3498db;
 }
 
 /* Dark mode styles */
 .dark-mode .portfolio-title {
+  background: linear-gradient(135deg, #2EE59D, #25B47E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .portfolio-container section {
+  background: #1a1f2e;
+  border: 1px solid rgba(46, 229, 157, 0.1);
+}
+
+.dark-mode .portfolio-container section:hover {
+  border-color: rgba(46, 229, 157, 0.3);
+  box-shadow: 0 8px 16px rgba(46, 229, 157, 0.1);
+}
+
+.dark-mode .css-metrics-title h3 {
+  color: #2EE59D;
+}
+
+.dark-mode .css-metrics-title h3::after {
+  background-color: #2EE59D;
+}
+
+.dark-mode .css-metrics-title:hover h3 {
+  color: #25B47E;
+}
+
+.dark-mode .portfolio-container h3 {
+  color: #e0e0e0;
+}
+
+.dark-mode .portfolio-container p {
+  color: #e0e0e0;
+}
+
+.dark-mode .metrics-image {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(46, 229, 157, 0.2);
+}
+
+.dark-mode .points-list li {
+  background: rgba(46, 229, 157, 0.1);
+  color: #e0e0e0;
+  border-color: rgba(46, 229, 157, 0.2);
+}
+
+.dark-mode .points-list li::before {
+  color: #2EE59D;
+}
+
+.dark-mode .points-list li:hover {
+  background: #2EE59D;
+  color: #1a1f2e;
+  border-color: #2EE59D;
+}
+
+.dark-mode .points-list li:hover::before {
+  color: #1a1f2e;
+}
+
+.dark-mode .tech-details li,
+.dark-mode .features-list li {
+  background: rgba(46, 229, 157, 0.1);
+  color: #e0e0e0;
+  border-color: rgba(46, 229, 157, 0.2);
+}
+
+.dark-mode .tech-details li:hover,
+.dark-mode .features-list li:hover {
+  background: #2EE59D;
+  color: #1a1f2e;
+  border-color: #2EE59D;
 }
 
 @media (max-width: 768px) {
@@ -160,8 +273,16 @@
     font-size: 1.5rem;
   }
 
+  .portfolio-container p {
+    font-size: 1rem;
+  }
+
   .metrics-image {
     width: 95%;
+  }
+
+  .points-list {
+    grid-template-columns: 1fr;
   }
 
   .tech-details ul,
@@ -169,10 +290,7 @@
     grid-template-columns: 1fr;
   }
 
-  .metrics-content p {
-    font-size: 1rem;
-  }
-
+  .points-list li,
   .tech-details li,
   .features-list li {
     font-size: 1rem;
