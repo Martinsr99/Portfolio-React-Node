@@ -3,9 +3,9 @@
   "name": "Martin Siles - Software Engineer Portfolio",
   "icons": [
     {
-      "src": "logo.webp",
+      "src": "logo.jpg",
       "sizes": "512x512",
-      "type": "image/webp"
+      "type": "image/jpeg"
     }
   ],
   "start_url": ".",
