@@ -7,10 +7,27 @@ import Footer from './components/Footer';
 import './App.css';
 import './styles/loading.css';
 
-// Lazy load components
-const Home = lazy(() => import('./components/Home'));
-const About = lazy(() => import('./components/About'));
-const Portfolio = lazy(() => import('./components/Portfolio'));
+// Lazy load components with increased timeout
+const Home = lazy(() => Promise.race([
+  import('./components/Home'),
+  new Promise((_, reject) => 
+    setTimeout(() => reject(new Error('Timeout')), 10000)
+  )
+]));
+
+const About = lazy(() => Promise.race([
+  import('./components/About'),
+  new Promise((_, reject) => 
+    setTimeout(() => reject(new Error('Timeout')), 10000)
+  )
+]));
+
+const Portfolio = lazy(() => Promise.race([
+  import('./components/Portfolio'),
+  new Promise((_, reject) => 
+    setTimeout(() => reject(new Error('Timeout')), 10000)
+  )
+]));
 
 // Loading component
 const LoadingFallback = () => {

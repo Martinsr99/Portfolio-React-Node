@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AppContext } from '../AppContext';
@@ -7,11 +7,20 @@ import '../styles/home.css';
 import '../styles/buttons.css';
 import '../styles/education.css';
 import { homeTranslations } from '../data/homeTranslations';
-import Projects from './Projects';
-import Testimonials from './Testimonials';
-import Education from './Education';
-import Skills from './Skills';
 import CV from './CV';
+
+// Lazy load components
+const Projects = lazy(() => import('./Projects'));
+const Testimonials = lazy(() => import('./Testimonials'));
+const Education = lazy(() => import('./Education'));
+const Skills = lazy(() => import('./Skills'));
+
+// Loading component for lazy loaded sections
+const SectionLoading = () => (
+  <div className="section-loading">
+    <div className="loading-spinner"></div>
+  </div>
+);
 
 const Home = () => {
   const { language, darkMode } = useContext(AppContext);
@@ -48,6 +57,7 @@ const Home = () => {
             src={profileImage}
             alt={currentLanguageData.name} 
             className="profile-image"
+            loading="eager" // Carga prioritaria de la imagen de perfil
           />
           <h1 className="name">
             {currentLanguageData.name}
@@ -61,18 +71,27 @@ const Home = () => {
           <CV />
         </div>
 
-        <Skills />
+        <Suspense fallback={<SectionLoading />}>
+          <Skills />
+        </Suspense>
 
-        <Testimonials />
+        <Suspense fallback={<SectionLoading />}>
+          <Testimonials />
+        </Suspense>
 
-        <Education />
+        <Suspense fallback={<SectionLoading />}>
+          <Education />
+        </Suspense>
 
         <div id="projects" ref={projectsRef}>
-          <Projects />
+          <Suspense fallback={<SectionLoading />}>
+            <Projects />
+          </Suspense>
         </div>
       </motion.div>
     </div>
   );
 };
 
-export default Home;
+// Exportar con React.memo para evitar re-renders innecesarios
+export default React.memo(Home);
