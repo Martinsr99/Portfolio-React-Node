@@ -7,8 +7,6 @@ import { headerTranslations } from '../data/headerTranslations';
 const Header = () => {
   const { language, toggleLanguage, darkMode, toggleTheme } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const t = headerTranslations[language];
@@ -16,42 +14,19 @@ const Header = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY < lastScrollY) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
-
-  useEffect(() => {
     setIsOpen(false);
   }, [location]);
 
-  const scrollToTop = (event) => {
+  const handleHomeClick = (event) => {
     event.preventDefault();
     if (location.pathname !== '/') {
       navigate('/');
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     toggleMenu();
   };
 
   return (
-    <header className={`header ${visible ? 'visible' : 'hidden'} ${darkMode ? 'dark' : 'light'}`}>
+    <header className={`header ${darkMode ? 'dark' : 'light'}`}>
       <div className="menu-icon" onClick={toggleMenu}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </div>
@@ -60,11 +35,10 @@ const Header = () => {
         <nav className={`nav-menu ${isOpen ? 'show' : ''}`}>
           <ul>
             <li>
-              <Link to="/" onClick={scrollToTop}>
+              <Link to="/" onClick={handleHomeClick}>
                 {t.cv}
               </Link>
             </li>
-            <li><Link to="/#projects" onClick={toggleMenu}>{t.projects}</Link></li>
             <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
             <li><Link to="/portfolio" onClick={toggleMenu}>{t.portfolio}</Link></li>
           </ul>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, Suspense, lazy } from 'react';
+import React, { useContext, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AppProvider, AppContext } from './AppContext';
 import { PulseLoader } from 'react-spinners';
@@ -44,7 +44,6 @@ function ScrollToTop() {
 
 function AppContent() {
   const { isPending, darkMode } = useContext(AppContext);
-  const projectsRef = useRef(null);
 
   useEffect(() => {
     // Add a class to the body when language is changing
@@ -63,7 +62,7 @@ function AppContent() {
 
     // Preload other components after initial load
     const preloadComponents = () => {
-      const componentsToPreload = ['./components/Projects', './components/Education', './components/Contact', './components/Portfolio'];
+      const componentsToPreload = ['./components/Education', './components/Contact', './components/Portfolio'];
       componentsToPreload.forEach(path => {
         const link = document.createElement('link');
         link.rel = 'prefetch';
@@ -77,36 +76,19 @@ function AppContent() {
     return () => clearTimeout(timer);
   }, [isPending, darkMode]);
 
-  const scrollToProjects = () => {
-    projectsRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <Router>
-      <div 
-        className={`App app-container ${darkMode ? 'dark-mode' : ''}`} 
-        style={{ 
-          display: 'flex', 
-          flexDirection: 'column', 
-          minHeight: '100vh',
-          width: '100%',
-          maxWidth: '100vw',
-          overflowX: 'hidden'
-        }}
-      >
-        <Header scrollToProjects={scrollToProjects} />
+      <div className={`App app-container ${darkMode ? 'dark-mode' : ''}`}>
+        <Header />
         <ScrollToTop />
         <main style={{ 
           flex: 1, 
           transition: 'opacity var(--transition-speed) ease-in-out', 
-          opacity: isPending ? 0.5 : 1,
-          width: '100%',
-          maxWidth: '100vw',
-          overflowX: 'hidden'
+          opacity: isPending ? 0.5 : 1
         }}>
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
-              <Route path="/" element={<Home projectsRef={projectsRef} />} />
+              <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/portfolio" element={<Portfolio />} />
               <Route path="*" element={<Navigate to="/" replace />} />
