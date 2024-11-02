@@ -26,6 +26,7 @@ const Portfolio = () => {
   const titleRef = useRef(null);
 
   useEffect(() => {
+    const currentTitleRef = titleRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -36,13 +37,13 @@ const Portfolio = () => {
       { threshold: 0.1 }
     );
 
-    if (titleRef.current) {
-      observer.observe(titleRef.current);
+    if (currentTitleRef) {
+      observer.observe(currentTitleRef);
     }
 
     return () => {
-      if (titleRef.current) {
-        observer.unobserve(titleRef.current);
+      if (currentTitleRef) {
+        observer.unobserve(currentTitleRef);
       }
     };
   }, []);

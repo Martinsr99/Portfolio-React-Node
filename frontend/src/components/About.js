@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { AppContext } from '../AppContext';
 import Contact from './Contact';
 import SocialCards from './SocialCards';
@@ -29,6 +29,7 @@ const About = () => {
   const titleRef = useRef(null);
 
   useEffect(() => {
+    const currentTitleRef = titleRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -39,13 +40,13 @@ const About = () => {
       { threshold: 0.1 }
     );
 
-    if (titleRef.current) {
-      observer.observe(titleRef.current);
+    if (currentTitleRef) {
+      observer.observe(currentTitleRef);
     }
 
     return () => {
-      if (titleRef.current) {
-        observer.unobserve(titleRef.current);
+      if (currentTitleRef) {
+        observer.unobserve(currentTitleRef);
       }
     };
   }, []);

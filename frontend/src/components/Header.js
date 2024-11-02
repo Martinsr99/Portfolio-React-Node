@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { AppContext } from '../AppContext';
 import { FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
 import { headerTranslations } from '../data/headerTranslations';
@@ -60,7 +59,11 @@ const Header = () => {
       <div className="header-content">
         <nav className={`nav-menu ${isOpen ? 'show' : ''}`}>
           <ul>
-            <li><a href="#" onClick={scrollToTop}>{t.cv}</a></li>
+            <li>
+              <Link to="/" onClick={scrollToTop}>
+                {t.cv}
+              </Link>
+            </li>
             <li><Link to="/#projects" onClick={toggleMenu}>{t.projects}</Link></li>
             <li><Link to="/about" onClick={toggleMenu}>{t.about}</Link></li>
             <li><Link to="/portfolio" onClick={toggleMenu}>{t.portfolio}</Link></li>
@@ -82,7 +85,7 @@ const Header = () => {
             className="language-toggle"
             aria-label={t.toggleLanguage}
           >
-            {t.toggleLanguage}
+            {language === 'es' ? 'EN' : 'ES'}
           </button>
         </div>
       </div>

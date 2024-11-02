@@ -45,6 +45,7 @@ const Skills = () => {
   const currentLanguageData = homeTranslations[language];
 
   useEffect(() => {
+    const currentSkillsTitleRef = skillsTitleRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -55,13 +56,13 @@ const Skills = () => {
       { threshold: 0.1 }
     );
 
-    if (skillsTitleRef.current) {
-      observer.observe(skillsTitleRef.current);
+    if (currentSkillsTitleRef) {
+      observer.observe(currentSkillsTitleRef);
     }
 
     return () => {
-      if (skillsTitleRef.current) {
-        observer.unobserve(skillsTitleRef.current);
+      if (currentSkillsTitleRef) {
+        observer.unobserve(currentSkillsTitleRef);
       }
     };
   }, []);

@@ -9,8 +9,12 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.jpg" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
+    <!-- Preload critical resources -->
+    <link rel="preload" href="%PUBLIC_URL%/logo.jpg" as="image" />
+    <link rel="preload" href="%PUBLIC_URL%/manifest.json" as="fetch" crossorigin />
+    
     <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Preload critical fonts -->

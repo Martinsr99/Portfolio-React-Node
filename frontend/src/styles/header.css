@@ -55,12 +55,20 @@
   align-items: center;
 }
 
+.nav-menu ul li {
+  display: flex;
+  align-items: center;
+}
+
 .nav-menu ul li a {
   text-decoration: none;
   font-weight: bold;
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
   white-space: nowrap;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .light .nav-menu ul li a {
@@ -93,7 +101,6 @@
 }
 
 .theme-toggle, .language-toggle {
-  background: none;
   border: none;
   font-size: 1.2rem;
   cursor: pointer;
@@ -102,26 +109,26 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   padding: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+  background: transparent;
 }
 
 .light .theme-toggle, .light .language-toggle {
   color: var(--text-color-dark);
-  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .dark .theme-toggle, .dark .language-toggle {
   color: var(--text-color-light);
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .theme-toggle:hover, .language-toggle:hover {
   transform: scale(1.1);
+  color: var(--secondary-color);
 }
 
 .language-toggle {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
 }
 

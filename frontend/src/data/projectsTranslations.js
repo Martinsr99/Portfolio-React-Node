@@ -2,13 +2,13 @@ export const projectsTranslations = {
   es: {
     title: "Proyectos",
     viewMore: "Ver Más",
-    workExperience: "Experiencia Laboral",
+    workExperienceTitle: "Experiencia Laboral",
     personalProjects: "Proyectos Personales",
     currently: "Actualmente",
     webServices: "Servicios Web",
     martinsilesDescription: "Ofrezco servicios de creación web para negocios locales, ayudándoles a establecer una presencia en línea efectiva y atractiva.",
     visitSite: "Visitar Sitio",
-    workExperience: [
+    workExperiences: [
       {
         id: 1,
         company: 'Raw iGaming',
@@ -46,13 +46,13 @@ export const projectsTranslations = {
   en: {
     title: "Projects",
     viewMore: "View More",
-    workExperience: "Work Experience",
+    workExperienceTitle: "Work Experience",
     personalProjects: "Personal Projects",
     currently: "Currently",
     webServices: "Web Services",
     martinsilesDescription: "I offer web creation services for local businesses, helping them establish an effective and attractive online presence.",
     visitSite: "Visit Site",
-    workExperience: [
+    workExperiences: [
       {
         id: 1,
         company: 'Raw iGaming',

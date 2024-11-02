@@ -9,13 +9,14 @@ import '../styles/education.css';
 import '../styles/buttons.css';
 
 const Education = () => {
-  const { language, darkMode, selectedCert, setSelectedCert } = useContext(AppContext);
+  const { language, darkMode, selectedCert } = useContext(AppContext);
   const [activeTab, setActiveTab] = useState('certifications');
   const [isTitleVisible, setIsTitleVisible] = useState(false);
   const titleRef = useRef(null);
   const t = educationTranslations[language];
 
   useEffect(() => {
+    const currentTitleRef = titleRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,24 +27,16 @@ const Education = () => {
       { threshold: 0.1 }
     );
 
-    if (titleRef.current) {
-      observer.observe(titleRef.current);
+    if (currentTitleRef) {
+      observer.observe(currentTitleRef);
     }
 
     return () => {
-      if (titleRef.current) {
-        observer.unobserve(titleRef.current);
+      if (currentTitleRef) {
+        observer.unobserve(currentTitleRef);
       }
     };
   }, []);
-
-  const handleCertSelect = useCallback((cert) => {
-    setSelectedCert(cert);
-  }, [setSelectedCert]);
-
-  const handleCertDeselect = useCallback(() => {
-    setSelectedCert(null);
-  }, [setSelectedCert]);
 
   const handleCertificateClick = useCallback((event, pdfUrl) => {
     event.preventDefault();
@@ -54,7 +47,7 @@ const Education = () => {
     return [...certificationsData].sort((a, b) => {
       return new Date(b.date) - new Date(a.date);
     });
-  }, [certificationsData]);
+  }, []); // certificationsData is static, so no need to include it in dependencies
 
   const timelineData = activeTab === 'certifications' ? sortedCertificationsData : educationData;
 

@@ -28,6 +28,8 @@ const Projects = () => {
   const [isPersonalProjectsTitleVisible, setIsPersonalProjectsTitleVisible] = useState(false);
 
   useEffect(() => {
+    const currentWorkExperienceRef = workExperienceTitleRef.current;
+    const currentPersonalProjectsRef = personalProjectsTitleRef.current;
     const observerOptions = {
       threshold: 0.1
     };
@@ -35,9 +37,9 @@ const Projects = () => {
     const observerCallback = (entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          if (entry.target === workExperienceTitleRef.current) {
+          if (entry.target === currentWorkExperienceRef) {
             setIsWorkExperienceTitleVisible(true);
-          } else if (entry.target === personalProjectsTitleRef.current) {
+          } else if (entry.target === currentPersonalProjectsRef) {
             setIsPersonalProjectsTitleVisible(true);
           }
           observer.unobserve(entry.target);
@@ -47,26 +49,23 @@ const Projects = () => {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    if (workExperienceTitleRef.current) {
-      observer.observe(workExperienceTitleRef.current);
+    if (currentWorkExperienceRef) {
+      observer.observe(currentWorkExperienceRef);
     }
 
-    if (personalProjectsTitleRef.current) {
-      observer.observe(personalProjectsTitleRef.current);
+    if (currentPersonalProjectsRef) {
+      observer.observe(currentPersonalProjectsRef);
     }
 
     return () => {
-      if (workExperienceTitleRef.current) {
-        observer.unobserve(workExperienceTitleRef.current);
+      if (currentWorkExperienceRef) {
+        observer.unobserve(currentWorkExperienceRef);
       }
-      if (personalProjectsTitleRef.current) {
-        observer.unobserve(personalProjectsTitleRef.current);
+      if (currentPersonalProjectsRef) {
+        observer.unobserve(currentPersonalProjectsRef);
       }
     };
   }, []);
-
-  const workExperienceTitle = language === 'en' ? "Work Experience" : "Experiencia Laboral";
-  const personalProjectsTitle = language === 'en' ? "Personal Projects" : "Proyectos Personales";
 
   return (
     <motion.div
@@ -87,7 +86,7 @@ const Projects = () => {
         >
           {isWorkExperienceTitleVisible && (
             <Typed
-              strings={[workExperienceTitle]}
+              strings={[t.workExperienceTitle]}
               typeSpeed={50}
               backSpeed={30}
               loop={false}
@@ -96,7 +95,7 @@ const Projects = () => {
         </motion.h2>
 
         <div className="timeline">
-          {t.workExperience.map((job, index) => (
+          {t.workExperiences.map((job, index) => (
             <motion.div
               key={job.id}
               className={`timeline-item ${index % 2 === 0 ? 'left' : 'right'}`}
@@ -138,7 +137,7 @@ const Projects = () => {
         >
           {isPersonalProjectsTitleVisible && (
             <Typed
-              strings={[personalProjectsTitle]}
+              strings={[t.personalProjects]}
               typeSpeed={50}
               backSpeed={30}
               loop={false}
