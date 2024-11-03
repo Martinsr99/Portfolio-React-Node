@@ -1,47 +1,16 @@
-import React, { useContext, useEffect, Suspense, lazy } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import { AppProvider, AppContext } from './AppContext';
 import { PulseLoader } from 'react-spinners';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Home from './components/Home';
+import About from './components/About';
+import Portfolio from './components/Portfolio';
+import Contact from './components/Contact';
+import Education from './components/Education';
 import './App.css';
 import './styles/loading.css';
-
-// Lazy load components with increased timeout
-const Home = lazy(() => Promise.race([
-  import('./components/Home'),
-  new Promise((_, reject) => 
-    setTimeout(() => reject(new Error('Timeout')), 10000)
-  )
-]));
-
-const About = lazy(() => Promise.race([
-  import('./components/About'),
-  new Promise((_, reject) => 
-    setTimeout(() => reject(new Error('Timeout')), 10000)
-  )
-]));
-
-const Portfolio = lazy(() => Promise.race([
-  import('./components/Portfolio'),
-  new Promise((_, reject) => 
-    setTimeout(() => reject(new Error('Timeout')), 10000)
-  )
-]));
-
-const Contact = lazy(() => Promise.race([
-  import('./components/Contact'),
-  new Promise((_, reject) => 
-    setTimeout(() => reject(new Error('Timeout')), 10000)
-  )
-]));
-
-const Education = lazy(() => Promise.race([
-  import('./components/Education'),
-  new Promise((_, reject) => 
-    setTimeout(() => reject(new Error('Timeout')), 10000)
-  )
-]));
 
 // Loading component
 const LoadingFallback = () => {
@@ -102,16 +71,14 @@ function AppContent() {
           transition: 'opacity var(--transition-speed) ease-in-out', 
           opacity: isPending ? 0.5 : 1
         }}>
-          <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/education" element={<Education />} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Suspense>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </main>
         <Footer />
       </div>
