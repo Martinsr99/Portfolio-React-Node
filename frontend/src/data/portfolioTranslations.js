@@ -7,11 +7,89 @@ export const portfolioTranslations = {
     architectureTitle: 'Arquitectura',
     architectureDescription: 'El portfolio está construido siguiendo una arquitectura modular y escalable:',
     architecturePoints: [
-      'Componentes React reutilizables y modulares',
-      'Gestión de estado global con Context API',
-      'Sistema de rutas con React Router',
-      'Lazy loading para optimización de carga',
-      'Sistema de traducciones modular'
+      {
+        text: 'Componentes React reutilizables y modulares',
+        code: `// Ejemplo de componente modular
+const FeatureCard = ({ title, description, icon }) => {
+  return (
+    <div className="feature-card">
+      <div className="icon">{icon}</div>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  );
+};
+
+// Uso del componente
+<FeatureCard
+  title="Título"
+  description="Descripción"
+  icon={<Icon />}
+/>`
+      },
+      {
+        text: 'Gestión de estado global con Context API',
+        code: `// Creación del contexto
+export const AppContext = createContext();
+
+export const AppProvider = ({ children }) => {
+  const [language, setLanguage] = useState('es');
+  const [darkMode, setDarkMode] = useState(true);
+  
+  return (
+    <AppContext.Provider value={{ 
+      language, 
+      darkMode, 
+      toggleTheme 
+    }}>
+      {children}
+    </AppContext.Provider>
+  );
+};`
+      },
+      {
+        text: 'Sistema de rutas con React Router',
+        code: `// Configuración de rutas
+<Router>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/portfolio" element={<Portfolio />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/education" element={<Education />} />
+  </Routes>
+</Router>`
+      },
+      {
+        text: 'Lazy loading para optimización de carga',
+        code: `// Implementación de lazy loading
+const About = React.lazy(() => import('./components/About'));
+const Portfolio = React.lazy(() => import('./components/Portfolio'));
+
+// Uso con Suspense
+<Suspense fallback={<LoadingSpinner />}>
+  <About />
+</Suspense>`
+      },
+      {
+        text: 'Sistema de traducciones modular',
+        code: `// Sistema de traducciones
+const translations = {
+  es: {
+    welcome: 'Bienvenido',
+    about: 'Sobre mí'
+  },
+  en: {
+    welcome: 'Welcome',
+    about: 'About me'
+  }
+};
+
+// Uso en componentes
+const { language } = useContext(AppContext);
+const t = translations[language];
+<h1>{t.welcome}</h1>`
+      }
     ],
     performanceTitle: 'Rendimiento',
     performanceDescription: 'Optimizado para una experiencia de usuario fluida:',
@@ -45,7 +123,9 @@ export const portfolioTranslations = {
     featureMultilingual: 'Sistema de internacionalización completo (Español/Inglés)',
     featureDarkMode: 'Tema claro/oscuro con persistencia de preferencias',
     featureAnimations: 'Animaciones y transiciones optimizadas para rendimiento',
-    featurePerformance: 'Optimización avanzada de carga y rendimiento'
+    featurePerformance: 'Optimización avanzada de carga y rendimiento',
+    showCodeButton: 'Mostrar Código',
+    hideCodeButton: 'Ocultar Código'
   },
   en: {
     title: 'Portfolio Creation',
@@ -55,11 +135,89 @@ export const portfolioTranslations = {
     architectureTitle: 'Architecture',
     architectureDescription: 'The portfolio is built following a modular and scalable architecture:',
     architecturePoints: [
-      'Reusable and modular React components',
-      'Global state management with Context API',
-      'Routing system with React Router',
-      'Lazy loading for load optimization',
-      'Modular translation system'
+      {
+        text: 'Reusable and modular React components',
+        code: `// Example of a modular component
+const FeatureCard = ({ title, description, icon }) => {
+  return (
+    <div className="feature-card">
+      <div className="icon">{icon}</div>
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  );
+};
+
+// Component usage
+<FeatureCard
+  title="Title"
+  description="Description"
+  icon={<Icon />}
+/>`
+      },
+      {
+        text: 'Global state management with Context API',
+        code: `// Context creation
+export const AppContext = createContext();
+
+export const AppProvider = ({ children }) => {
+  const [language, setLanguage] = useState('en');
+  const [darkMode, setDarkMode] = useState(true);
+  
+  return (
+    <AppContext.Provider value={{ 
+      language, 
+      darkMode, 
+      toggleTheme 
+    }}>
+      {children}
+    </AppContext.Provider>
+  );
+};`
+      },
+      {
+        text: 'Routing system with React Router',
+        code: `// Routes configuration
+<Router>
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/portfolio" element={<Portfolio />} />
+    <Route path="/contact" element={<Contact />} />
+    <Route path="/education" element={<Education />} />
+  </Routes>
+</Router>`
+      },
+      {
+        text: 'Lazy loading for load optimization',
+        code: `// Lazy loading implementation
+const About = React.lazy(() => import('./components/About'));
+const Portfolio = React.lazy(() => import('./components/Portfolio'));
+
+// Usage with Suspense
+<Suspense fallback={<LoadingSpinner />}>
+  <About />
+</Suspense>`
+      },
+      {
+        text: 'Modular translation system',
+        code: `// Translation system
+const translations = {
+  es: {
+    welcome: 'Bienvenido',
+    about: 'Sobre mí'
+  },
+  en: {
+    welcome: 'Welcome',
+    about: 'About me'
+  }
+};
+
+// Usage in components
+const { language } = useContext(AppContext);
+const t = translations[language];
+<h1>{t.welcome}</h1>`
+      }
     ],
     performanceTitle: 'Performance',
     performanceDescription: 'Optimized for a smooth user experience:',
@@ -93,6 +251,8 @@ export const portfolioTranslations = {
     featureMultilingual: 'Complete internationalization system (Spanish/English)',
     featureDarkMode: 'Light/dark theme with preference persistence',
     featureAnimations: 'Performance-optimized animations and transitions',
-    featurePerformance: 'Advanced loading and performance optimization'
+    featurePerformance: 'Advanced loading and performance optimization',
+    showCodeButton: 'Show Code',
+    hideCodeButton: 'Hide Code'
   }
 };

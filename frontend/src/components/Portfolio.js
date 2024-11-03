@@ -4,6 +4,8 @@ import { ReactTyped } from 'react-typed';
 import { AppContext } from '../AppContext';
 import { portfolioTranslations } from '../data/portfolioTranslations';
 import cssQualityImage from '../images/portfolio/cssQuality.png';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import '../styles/portfolio.css';
 
 const titleVariants = {
@@ -23,6 +25,7 @@ const Portfolio = () => {
   const { language, darkMode } = useContext(AppContext);
   const t = portfolioTranslations[language];
   const [isTitleVisible, setIsTitleVisible] = useState(false);
+  const [visibleCode, setVisibleCode] = useState({});
   const titleRef = useRef(null);
 
   useEffect(() => {
@@ -48,10 +51,48 @@ const Portfolio = () => {
     };
   }, []);
 
+  const toggleCode = (index) => {
+    setVisibleCode(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
   const renderPointsList = (points) => (
     <ul className="points-list">
       {points.map((point, index) => (
         <li key={index}>{point}</li>
+      ))}
+    </ul>
+  );
+
+  const renderArchitecturePoints = () => (
+    <ul className="points-list">
+      {t.architecturePoints.map((point, index) => (
+        <li key={index} className="architecture-point">
+          <div className="point-content">
+            <span>{point.text}</span>
+            <button 
+              className="code-toggle-btn"
+              onClick={() => toggleCode(index)}
+            >
+              {visibleCode[index] ? t.hideCodeButton : t.showCodeButton}
+            </button>
+          </div>
+          {visibleCode[index] && (
+            <div className="code-section">
+              <SyntaxHighlighter
+                language="javascript"
+                style={vscDarkPlus}
+                className="code-block"
+                wrapLines={true}
+                showLineNumbers={true}
+              >
+                {point.code}
+              </SyntaxHighlighter>
+            </div>
+          )}
+        </li>
       ))}
     </ul>
   );
@@ -101,7 +142,7 @@ const Portfolio = () => {
           <section className="architecture">
             <h3>{t.architectureTitle}</h3>
             <p>{t.architectureDescription}</p>
-            {renderPointsList(t.architecturePoints)}
+            {renderArchitecturePoints()}
           </section>
 
           <section className="performance">
