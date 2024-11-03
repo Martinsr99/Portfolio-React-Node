@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Swal from 'sweetalert2';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -29,6 +29,11 @@ const Contact = () => {
   const titleRef = useRef(null);
   const recaptchaRef = useRef(null);
   const isInView = useInView(titleRef, { once: true });
+
+  useEffect(() => {
+    // Initialize emailjs
+    emailjs.init(EMAILJS_CONFIG.USER_ID);
+  }, []);
 
   const showLoadingModal = () => {
     return Swal.fire({
@@ -92,12 +97,17 @@ const Contact = () => {
     const loadingModal = showLoadingModal();
 
     try {
-      await emailjs.send(
-        EMAILJS_CONFIG.SERVICE_ID,
-        EMAILJS_CONFIG.TEMPLATE_ID,
-        { name, email, message },
-        EMAILJS_CONFIG.USER_ID
-      );
+      const response = await Promise.race([
+        emailjs.send(
+          EMAILJS_CONFIG.SERVICE_ID,
+          EMAILJS_CONFIG.TEMPLATE_ID,
+          { name, email, message },
+          EMAILJS_CONFIG.USER_ID
+        ),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Timeout')), 30000)
+        )
+      ]);
 
       loadingModal.close();
       await showSuccessModal();
@@ -112,7 +122,7 @@ const Contact = () => {
     } catch (error) {
       console.error('Error:', error);
       loadingModal.close();
-      showErrorModal(t.errorOccurred);
+      showErrorModal(error.message === 'Timeout' ? t.timeoutError : t.errorOccurred);
     }
   };
 

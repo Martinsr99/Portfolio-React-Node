@@ -5,6 +5,9 @@ const path = require('path');
 module.exports = {
   webpack: {
     configure: (webpackConfig, { env, paths }) => {
+      // Add source-map for better debugging
+      webpackConfig.devtool = 'source-map';
+
       // Only add these optimizations in production
       if (env === 'production') {
         // Enable gzip compression

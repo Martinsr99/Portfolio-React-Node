@@ -29,6 +29,20 @@ const Portfolio = lazy(() => Promise.race([
   )
 ]));
 
+const Contact = lazy(() => Promise.race([
+  import('./components/Contact'),
+  new Promise((_, reject) => 
+    setTimeout(() => reject(new Error('Timeout')), 10000)
+  )
+]));
+
+const Education = lazy(() => Promise.race([
+  import('./components/Education'),
+  new Promise((_, reject) => 
+    setTimeout(() => reject(new Error('Timeout')), 10000)
+  )
+]));
+
 // Loading component
 const LoadingFallback = () => {
   const { darkMode } = useContext(AppContext);
@@ -76,21 +90,6 @@ function AppContent() {
     } else {
       document.body.classList.remove('dark-mode');
     }
-
-    // Preload other components after initial load
-    const preloadComponents = () => {
-      const componentsToPreload = ['./components/Education', './components/Contact', './components/Portfolio'];
-      componentsToPreload.forEach(path => {
-        const link = document.createElement('link');
-        link.rel = 'prefetch';
-        link.href = path;
-        document.head.appendChild(link);
-      });
-    };
-
-    // Preload after a short delay to not block initial render
-    const timer = setTimeout(preloadComponents, 2000);
-    return () => clearTimeout(timer);
   }, [isPending, darkMode]);
 
   return (
@@ -108,6 +107,8 @@ function AppContent() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/education" element={<Education />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>

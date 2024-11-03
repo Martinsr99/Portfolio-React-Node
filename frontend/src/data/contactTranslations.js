@@ -14,7 +14,8 @@ export const contactTranslations = {
     errorOccurred: "Ocurrió un error. Por favor, inténtalo más tarde.",
     captcha: "Por favor, resuelve este captcha simple",
     captchaPlaceholder: "Resultado del captcha",
-    captchaInvalid: "Captcha inválido. Por favor, inténtalo de nuevo."
+    captchaInvalid: "Captcha inválido. Por favor, inténtalo de nuevo.",
+    timeoutError: "La operación ha tardado demasiado. Por favor, inténtalo de nuevo."
   },
   en: {
     getInTouch: "Get in Touch",
@@ -31,6 +32,7 @@ export const contactTranslations = {
     errorOccurred: "An error occurred. Please try again later.",
     captcha: "Please solve this simple captcha",
     captchaPlaceholder: "Captcha result",
-    captchaInvalid: "Invalid captcha. Please try again."
+    captchaInvalid: "Invalid captcha. Please try again.",
+    timeoutError: "The operation took too long. Please try again."
   }
 };
