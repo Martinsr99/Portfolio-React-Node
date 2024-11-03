@@ -416,7 +416,7 @@
 }
 
 .linkedin-section {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/bannerLinkedin.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/bannerLinkedin.jpg');
   background-size: cover;
   background-position: center;
 }
@@ -433,7 +433,7 @@
 }
 
 .github-section {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/github.webp');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/github.jpg');
   background-size: cover;
   background-position: center;
 }
