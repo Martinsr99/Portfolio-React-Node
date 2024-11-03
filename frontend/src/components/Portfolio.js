@@ -20,7 +20,7 @@ const titleVariants = {
 };
 
 const Portfolio = () => {
-  const { language } = useContext(AppContext);
+  const { language, darkMode } = useContext(AppContext);
   const t = portfolioTranslations[language];
   const [isTitleVisible, setIsTitleVisible] = useState(false);
   const titleRef = useRef(null);
@@ -57,95 +57,97 @@ const Portfolio = () => {
   );
 
   return (
-    <div className="portfolio-section">
-      <motion.h2
-        ref={titleRef}
-        className="portfolio-title gradient-text"
-        variants={titleVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {isTitleVisible && (
-          <ReactTyped
-            strings={[t.title]}
-            typeSpeed={50}
-            backSpeed={30}
-            loop={false}
-          />
-        )}
-      </motion.h2>
-      
-      <div className="portfolio-container">
-        <section className="css-metrics">
-          <a 
-            href="https://www.projectwallace.com/css-code-quality?url=martinsiles.es&prettify=1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="css-metrics-title"
-          >
-            <h3>{t.cssMetricsTitle}</h3>
-          </a>
-          <div className="metrics-content">
-            <p>{t.cssMetricsDescription}</p>
-            <div className="metrics-image">
-              <img 
-                src={cssQualityImage} 
-                alt="CSS Quality Metrics" 
-                className="quality-image"
-              />
+    <div className={`portfolio-section ${darkMode ? 'dark-mode' : ''}`}>
+      <div className="portfolio-content">
+        <motion.h2
+          ref={titleRef}
+          className="portfolio-title gradient-text"
+          variants={titleVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {isTitleVisible && (
+            <ReactTyped
+              strings={[t.title]}
+              typeSpeed={50}
+              backSpeed={30}
+              loop={false}
+            />
+          )}
+        </motion.h2>
+        
+        <div className="portfolio-container">
+          <section className="css-metrics">
+            <a 
+              href="https://www.projectwallace.com/css-code-quality?url=martinsiles.es&prettify=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="css-metrics-title"
+            >
+              <h3>{t.cssMetricsTitle}</h3>
+            </a>
+            <div className="metrics-content">
+              <p>{t.cssMetricsDescription}</p>
+              <div className="metrics-image">
+                <img 
+                  src={cssQualityImage} 
+                  alt="CSS Quality Metrics" 
+                  className="quality-image"
+                />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section className="architecture">
-          <h3>{t.architectureTitle}</h3>
-          <p>{t.architectureDescription}</p>
-          {renderPointsList(t.architecturePoints)}
-        </section>
+          <section className="architecture">
+            <h3>{t.architectureTitle}</h3>
+            <p>{t.architectureDescription}</p>
+            {renderPointsList(t.architecturePoints)}
+          </section>
 
-        <section className="performance">
-          <h3>{t.performanceTitle}</h3>
-          <p>{t.performanceDescription}</p>
-          {renderPointsList(t.performancePoints)}
-        </section>
+          <section className="performance">
+            <h3>{t.performanceTitle}</h3>
+            <p>{t.performanceDescription}</p>
+            {renderPointsList(t.performancePoints)}
+          </section>
 
-        <section className="accessibility">
-          <h3>{t.accessibilityTitle}</h3>
-          <p>{t.accessibilityDescription}</p>
-          {renderPointsList(t.accessibilityPoints)}
-        </section>
+          <section className="accessibility">
+            <h3>{t.accessibilityTitle}</h3>
+            <p>{t.accessibilityDescription}</p>
+            {renderPointsList(t.accessibilityPoints)}
+          </section>
 
-        <section className="seo">
-          <h3>{t.seoTitle}</h3>
-          <p>{t.seoDescription}</p>
-          {renderPointsList(t.seoPoints)}
-        </section>
+          <section className="seo">
+            <h3>{t.seoTitle}</h3>
+            <p>{t.seoDescription}</p>
+            {renderPointsList(t.seoPoints)}
+          </section>
 
-        <section className="tech-stack">
-          <h3>{t.techStackTitle}</h3>
-          <div className="tech-details">
-            <ul>
-              <li>React.js</li>
-              <li>React Router</li>
-              <li>Framer Motion</li>
-              <li>CSS3</li>
-              <li>Context API</li>
-            </ul>
-          </div>
-        </section>
+          <section className="tech-stack">
+            <h3>{t.techStackTitle}</h3>
+            <div className="tech-details">
+              <ul>
+                <li>React.js</li>
+                <li>React Router</li>
+                <li>Framer Motion</li>
+                <li>CSS3</li>
+                <li>Context API</li>
+              </ul>
+            </div>
+          </section>
 
-        <section className="features">
-          <h3>{t.featuresTitle}</h3>
-          <div className="features-list">
-            <ul>
-              <li>{t.featureResponsive}</li>
-              <li>{t.featureMultilingual}</li>
-              <li>{t.featureDarkMode}</li>
-              <li>{t.featureAnimations}</li>
-              <li>{t.featurePerformance}</li>
-            </ul>
-          </div>
-        </section>
+          <section className="features">
+            <h3>{t.featuresTitle}</h3>
+            <div className="features-list">
+              <ul>
+                <li>{t.featureResponsive}</li>
+                <li>{t.featureMultilingual}</li>
+                <li>{t.featureDarkMode}</li>
+                <li>{t.featureAnimations}</li>
+                <li>{t.featurePerformance}</li>
+              </ul>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );

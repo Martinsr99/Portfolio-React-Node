@@ -7,6 +7,8 @@ import { headerTranslations } from '../data/headerTranslations';
 const Header = () => {
   const { language, toggleLanguage, darkMode, toggleTheme } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const t = headerTranslations[language];
@@ -17,6 +19,25 @@ const Header = () => {
     setIsOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < lastScrollY || currentScrollY < 70) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 70) {
+        setIsVisible(false);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
+
   const handleHomeClick = (event) => {
     event.preventDefault();
     if (location.pathname !== '/') {
@@ -26,7 +47,7 @@ const Header = () => {
   };
 
   return (
-    <header className={`header ${darkMode ? 'dark' : 'light'}`}>
+    <header className={`header ${darkMode ? 'dark' : 'light'} ${isVisible ? '' : 'hidden'}`}>
       <div className="menu-icon" onClick={toggleMenu}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </div>

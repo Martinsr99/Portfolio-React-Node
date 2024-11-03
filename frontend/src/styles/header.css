@@ -9,6 +9,11 @@
   height: 70px;
   display: flex;
   align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.header.hidden {
+  transform: translateY(-100%);
 }
 
 .header.light {

@@ -1,7 +1,17 @@
 .portfolio-section {
-  padding: 2rem;
+  width: 100%;
+  min-height: auto;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f0f4f8 0%, #d0e2f3 50%, #b0d0e8 100%);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.portfolio-section > * {
   max-width: 1200px;
-  margin: 6rem auto 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .portfolio-title {
@@ -182,6 +192,12 @@
 }
 
 /* Dark mode styles */
+.dark-mode .portfolio-section {
+  background: rgb(26, 26, 26);
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
 .dark-mode .portfolio-title {
   background: linear-gradient(135deg, #2EE59D, #25B47E);
   -webkit-background-clip: text;
@@ -260,8 +276,7 @@
 
 @media (max-width: 768px) {
   .portfolio-section {
-    padding: 1rem;
-    margin-top: 4rem;
+    padding: 6rem 1rem 2rem 1rem;
   }
 
   .portfolio-title {
