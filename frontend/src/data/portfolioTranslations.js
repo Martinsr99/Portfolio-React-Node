@@ -96,11 +96,62 @@ const t = translations[language];
     performanceTitle: 'Rendimiento',
     performanceDescription: 'Optimizado para una experiencia de usuario fluida:',
     performancePoints: [
-      'Carga diferida de componentes y recursos',
-      'Optimización de imágenes y assets',
-      'Minimización de re-renders',
-      'Caché y persistencia de datos',
-      'Animaciones optimizadas para rendimiento'
+      {
+        text: 'Lazy loading con Intersection Observer',
+        code: `// Implementación de Intersection Observer para carga perezosa
+useEffect(() => {
+  const currentTitleRef = titleRef.current;
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setIsTitleVisible(true);
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.1 }
+  );
+
+  if (currentTitleRef) {
+    observer.observe(currentTitleRef);
+  }
+
+  return () => {
+    if (currentTitleRef) {
+      observer.unobserve(currentTitleRef);
+    }
+  };
+}, []);`
+      },
+      {
+        text: 'Optimización de animaciones con Framer Motion',
+        code: `// Animaciones optimizadas usando Framer Motion
+<motion.div 
+  className="code-wrapper"
+  initial={{ opacity: 0, height: 0 }}
+  animate={{ opacity: 1, height: "auto" }}
+  exit={{ opacity: 0, height: 0 }}
+  transition={{ duration: 0.3 }}
+>
+  {/* Contenido animado */}
+</motion.div>`
+      },
+      {
+        text: 'Gestión eficiente de estado',
+        code: `// Optimización de actualizaciones de estado
+const toggleCode = (index) => {
+  setVisibleCode(prev => {
+    const newState = { ...prev };
+    // Cerrar otros códigos abiertos para mejorar rendimiento
+    Object.keys(newState).forEach(key => {
+      if (key !== index.toString()) {
+        newState[key] = false;
+      }
+    });
+    newState[index] = !prev[index];
+    return newState;
+  });
+};`
+      }
     ],
     accessibilityTitle: 'Accesibilidad',
     accessibilityDescription: 'Diseñado pensando en la accesibilidad:',
@@ -226,11 +277,62 @@ const t = translations[language];
     performanceTitle: 'Performance',
     performanceDescription: 'Optimized for a smooth user experience:',
     performancePoints: [
-      'Deferred loading of components and resources',
-      'Image and asset optimization',
-      'Re-renders minimization',
-      'Data caching and persistence',
-      'Performance-optimized animations'
+      {
+        text: 'Lazy loading with Intersection Observer',
+        code: `// Implementation of Intersection Observer for lazy loading
+useEffect(() => {
+  const currentTitleRef = titleRef.current;
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setIsTitleVisible(true);
+        observer.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.1 }
+  );
+
+  if (currentTitleRef) {
+    observer.observe(currentTitleRef);
+  }
+
+  return () => {
+    if (currentTitleRef) {
+      observer.unobserve(currentTitleRef);
+    }
+  };
+}, []);`
+      },
+      {
+        text: 'Animation optimization with Framer Motion',
+        code: `// Optimized animations using Framer Motion
+<motion.div 
+  className="code-wrapper"
+  initial={{ opacity: 0, height: 0 }}
+  animate={{ opacity: 1, height: "auto" }}
+  exit={{ opacity: 0, height: 0 }}
+  transition={{ duration: 0.3 }}
+>
+  {/* Animated content */}
+</motion.div>`
+      },
+      {
+        text: 'Efficient state management',
+        code: `// State update optimization
+const toggleCode = (index) => {
+  setVisibleCode(prev => {
+    const newState = { ...prev };
+    // Close other open codes to improve performance
+    Object.keys(newState).forEach(key => {
+      if (key !== index.toString()) {
+        newState[key] = false;
+      }
+    });
+    newState[index] = !prev[index];
+    return newState;
+  });
+};`
+      }
     ],
     accessibilityTitle: 'Accessibility',
     accessibilityDescription: 'Designed with accessibility in mind:',

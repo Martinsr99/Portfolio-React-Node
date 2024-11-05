@@ -51,15 +51,15 @@ const Portfolio = () => {
     };
   }, []);
 
-  const toggleCode = (index) => {
+  const toggleCode = (index, section) => {
     setVisibleCode(prev => {
       const newState = { ...prev };
       Object.keys(newState).forEach(key => {
-        if (key !== index.toString()) {
+        if (key !== `${section}-${index}`) {
           newState[key] = false;
         }
       });
-      newState[index] = !prev[index];
+      newState[`${section}-${index}`] = !prev[`${section}-${index}`];
       return newState;
     });
   };
@@ -72,12 +72,12 @@ const Portfolio = () => {
     </ul>
   );
 
-  const renderArchitectureCards = () => (
+  const renderCodeCards = (points, section) => (
     <div className="architecture-grid">
-      {t.architecturePoints.map((point, index) => (
+      {points.map((point, index) => (
         <motion.div 
           key={index} 
-          className={`architecture-item ${visibleCode[index] ? 'expanded' : ''}`}
+          className={`architecture-item ${visibleCode[`${section}-${index}`] ? 'expanded' : ''}`}
           layout
           transition={{ duration: 0.3 }}
         >
@@ -85,13 +85,13 @@ const Portfolio = () => {
             <h3>{point.text}</h3>
             <button 
               className="code-toggle-btn"
-              onClick={() => toggleCode(index)}
+              onClick={() => toggleCode(index, section)}
             >
-              {visibleCode[index] ? t.hideCodeButton : t.showCodeButton}
+              {visibleCode[`${section}-${index}`] ? t.hideCodeButton : t.showCodeButton}
             </button>
           </div>
           <AnimatePresence>
-            {visibleCode[index] && (
+            {visibleCode[`${section}-${index}`] && (
               <motion.div 
                 className="code-wrapper"
                 initial={{ opacity: 0, height: 0 }}
@@ -163,13 +163,13 @@ const Portfolio = () => {
           <section className="architecture">
             <h3>{t.architectureTitle}</h3>
             <p>{t.architectureDescription}</p>
-            {renderArchitectureCards()}
+            {renderCodeCards(t.architecturePoints, 'architecture')}
           </section>
 
           <section className="performance">
             <h3>{t.performanceTitle}</h3>
             <p>{t.performanceDescription}</p>
-            {renderPointsList(t.performancePoints)}
+            {renderCodeCards(t.performancePoints, 'performance')}
           </section>
 
           <section className="accessibility">
