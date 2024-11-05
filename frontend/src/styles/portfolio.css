@@ -4,6 +4,7 @@
   transition: background-color 0.3s ease;
   background-color: #f5f5f5;
   color: #333;
+  margin-top: 80px; /* Add margin for header */
 }
 
 .portfolio-section.dark-mode {
@@ -127,7 +128,7 @@
   color: #98DFAF;
 }
 
-/* Estilos para la grid de arquitectura */
+/* Architecture grid styles */
 .architecture-grid {
   display: flex;
   flex-direction: column;
@@ -181,7 +182,7 @@
   color: #98DFAF;
 }
 
-/* Estilos para el botón de código */
+/* Code button styles */
 .code-toggle-btn {
   background: rgba(46, 139, 87, 0.1);
   color: #2E8B57;
@@ -211,7 +212,7 @@
   border-color: rgba(152, 223, 175, 0.5);
 }
 
-/* Estilos para la sección de código */
+/* Code section styles */
 .code-section {
   border-radius: 8px;
   overflow: hidden;
@@ -242,6 +243,7 @@
 @media (max-width: 768px) {
   .portfolio-section {
     padding: 1rem;
+    margin-top: 60px; /* Adjust margin for mobile header */
   }
 
   .portfolio-title {

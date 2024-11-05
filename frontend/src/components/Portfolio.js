@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ReactTyped } from 'react-typed';
 import { AppContext } from '../AppContext';
-import { portfolioTranslations } from '../data/portfolioTranslations';
+import { portfolioTranslations } from '../data/portfolio';
 import cssQualityImage from '../images/portfolio/cssQuality.png';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -63,14 +63,6 @@ const Portfolio = () => {
       return newState;
     });
   };
-
-  const renderPointsList = (points) => (
-    <ul className="points-list">
-      {points.map((point, index) => (
-        <li key={index}>{point}</li>
-      ))}
-    </ul>
-  );
 
   const renderCodeCards = (points, section) => (
     <div className="architecture-grid">
@@ -175,13 +167,19 @@ const Portfolio = () => {
           <section className="accessibility">
             <h3>{t.accessibilityTitle}</h3>
             <p>{t.accessibilityDescription}</p>
-            {renderPointsList(t.accessibilityPoints)}
+            {renderCodeCards(t.accessibilityPoints, 'accessibility')}
           </section>
 
           <section className="seo">
             <h3>{t.seoTitle}</h3>
             <p>{t.seoDescription}</p>
-            {renderPointsList(t.seoPoints)}
+            {renderCodeCards(t.seoPoints, 'seo')}
+          </section>
+
+          <section className="features">
+            <h3>{t.featuresTitle}</h3>
+            <p>{t.featuresDescription}</p>
+            {renderCodeCards(t.featuresPoints, 'features')}
           </section>
 
           <section className="tech-stack">
@@ -193,19 +191,6 @@ const Portfolio = () => {
                 <li>Framer Motion</li>
                 <li>CSS3</li>
                 <li>Context API</li>
-              </ul>
-            </div>
-          </section>
-
-          <section className="features">
-            <h3>{t.featuresTitle}</h3>
-            <div className="features-list">
-              <ul>
-                <li>{t.featureResponsive}</li>
-                <li>{t.featureMultilingual}</li>
-                <li>{t.featureDarkMode}</li>
-                <li>{t.featureAnimations}</li>
-                <li>{t.featurePerformance}</li>
               </ul>
             </div>
           </section>
