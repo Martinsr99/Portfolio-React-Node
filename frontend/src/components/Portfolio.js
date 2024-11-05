@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ReactTyped } from 'react-typed';
 import { AppContext } from '../AppContext';
 import { portfolioTranslations } from '../data/portfolioTranslations';
@@ -52,10 +52,16 @@ const Portfolio = () => {
   }, []);
 
   const toggleCode = (index) => {
-    setVisibleCode(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
+    setVisibleCode(prev => {
+      const newState = { ...prev };
+      Object.keys(newState).forEach(key => {
+        if (key !== index.toString()) {
+          newState[key] = false;
+        }
+      });
+      newState[index] = !prev[index];
+      return newState;
+    });
   };
 
   const renderPointsList = (points) => (
@@ -66,12 +72,17 @@ const Portfolio = () => {
     </ul>
   );
 
-  const renderArchitecturePoints = () => (
-    <ul className="points-list">
+  const renderArchitectureCards = () => (
+    <div className="architecture-grid">
       {t.architecturePoints.map((point, index) => (
-        <li key={index} className="architecture-point">
-          <div className="point-content">
-            <span>{point.text}</span>
+        <motion.div 
+          key={index} 
+          className={`architecture-item ${visibleCode[index] ? 'expanded' : ''}`}
+          layout
+          transition={{ duration: 0.3 }}
+        >
+          <div className="architecture-card">
+            <h3>{point.text}</h3>
             <button 
               className="code-toggle-btn"
               onClick={() => toggleCode(index)}
@@ -79,22 +90,32 @@ const Portfolio = () => {
               {visibleCode[index] ? t.hideCodeButton : t.showCodeButton}
             </button>
           </div>
-          {visibleCode[index] && (
-            <div className="code-section">
-              <SyntaxHighlighter
-                language="javascript"
-                style={vscDarkPlus}
-                className="code-block"
-                wrapLines={true}
-                showLineNumbers={true}
+          <AnimatePresence>
+            {visibleCode[index] && (
+              <motion.div 
+                className="code-wrapper"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
               >
-                {point.code}
-              </SyntaxHighlighter>
-            </div>
-          )}
-        </li>
+                <div className="code-section">
+                  <SyntaxHighlighter
+                    language="javascript"
+                    style={vscDarkPlus}
+                    className="code-block"
+                    wrapLines={true}
+                    showLineNumbers={true}
+                  >
+                    {point.code}
+                  </SyntaxHighlighter>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       ))}
-    </ul>
+    </div>
   );
 
   return (
@@ -142,7 +163,7 @@ const Portfolio = () => {
           <section className="architecture">
             <h3>{t.architectureTitle}</h3>
             <p>{t.architectureDescription}</p>
-            {renderArchitecturePoints()}
+            {renderArchitectureCards()}
           </section>
 
           <section className="performance">

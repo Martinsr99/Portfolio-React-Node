@@ -9,7 +9,7 @@ export const portfolioTranslations = {
     architecturePoints: [
       {
         text: 'Componentes React reutilizables y modulares',
-        code: `// Ejemplo de componente modular
+        code: `// Componente modular con props para reutilización
 const FeatureCard = ({ title, description, icon }) => {
   return (
     <div className="feature-card">
@@ -20,19 +20,20 @@ const FeatureCard = ({ title, description, icon }) => {
   );
 };
 
-// Uso del componente
+// Ejemplo de uso con diferente contenido
 <FeatureCard
-  title="Título"
-  description="Descripción"
+  title="Title"
+  description="Description"
   icon={<Icon />}
 />`
       },
       {
         text: 'Gestión de estado global con Context API',
-        code: `// Creación del contexto
+        code: `// Gestión de estado global usando Context API
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  // Estado para preferencias de idioma y tema
   const [language, setLanguage] = useState('es');
   const [darkMode, setDarkMode] = useState(true);
   
@@ -49,9 +50,10 @@ export const AppProvider = ({ children }) => {
       },
       {
         text: 'Sistema de rutas con React Router',
-        code: `// Configuración de rutas
+        code: `// Configuración de rutas de la aplicación
 <Router>
   <Routes>
+    {/* Rutas principales de navegación */}
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
     <Route path="/portfolio" element={<Portfolio />} />
@@ -62,18 +64,18 @@ export const AppProvider = ({ children }) => {
       },
       {
         text: 'Lazy loading para optimización de carga',
-        code: `// Implementación de lazy loading
+        code: `// Importaciones dinámicas para división de código
 const About = React.lazy(() => import('./components/About'));
 const Portfolio = React.lazy(() => import('./components/Portfolio'));
 
-// Uso con Suspense
+// Envolviendo componentes lazy con fallback de carga
 <Suspense fallback={<LoadingSpinner />}>
   <About />
 </Suspense>`
       },
       {
         text: 'Sistema de traducciones modular',
-        code: `// Sistema de traducciones
+        code: `// Configuración del soporte multilingüe
 const translations = {
   es: {
     welcome: 'Bienvenido',
@@ -85,7 +87,7 @@ const translations = {
   }
 };
 
-// Uso en componentes
+// Uso de traducciones en componentes
 const { language } = useContext(AppContext);
 const t = translations[language];
 <h1>{t.welcome}</h1>`
@@ -137,7 +139,7 @@ const t = translations[language];
     architecturePoints: [
       {
         text: 'Reusable and modular React components',
-        code: `// Example of a modular component
+        code: `// Modular component with props for reusability
 const FeatureCard = ({ title, description, icon }) => {
   return (
     <div className="feature-card">
@@ -148,7 +150,7 @@ const FeatureCard = ({ title, description, icon }) => {
   );
 };
 
-// Component usage
+// Example usage with different content
 <FeatureCard
   title="Title"
   description="Description"
@@ -157,10 +159,11 @@ const FeatureCard = ({ title, description, icon }) => {
       },
       {
         text: 'Global state management with Context API',
-        code: `// Context creation
+        code: `// Global state management using Context API
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  // State for language and theme preferences
   const [language, setLanguage] = useState('en');
   const [darkMode, setDarkMode] = useState(true);
   
@@ -177,9 +180,10 @@ export const AppProvider = ({ children }) => {
       },
       {
         text: 'Routing system with React Router',
-        code: `// Routes configuration
+        code: `// Application routing configuration
 <Router>
   <Routes>
+    {/* Main navigation routes */}
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
     <Route path="/portfolio" element={<Portfolio />} />
@@ -190,18 +194,18 @@ export const AppProvider = ({ children }) => {
       },
       {
         text: 'Lazy loading for load optimization',
-        code: `// Lazy loading implementation
+        code: `// Dynamic imports for code splitting
 const About = React.lazy(() => import('./components/About'));
 const Portfolio = React.lazy(() => import('./components/Portfolio'));
 
-// Usage with Suspense
+// Wrapping lazy components with loading fallback
 <Suspense fallback={<LoadingSpinner />}>
   <About />
 </Suspense>`
       },
       {
         text: 'Modular translation system',
-        code: `// Translation system
+        code: `// Multilingual support configuration
 const translations = {
   es: {
     welcome: 'Bienvenido',
@@ -213,7 +217,7 @@ const translations = {
   }
 };
 
-// Usage in components
+// Using translations in components
 const { language } = useContext(AppContext);
 const t = translations[language];
 <h1>{t.welcome}</h1>`
