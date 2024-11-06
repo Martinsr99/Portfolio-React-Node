@@ -4,99 +4,76 @@ export const seoTranslations = {
     description: 'Optimizado para motores de búsqueda:',
     points: [
       {
-        text: 'Meta tags dinámicos',
-        code: `// Implementación de meta tags dinámicos
-const SEO = ({ title, description, lang }) => {
-  return (
-    <Helmet>
-      <html lang={lang} />
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      
-      {/* Meta tags para redes sociales */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content="website" />
-      <meta property="og:image" content="/images/profile-image.jpg" />
-      
-      {/* Meta tags para Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-    </Helmet>
-  );
-};
+        text: 'Meta tags y configuración PWA',
+        code: `// Configuración de meta tags en index.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Martin Siles - Software Engineer Portfolio" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>Martin Siles - Software Engineer</title>
+</head>
 
-// Uso en componentes
-<SEO 
-  title="Portfolio - Martin Siles"
-  description="Portfolio profesional de Martin Siles, Ingeniero de Software"
-  lang="es"
-/>`
+// Configuración PWA en manifest.json
+{
+  "short_name": "Martin Siles",
+  "name": "Martin Siles - Software Engineer",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "categories": ["portfolio", "web development"]
+}`
       },
       {
-        text: 'Estructura de datos Schema.org',
-        code: `// Implementación de Schema.org
-const SchemaOrg = () => {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Martin Siles",
-    "jobTitle": "Software Engineer",
-    "url": "https://martinsiles.es",
-    "sameAs": [
-      "https://github.com/username",
-      "https://linkedin.com/in/username"
-    ],
-    "knowsAbout": [
-      "React",
-      "JavaScript",
-      "Node.js",
-      "Web Development"
-    ]
-  };
+        text: 'Optimización de caché y compresión',
+        code: `# Configuración de caché en .htaccess
+# Habilitar compresión
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+</IfModule>
 
-  return (
-    <script type="application/ld+json">
-      {JSON.stringify(schema)}
-    </script>
-  );
-};`
+# Configuración de caché del navegador
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>`
       },
       {
-        text: 'Optimización de rutas y enlaces',
-        code: `// Configuración de rutas SEO-friendly
-const routes = [
-  {
-    path: '/',
-    element: <Home />,
-    // Metadata para cada ruta
-    meta: {
-      title: 'Inicio | Martin Siles',
-      description: 'Portfolio profesional y proyectos'
-    }
-  },
-  {
-    path: '/portfolio',
-    element: <Portfolio />,
-    meta: {
-      title: 'Portfolio | Martin Siles',
-      description: 'Proyectos y trabajos destacados'
-    }
-  }
-];
+        text: 'Configuración de robots y redirecciones',
+        code: `# Configuración de robots.txt
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
 
-// Componente de enlace optimizado
-const SEOLink = ({ to, children, title }) => (
-  <Link 
-    to={to}
-    title={title}
-    rel={to.startsWith('http') ? 'noopener noreferrer' : undefined}
-    target={to.startsWith('http') ? '_blank' : undefined}
-  >
-    {children}
-  </Link>
-);`
+# Configuración de redirecciones en .htaccess
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]
+
+# Habilitar CORS
+Header set Access-Control-Allow-Origin "*"`
       }
     ]
   },
@@ -105,99 +82,76 @@ const SEOLink = ({ to, children, title }) => (
     description: 'Optimized for search engines:',
     points: [
       {
-        text: 'Dynamic meta tags',
-        code: `// Dynamic meta tags implementation
-const SEO = ({ title, description, lang }) => {
-  return (
-    <Helmet>
-      <html lang={lang} />
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      
-      {/* Social media meta tags */}
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:type" content="website" />
-      <meta property="og:image" content="/images/profile-image.jpg" />
-      
-      {/* Twitter meta tags */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-    </Helmet>
-  );
-};
+        text: 'Meta tags and PWA configuration',
+        code: `// Meta tags configuration in index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Martin Siles - Software Engineer Portfolio" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>Martin Siles - Software Engineer</title>
+</head>
 
-// Usage in components
-<SEO 
-  title="Portfolio - Martin Siles"
-  description="Professional portfolio of Martin Siles, Software Engineer"
-  lang="en"
-/>`
+// PWA configuration in manifest.json
+{
+  "short_name": "Martin Siles",
+  "name": "Martin Siles - Software Engineer",
+  "icons": [
+    {
+      "src": "logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "categories": ["portfolio", "web development"]
+}`
       },
       {
-        text: 'Schema.org structured data',
-        code: `// Schema.org implementation
-const SchemaOrg = () => {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Martin Siles",
-    "jobTitle": "Software Engineer",
-    "url": "https://martinsiles.es",
-    "sameAs": [
-      "https://github.com/username",
-      "https://linkedin.com/in/username"
-    ],
-    "knowsAbout": [
-      "React",
-      "JavaScript",
-      "Node.js",
-      "Web Development"
-    ]
-  };
+        text: 'Cache and compression optimization',
+        code: `# Cache configuration in .htaccess
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+</IfModule>
 
-  return (
-    <script type="application/ld+json">
-      {JSON.stringify(schema)}
-    </script>
-  );
-};`
+# Browser caching configuration
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>`
       },
       {
-        text: 'Route and link optimization',
-        code: `// SEO-friendly route configuration
-const routes = [
-  {
-    path: '/',
-    element: <Home />,
-    // Metadata for each route
-    meta: {
-      title: 'Home | Martin Siles',
-      description: 'Professional portfolio and projects'
-    }
-  },
-  {
-    path: '/portfolio',
-    element: <Portfolio />,
-    meta: {
-      title: 'Portfolio | Martin Siles',
-      description: 'Featured projects and work'
-    }
-  }
-];
+        text: 'Robots and redirects configuration',
+        code: `# Robots.txt configuration
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
 
-// Optimized link component
-const SEOLink = ({ to, children, title }) => (
-  <Link 
-    to={to}
-    title={title}
-    rel={to.startsWith('http') ? 'noopener noreferrer' : undefined}
-    target={to.startsWith('http') ? '_blank' : undefined}
-  >
-    {children}
-  </Link>
-);`
+# Redirects configuration in .htaccess
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]
+
+# Enable CORS
+Header set Access-Control-Allow-Origin "*"`
       }
     ]
   }
