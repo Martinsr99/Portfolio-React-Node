@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ReactTyped } from 'react-typed';
 import { AppContext } from '../AppContext';
 import { portfolioTranslations } from '../data/portfolio';
-import cssQualityImage from '../images/portfolio/cssQuality.png';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import '../styles/portfolio.css';
@@ -27,6 +26,7 @@ const Portfolio = () => {
   const [isTitleVisible, setIsTitleVisible] = useState(false);
   const [visibleCode, setVisibleCode] = useState({});
   const titleRef = useRef(null);
+  const metricsUrl = "https://www.projectwallace.com/css-code-quality?url=martinsiles.es&prettify=1";
 
   useEffect(() => {
     const currentTitleRef = titleRef.current;
@@ -131,27 +131,6 @@ const Portfolio = () => {
         </motion.h2>
         
         <div className="portfolio-container">
-          <section className="css-metrics">
-            <a 
-              href="https://www.projectwallace.com/css-code-quality?url=martinsiles.es&prettify=1"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="css-metrics-title"
-            >
-              <h3>{t.cssMetricsTitle}</h3>
-            </a>
-            <div className="metrics-content">
-              <p>{t.cssMetricsDescription}</p>
-              <div className="metrics-image">
-                <img 
-                  src={cssQualityImage} 
-                  alt="CSS Quality Metrics" 
-                  className="quality-image"
-                />
-              </div>
-            </div>
-          </section>
-
           <section className="architecture">
             <h3>{t.architectureTitle}</h3>
             <p>{t.architectureDescription}</p>
@@ -192,6 +171,34 @@ const Portfolio = () => {
                 <li>CSS3</li>
                 <li>Context API</li>
               </ul>
+            </div>
+          </section>
+
+          <section className="css-metrics">
+            <a 
+              href={metricsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="css-metrics-title"
+            >
+              <h3>{t.cssMetricsTitle}</h3>
+            </a>
+            <div className="metrics-content">
+              <p dangerouslySetInnerHTML={{ __html: t.cssMetricsDescription }} />
+              <div className="metrics-grid">
+                <div className="metric-item">
+                  <h4>MAINTAINABILITY</h4>
+                  <span className="metric-value">97</span>
+                </div>
+                <div className="metric-item">
+                  <h4>COMPLEXITY</h4>
+                  <span className="metric-value">97</span>
+                </div>
+                <div className="metric-item">
+                  <h4>PERFORMANCE</h4>
+                  <span className="metric-value">97</span>
+                </div>
+              </div>
             </div>
           </section>
         </div>
