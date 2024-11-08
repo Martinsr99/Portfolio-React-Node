@@ -25,6 +25,7 @@ const Portfolio = () => {
   const t = portfolioTranslations[language];
   const [isTitleVisible, setIsTitleVisible] = useState(false);
   const [visibleCode, setVisibleCode] = useState({});
+  const [expandedSections, setExpandedSections] = useState({});
   const titleRef = useRef(null);
   const metricsUrl = "https://www.projectwallace.com/css-code-quality?url=martinsiles.es&prettify=1";
 
@@ -62,6 +63,13 @@ const Portfolio = () => {
       newState[`${section}-${index}`] = !prev[`${section}-${index}`];
       return newState;
     });
+  };
+
+  const toggleSection = (section) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
   };
 
   const renderCodeCards = (points, section) => (
@@ -110,6 +118,34 @@ const Portfolio = () => {
     </div>
   );
 
+  const renderSection = (sectionKey, title, description, content) => (
+    <motion.section 
+      className={`portfolio-section-item ${expandedSections[sectionKey] ? 'expanded' : ''}`}
+      layout
+      transition={{ duration: 0.3 }}
+    >
+      <div className="section-header" onClick={() => toggleSection(sectionKey)}>
+        <h3>{title}</h3>
+        <button className="expand-toggle">
+          {expandedSections[sectionKey] ? '−' : '+'}
+        </button>
+      </div>
+      <AnimatePresence>
+        {expandedSections[sectionKey] && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <p>{description}</p>
+            {content}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.section>
+  );
+
   return (
     <div className={`portfolio-section ${darkMode ? 'dark-mode' : ''}`}>
       <div className="portfolio-content">
@@ -131,38 +167,45 @@ const Portfolio = () => {
         </motion.h2>
         
         <div className="portfolio-container">
-          <section className="architecture">
-            <h3>{t.architectureTitle}</h3>
-            <p>{t.architectureDescription}</p>
-            {renderCodeCards(t.architecturePoints, 'architecture')}
-          </section>
+          {renderSection(
+            'architecture',
+            t.architectureTitle,
+            t.architectureDescription,
+            renderCodeCards(t.architecturePoints, 'architecture')
+          )}
 
-          <section className="performance">
-            <h3>{t.performanceTitle}</h3>
-            <p>{t.performanceDescription}</p>
-            {renderCodeCards(t.performancePoints, 'performance')}
-          </section>
+          {renderSection(
+            'performance',
+            t.performanceTitle,
+            t.performanceDescription,
+            renderCodeCards(t.performancePoints, 'performance')
+          )}
 
-          <section className="accessibility">
-            <h3>{t.accessibilityTitle}</h3>
-            <p>{t.accessibilityDescription}</p>
-            {renderCodeCards(t.accessibilityPoints, 'accessibility')}
-          </section>
+          {renderSection(
+            'accessibility',
+            t.accessibilityTitle,
+            t.accessibilityDescription,
+            renderCodeCards(t.accessibilityPoints, 'accessibility')
+          )}
 
-          <section className="seo">
-            <h3>{t.seoTitle}</h3>
-            <p>{t.seoDescription}</p>
-            {renderCodeCards(t.seoPoints, 'seo')}
-          </section>
+          {renderSection(
+            'seo',
+            t.seoTitle,
+            t.seoDescription,
+            renderCodeCards(t.seoPoints, 'seo')
+          )}
 
-          <section className="features">
-            <h3>{t.featuresTitle}</h3>
-            <p>{t.featuresDescription}</p>
-            {renderCodeCards(t.featuresPoints, 'features')}
-          </section>
+          {renderSection(
+            'features',
+            t.featuresTitle,
+            t.featuresDescription,
+            renderCodeCards(t.featuresPoints, 'features')
+          )}
 
-          <section className="tech-stack">
-            <h3>{t.techStackTitle}</h3>
+          {renderSection(
+            'tech-stack',
+            t.techStackTitle,
+            '',
             <div className="tech-details">
               <ul>
                 <li>React.js</li>
@@ -172,35 +215,27 @@ const Portfolio = () => {
                 <li>Context API</li>
               </ul>
             </div>
-          </section>
+          )}
 
-          <section className="css-metrics">
-            <a 
-              href={metricsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="css-metrics-title"
-            >
-              <h3>{t.cssMetricsTitle}</h3>
-            </a>
-            <div className="metrics-content">
-              <p dangerouslySetInnerHTML={{ __html: t.cssMetricsDescription }} />
-              <div className="metrics-grid">
-                <div className="metric-item">
-                  <h4>MAINTAINABILITY</h4>
-                  <span className="metric-value">97</span>
-                </div>
-                <div className="metric-item">
-                  <h4>COMPLEXITY</h4>
-                  <span className="metric-value">97</span>
-                </div>
-                <div className="metric-item">
-                  <h4>PERFORMANCE</h4>
-                  <span className="metric-value">97</span>
-                </div>
+          {renderSection(
+            'css-metrics',
+            t.cssMetricsTitle,
+            <div dangerouslySetInnerHTML={{ __html: t.cssMetricsDescription }} />,
+            <div className="metrics-grid">
+              <div className="metric-item">
+                <h4>MAINTAINABILITY</h4>
+                <span className="metric-value">97</span>
+              </div>
+              <div className="metric-item">
+                <h4>COMPLEXITY</h4>
+                <span className="metric-value">97</span>
+              </div>
+              <div className="metric-item">
+                <h4>PERFORMANCE</h4>
+                <span className="metric-value">97</span>
               </div>
             </div>
-          </section>
+          )}
         </div>
       </div>
     </div>
