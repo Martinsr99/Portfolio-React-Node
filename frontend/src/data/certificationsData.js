@@ -5,7 +5,7 @@ export const certificationsData = [
       en: "ChatGPT Prompt Engineering for Developers"
     },
     platform: "DeepLearning.AI",
-    date: "2024-01-09",
+    date: "2024-10-31",
     pdfUrl: "/certificates/openAI-deeplearning.pdf",
     instructor: "OpenAI",
     duration: {

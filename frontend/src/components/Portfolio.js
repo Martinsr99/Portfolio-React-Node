@@ -5,6 +5,12 @@ import { AppContext } from '../AppContext';
 import { portfolioTranslations } from '../data/portfolio';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { 
+  FaReact, FaRoute
+} from 'react-icons/fa';
+import { 
+  SiFramer, SiCss3, SiReact
+} from 'react-icons/si';
 import '../styles/portfolio.css';
 
 const titleVariants = {
@@ -20,12 +26,21 @@ const titleVariants = {
   }
 };
 
+const iconMap = {
+  'React.js': FaReact,
+  'React Router': FaRoute,
+  'Framer Motion': SiFramer,
+  'CSS3': SiCss3,
+  'Context API': SiReact
+};
+
 const Portfolio = () => {
   const { language, darkMode } = useContext(AppContext);
   const t = portfolioTranslations[language];
   const [isTitleVisible, setIsTitleVisible] = useState(false);
   const [visibleCode, setVisibleCode] = useState({});
   const [expandedSections, setExpandedSections] = useState({});
+  const [hoveredTech, setHoveredTech] = useState(null);
   const titleRef = useRef(null);
   const metricsUrl = "https://www.projectwallace.com/css-code-quality?url=martinsiles.es&prettify=1";
 
@@ -118,6 +133,38 @@ const Portfolio = () => {
     </div>
   );
 
+  const renderTechStack = () => (
+    <div className="tech-stack-grid">
+      {t.techStackPoints.technologies.map((tech) => {
+        const Icon = iconMap[tech.name] || FaReact;
+        return (
+          <div
+            key={tech.name}
+            className="tech-stack-item"
+            onMouseEnter={() => setHoveredTech(tech)} 
+            onMouseLeave={() => setHoveredTech(null)}
+          >
+            <Icon className="tech-stack-icon" />
+            <p className="tech-stack-name">{tech.name}</p>
+            <AnimatePresence>
+              {hoveredTech && hoveredTech.name === tech.name && (
+                <motion.div 
+                  className="tech-stack-overlay"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <p>{tech.description}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+
   const renderSection = (sectionKey, title, description, content) => (
     <motion.section 
       className={`portfolio-section-item ${expandedSections[sectionKey] ? 'expanded' : ''}`}
@@ -205,16 +252,8 @@ const Portfolio = () => {
           {renderSection(
             'tech-stack',
             t.techStackTitle,
-            '',
-            <div className="tech-details">
-              <ul>
-                <li>React.js</li>
-                <li>React Router</li>
-                <li>Framer Motion</li>
-                <li>CSS3</li>
-                <li>Context API</li>
-              </ul>
-            </div>
+            t.techStackPoints.description,
+            renderTechStack()
           )}
 
           {renderSection(

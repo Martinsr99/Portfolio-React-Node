@@ -4,7 +4,7 @@ import { staticData } from './data/staticData';
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [language, setLanguage] = useState('es'); // Default to Spanish
+  const [language, setLanguage] = useState('en'); // Default to English
   const [isPending, startTransition] = useTransition();
   const [darkMode, setDarkMode] = useState(() => {
     const savedMode = localStorage.getItem('darkMode');

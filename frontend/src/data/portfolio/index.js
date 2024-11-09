@@ -3,6 +3,7 @@ import { performanceTranslations } from './performanceTranslations';
 import { accessibilityTranslations } from './accessibilityTranslations';
 import { seoTranslations } from './seoTranslations';
 import { featuresTranslations } from './featuresTranslations';
+import { techStackTranslations } from './techStackTranslations';
 
 const metricsUrl = "https://www.projectwallace.com/css-code-quality?url=martinsiles.es&prettify=1";
 
@@ -28,7 +29,8 @@ export const portfolioTranslations = {
     featuresTitle: featuresTranslations.es.title,
     featuresDescription: featuresTranslations.es.description,
     featuresPoints: featuresTranslations.es.points,
-    techStackTitle: 'Stack Tecnológico'
+    techStackTitle: 'Stack Tecnológico',
+    techStackPoints: techStackTranslations.es
   },
   en: {
     title: 'Portfolio Creation',
@@ -51,6 +53,7 @@ export const portfolioTranslations = {
     featuresTitle: featuresTranslations.en.title,
     featuresDescription: featuresTranslations.en.description,
     featuresPoints: featuresTranslations.en.points,
-    techStackTitle: 'Tech Stack'
+    techStackTitle: 'Tech Stack',
+    techStackPoints: techStackTranslations.en
   }
 };
